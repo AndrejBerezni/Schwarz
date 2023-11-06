@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 export const theme = {
   bgColor: '#000000',
+  navBgColor: '#111111',
   textColor: '#FFFFFF',
   primary: '#ffd900',
   secondary: '#F5F5F5',
@@ -27,6 +28,7 @@ body {
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
     margin: 0;
+    padding-top: 30px;
     width: 100vw;
     min-height: 100vh;
 }

@@ -1,44 +1,44 @@
+import { BiSearchAlt } from 'react-icons/bi'
+import { BsCartFill } from 'react-icons/bs'
+import { MdAccountCircle } from 'react-icons/md'
+import { TfiMenuAlt } from 'react-icons/tfi'
 import {
   StyledTopNavbar,
-  StyledNavTitle,
-  StyledNavDiv,
-  StyledNavSearchIcon,
-  StyledNavInput,
-  StyledNavButton,
+  NavTitle,
+  NavDiv,
+  NavSearchIcon,
+  NavInput,
+  NavButton,
+  NavTooltip,
 } from './TopNavbar.styles'
-import { MdAccountCircle } from 'react-icons/md'
-import { BsCartFill } from 'react-icons/bs'
-import { BiSearchAlt } from 'react-icons/bi'
-import { TfiMenuAlt } from 'react-icons/tfi'
 
 export default function TopNavbar() {
   return (
     <StyledTopNavbar>
-      <StyledNavDiv>
-        <StyledNavTitle>Schwartz</StyledNavTitle>
-      </StyledNavDiv>
-      <StyledNavDiv>
-        <StyledNavInput
-          type="text"
-          placeholder="Search for products..."
-        ></StyledNavInput>
-        <StyledNavSearchIcon>
+      <NavDiv>
+        <NavTitle>Schwarz</NavTitle>
+      </NavDiv>
+      <NavDiv>
+        <NavInput type="text" placeholder="Search for products..."></NavInput>
+        <NavSearchIcon>
           <BiSearchAlt />
-        </StyledNavSearchIcon>
-      </StyledNavDiv>
-      <StyledNavDiv>
-        <StyledNavButton variant="mobile-only">
+        </NavSearchIcon>
+      </NavDiv>
+      <NavDiv>
+        <NavButton variant="mobile-only">
           <TfiMenuAlt />
-        </StyledNavButton>
+        </NavButton>
         <div>
-          <StyledNavButton>
+          <NavButton>
             <MdAccountCircle />
-          </StyledNavButton>
-          <StyledNavButton>
+          </NavButton>
+          <NavTooltip>Account</NavTooltip>
+          <NavButton>
             <BsCartFill />
-          </StyledNavButton>
+          </NavButton>
+          <NavTooltip>Cart</NavTooltip>
         </div>
-      </StyledNavDiv>
+      </NavDiv>
     </StyledTopNavbar>
   )
 }

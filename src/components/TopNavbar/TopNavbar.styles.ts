@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export const StyledTopNavbar = styled.div`
   position: fixed;
@@ -13,7 +13,7 @@ export const StyledTopNavbar = styled.div`
   align-items: center;
 `
 
-export const StyledNavTitle = styled.h5`
+export const NavTitle = styled.h5`
   font-family: ${(props) => props.theme.headFont};
   color: ${(props) => props.theme.primary};
   font-size: x-large;
@@ -27,7 +27,7 @@ export const StyledNavTitle = styled.h5`
   }
 `
 
-export const StyledNavDiv = styled.div`
+export const NavDiv = styled.div`
   display: flex;
   flex-wrap: nowrap;
   gap: 0;
@@ -43,7 +43,7 @@ export const StyledNavDiv = styled.div`
   }
 `
 
-export const StyledNavSearchIcon = styled(StyledNavDiv)`
+export const NavSearchIcon = styled(NavDiv)`
   background-color: ${(props) => props.theme.primary};
   height: 30px;
   width: 30px;
@@ -54,7 +54,7 @@ export const StyledNavSearchIcon = styled(StyledNavDiv)`
   right: 0;
 `
 
-export const StyledNavInput = styled.input`
+export const NavInput = styled.input`
   width: 400px;
   height: 30px;
   border-radius: 5px;
@@ -66,7 +66,8 @@ export const StyledNavInput = styled.input`
   }
 `
 
-interface StyledNavButtonProps {
+//using 'variant' prop was showing TS warning, therefore I am creating interface for props
+interface NavButtonProps {
   theme: {
     primary: string
     secondary: string
@@ -74,7 +75,27 @@ interface StyledNavButtonProps {
   variant?: string
 }
 
-export const StyledNavButton = styled.button<StyledNavButtonProps>`
+export const NavTooltip = styled.div`
+  position: absolute;
+  background-color: ${(props) => props.theme.navBgColor};
+  color: ${(props) => props.theme.primary};
+  font-family: ${(props) => props.theme.headFont};
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  top: 0%;
+  left: -100%;
+  position: absolute;
+`
+
+export const NavButton = styled.button<NavButtonProps>`
   color: ${(props) => props.theme.primary};
   background-color: transparent;
   border: none;
@@ -89,6 +110,10 @@ export const StyledNavButton = styled.button<StyledNavButtonProps>`
     cursor: pointer;
     transform: scale(1.1);
     color: ${(props) => props.theme.secondary};
+    + ${NavTooltip} {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
   @media (max-width: 768px) {
     display: inline-block;

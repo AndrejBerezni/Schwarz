@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 1280px;
     min-height: 100vh;
     margin: 0 auto;
-    padding-top: 90px;
+    padding-top: 80px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -42,6 +42,12 @@ h5:hover,
 h6:hover,
 p:hover {
     cursor: default
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding-top: 120px;
+  }
 }
 `
 

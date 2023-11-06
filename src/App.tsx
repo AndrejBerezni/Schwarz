@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound'
 import Product from './pages/Product'
 import ProductList from './pages/ProductList'
 import { getAuthStatus, getUser } from './store/authentication/selectors'
+import Cart from './components/Cart'
 
 function App() {
   const isAuth = useSelector(getAuthStatus)
@@ -43,6 +44,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </MainContent>
+      <Cart />
       <Footer />
     </ThemeProvider>
   )

@@ -40,6 +40,7 @@ export const NavDiv = styled.div`
   }
   &:nth-of-type(3) {
     justify-content: space-between;
+    margin-bottom: 0px;
   }
 `
 
@@ -65,15 +66,6 @@ export const NavInput = styled.input`
     width: 100%;
   }
 `
-
-//using 'variant' prop was showing TS warning, therefore I am creating interface for props
-interface NavButtonProps {
-  theme: {
-    primary: string
-    secondary: string
-  }
-  variant?: string
-}
 
 export const NavTooltip = styled.div`
   position: absolute;
@@ -110,7 +102,16 @@ export const CartItemsNumber = styled.p`
   z-index: 1;
 `
 
-export const NavButton = styled.button<NavButtonProps>`
+//using 'variant' prop was showing TS warning, therefore I am creating interface for props
+interface INavButtonProps {
+  theme: {
+    primary: string
+    secondary: string
+  }
+  variant?: string
+}
+
+export const NavButton = styled.button<INavButtonProps>`
   color: ${(props) => props.theme.primary};
   background-color: transparent;
   border: none;

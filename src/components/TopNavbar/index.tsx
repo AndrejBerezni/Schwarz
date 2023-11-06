@@ -12,8 +12,12 @@ import {
   NavTooltip,
   CartItemsNumber,
 } from './TopNavbar.styles'
+import { useDispatch } from 'react-redux'
+import { showCart } from '../../store/sidebars'
 
 export default function TopNavbar() {
+  const dispatch = useDispatch()
+
   return (
     <StyledTopNavbar>
       <NavDiv>
@@ -34,7 +38,7 @@ export default function TopNavbar() {
             <MdAccountCircle />
           </NavButton>
           <NavTooltip>Account</NavTooltip>
-          <NavButton>
+          <NavButton onClick={() => dispatch(showCart())}>
             <BsCartFill />
             <CartItemsNumber>0</CartItemsNumber>
           </NavButton>

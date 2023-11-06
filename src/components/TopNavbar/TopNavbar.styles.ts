@@ -83,7 +83,7 @@ export const NavTooltip = styled.div`
   text-transform: uppercase;
   font-style: italic;
   font-weight: 600;
-  padding: 8px;
+  padding: 8px 0 0;
   border-radius: 4px;
   font-size: 14px;
   z-index: 1;
@@ -93,6 +93,21 @@ export const NavTooltip = styled.div`
   top: 0%;
   left: -100%;
   position: absolute;
+`
+
+export const CartItemsNumber = styled.p`
+  position: absolute;
+  top: 0%;
+  right: -15%;
+  width: fit-content;
+  height: 15px;
+  font-size: 12px;
+  padding: 0 3px;
+  margin: 0;
+  border: 1px solid ${(props) => props.theme.primary};
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.navBgColor};
+  z-index: 1;
 `
 
 export const NavButton = styled.button<NavButtonProps>`
@@ -118,4 +133,5 @@ export const NavButton = styled.button<NavButtonProps>`
   @media (max-width: 768px) {
     display: inline-block;
   }
+  position: relative;
 `

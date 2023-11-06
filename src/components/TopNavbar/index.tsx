@@ -10,6 +10,7 @@ import {
   NavInput,
   NavButton,
   NavTooltip,
+  CartItemsNumber,
 } from './TopNavbar.styles'
 
 export default function TopNavbar() {
@@ -35,6 +36,7 @@ export default function TopNavbar() {
           <NavTooltip>Account</NavTooltip>
           <NavButton>
             <BsCartFill />
+            <CartItemsNumber>0</CartItemsNumber>
           </NavButton>
           <NavTooltip>Cart</NavTooltip>
         </div>

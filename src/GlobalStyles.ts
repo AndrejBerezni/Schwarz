@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const theme = {
-  bgColor: '#000000',
-  navBgColor: '#111111',
+  bgColor: '#111111',
+  navBgColor: '#000000',
   textColor: '#FFFFFF',
   primary: '#ffd900',
   secondary: '#F5F5F5',

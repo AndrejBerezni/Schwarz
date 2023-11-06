@@ -13,15 +13,17 @@ import {
   CartItemsNumber,
 } from './TopNavbar.styles'
 import { useDispatch } from 'react-redux'
-import { showCart } from '../../store/sidebars'
+import { showCart, showCategories } from '../../store/sidebars'
+import { useNavigate } from 'react-router'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   return (
     <StyledTopNavbar>
       <NavDiv>
-        <NavTitle>Schwarz</NavTitle>
+        <NavTitle onClick={() => navigate('/')}>Schwarz</NavTitle>
       </NavDiv>
       <NavDiv>
         <NavInput type="text" placeholder="Search for products..."></NavInput>
@@ -30,7 +32,10 @@ export default function TopNavbar() {
         </NavSearchIcon>
       </NavDiv>
       <NavDiv>
-        <NavButton variant="mobile-only">
+        <NavButton
+          variant="mobile-only"
+          onClick={() => dispatch(showCategories())}
+        >
           <TfiMenuAlt />
         </NavButton>
         <div>

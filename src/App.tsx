@@ -13,6 +13,7 @@ import Product from './pages/Product'
 import ProductList from './pages/ProductList'
 import { getAuthStatus, getUser } from './store/authentication/selectors'
 import Cart from './components/Cart'
+import BrowseCategoriesSide from './components/BrowseCategories/BrowseCategoriesSide'
 
 function App() {
   const isAuth = useSelector(getAuthStatus)
@@ -45,6 +46,7 @@ function App() {
         </Routes>
       </MainContent>
       <Cart />
+      <BrowseCategoriesSide />
       <Footer />
     </ThemeProvider>
   )

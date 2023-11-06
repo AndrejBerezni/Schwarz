@@ -10,13 +10,13 @@ interface IStyledCartProps {
 export const StyledCart = styled.div<IStyledCartProps>`
   position: fixed;
   top: 0;
-  right: ${(props) => (props.show ? '0' : '-400px')};
+  right: ${(props) => (props.show ? '0' : '-768px')};
   height: 100vh;
   width: min(400px, 50vw);
   background-color: ${(props) => props.theme.navBgColor};
   display: flex;
   z-index: 2;
-  transition: right 0.4s ease-in;
+  transition: right 0.6s ease-out;
   border-left: 1px solid ${(props) => props.theme.borderColor};
   @media (max-width: 768px) {
     width: 100%;

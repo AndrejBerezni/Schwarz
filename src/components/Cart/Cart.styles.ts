@@ -17,7 +17,36 @@ export const StyledCart = styled.div<IStyledCartProps>`
   display: flex;
   z-index: 2;
   transition: right 0.4s ease-in;
+  border-left: 1px solid ${(props) => props.theme.borderColor};
   @media (max-width: 768px) {
     width: 100%;
+    border: none;
   }
+`
+
+export const CloseCartButton = styled.button`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  color: ${(props) => props.theme.borderColor};
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  transition: 0.5s;
+  &: hover {
+    cursor: pointer;
+    transform: rotate(180deg);
+    color: ${(props) => props.theme.primary};
+  }
+`
+
+export const CartBackgroundImage = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${(props) => props.theme.borderColor};
+  font-size: 200px;
+  opacity: 0.5;
 `

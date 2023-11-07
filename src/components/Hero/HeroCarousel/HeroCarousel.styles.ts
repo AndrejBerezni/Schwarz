@@ -43,7 +43,7 @@ export const HeroCarouselIndicator = styled.div`
   gap: 10px;
 `
 
-export const HeroCarouselPage = styled.div<IHeroCarouselItemProps>`
+export const StyledHeroCarouselPage = styled.div<IHeroCarouselItemProps>`
   position: absolute;
   top: 0;
   left: ${(props) => (props.current ? '0' : '-100%')};
@@ -51,21 +51,27 @@ export const HeroCarouselPage = styled.div<IHeroCarouselItemProps>`
   width: 100%;
   height: 100%;
   background: linear-gradient(to left, #222222, #111111, #000000);
-  transition: right 0.6s ease-out;
+  transition: left 1s ease-out;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-left: 20px;
   @media (max-width: 768px) {
     padding-left: 30px;
   }
 `
+export const HeroCarouselDiv = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+`
 
 export const HeroCarouselPageTitle = styled.h5`
   font-size: 32px;
-  max-width: 80%;
   text-align: start;
-  margin: 0 0 10px;
+  margin: 0 0 40px;
+  text-transform: uppercase;
   @media (min-width: 1096px) {
     font-size: 46px;
   }
@@ -79,19 +85,15 @@ export const HeroCarouselPageSubtitle = styled.h6`
   margin: 0;
   color: ${(props) => props.theme.textColor};
   text-align: start;
+  text-transform: uppercase;
   @media (max-width: 768px) {
     font-size: 12px;
   }
 `
 
 export const HeroCarouselImg = styled.img`
-  height: 90%;
+  max-width: 50%;
+  max-height: 100%;
   color: ${(props) => props.theme.textColor};
   margin-right: -10%;
-  @media (max-width: 1096px) {
-    height: 70%;
-  }
-  @media (max-width: 768px) {
-    height: 50%;
-  }
 `

@@ -1,14 +1,10 @@
 import { Outlet } from 'react-router'
+import BrowseCategories from '../../components/BrowseCategories'
 
 export default function Home() {
   return (
     <>
-      <h1>Home</h1>
-      <ul>
-        <li>category1</li>
-        <li>category2</li>
-        <li>category3</li>
-      </ul>
+      <BrowseCategories />
       <Outlet />
     </>
   )

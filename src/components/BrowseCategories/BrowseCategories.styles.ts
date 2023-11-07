@@ -1,6 +1,17 @@
 import { styled } from 'styled-components'
 
-export const StyledBrowseCategories = styled.ul``
+export const StyledBrowseCategories = styled.ul`
+  margin: 0 auto;
+  height: 400px;
+  width: 300px;
+  border: 1px solid ${(props) => props.theme.borderColor};
+  border-radius: 10px;
+  padding: 0;
+  background-color: ${(props) => props.theme.navBgColor};
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
 
 interface IStyledBrowseCategoriesSideProps {
   theme: {
@@ -41,27 +52,36 @@ export const CloseBrowseSide = styled.button`
   }
 `
 
-export const BrowseSideTitle = styled.h2`
-  width: 100vw;
-  height: 40px;
-  text-align: left;
-  padding: 2px 0 0 15px;
+export const BrowseTitle = styled.h2`
+  width: 100%;
+  border-radius: 10px 10px 0 0;
   font-family: ${(props) => props.theme.headFont};
   font-size: 24px;
   background-color: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.navBgColor};
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  padding: 5px;
   margin: 0;
 `
 
-export const BrowseSideItem = styled.li`
+export const BrowseSideTitle = styled(BrowseTitle)`
   width: 100vw;
+  border-radius: 0;
+  text-align: left;
+  padding: 2px 0 0 15px;
+`
+
+export const BrowseItem = styled.li`
+  width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
   padding-left: 15px;
   font-family: ${(props) => props.theme.headFont};
   background-color: transparent;
-  color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.secondary};
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   transition: 0.3s;
   &:hover {

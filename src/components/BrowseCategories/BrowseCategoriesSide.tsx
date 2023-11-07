@@ -2,7 +2,7 @@ import {
   StyledBrowseCategoriesSide,
   CloseBrowseSide,
   BrowseSideTitle,
-  BrowseSideItem,
+  BrowseItem,
 } from './BrowseCategories.styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { getShowCategories } from '../../store/sidebars/selectors'
@@ -18,9 +18,9 @@ export default function BrowseCategoriesSide() {
         X
       </CloseBrowseSide>
       <BrowseSideTitle>Browse Categories</BrowseSideTitle>
-      <BrowseSideItem>Man</BrowseSideItem>
-      <BrowseSideItem>Women</BrowseSideItem>
-      <BrowseSideItem>Kids</BrowseSideItem>
+      <BrowseItem>Men</BrowseItem>
+      <BrowseItem>Women</BrowseItem>
+      <BrowseItem>Kids</BrowseItem>
     </StyledBrowseCategoriesSide>
   )
 }

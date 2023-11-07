@@ -1,5 +1,16 @@
-import { StyledBrowseCategories } from './BrowseCategories.styles'
+import {
+  StyledBrowseCategories,
+  BrowseTitle,
+  BrowseItem,
+} from './BrowseCategories.styles'
 
 export default function BrowseCategories() {
-  return <StyledBrowseCategories></StyledBrowseCategories>
+  return (
+    <StyledBrowseCategories>
+      <BrowseTitle>Browse Categories</BrowseTitle>
+      <BrowseItem>Men</BrowseItem>
+      <BrowseItem>Women</BrowseItem>
+      <BrowseItem>Kids</BrowseItem>
+    </StyledBrowseCategories>
+  )
 }

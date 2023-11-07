@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 export const StyledBrowseCategories = styled.ul`
-  margin: 0 auto;
+  margin: 0 30px 0 0;
   height: 400px;
   width: 300px;
   border: 1px solid ${(props) => props.theme.borderColor};

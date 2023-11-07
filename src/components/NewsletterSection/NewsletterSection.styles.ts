@@ -4,6 +4,7 @@ export const StyledNewsLetterSection = styled.section`
   background-color: ${(props) => props.theme.navBgColor};
   font-size: 18px;
   padding: 20px 10px;
+  width: 100vw;
   @media (max-width: 768px) {
     font-size: 14px;
   }

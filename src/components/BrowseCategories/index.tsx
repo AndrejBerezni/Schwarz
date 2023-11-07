@@ -7,10 +7,12 @@ import {
 export default function BrowseCategories() {
   return (
     <StyledBrowseCategories>
-      <BrowseTitle>Browse Categories</BrowseTitle>
-      <BrowseItem>Men</BrowseItem>
-      <BrowseItem>Women</BrowseItem>
-      <BrowseItem>Kids</BrowseItem>
+      <BrowseTitle>Browse Brands</BrowseTitle>
+      <BrowseItem>Cartier</BrowseItem>
+      <BrowseItem>Patek Philippe</BrowseItem>
+      <BrowseItem>Vacheron Constantin</BrowseItem>
+      <BrowseItem>Ulysse Nardin</BrowseItem>
+      <BrowseItem>Rolex</BrowseItem>
     </StyledBrowseCategories>
   )
 }

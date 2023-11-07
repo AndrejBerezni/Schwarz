@@ -17,10 +17,12 @@ export default function BrowseCategoriesSide() {
       <CloseBrowseSide onClick={() => dispatch(hideSidebars())}>
         X
       </CloseBrowseSide>
-      <BrowseSideTitle>Browse Categories</BrowseSideTitle>
-      <BrowseItem>Men</BrowseItem>
-      <BrowseItem>Women</BrowseItem>
-      <BrowseItem>Kids</BrowseItem>
+      <BrowseSideTitle>Browse Brands</BrowseSideTitle>
+      <BrowseItem>Cartier</BrowseItem>
+      <BrowseItem>Patek Philippe</BrowseItem>
+      <BrowseItem>Vacheron Constantin</BrowseItem>
+      <BrowseItem>Ulysse Nardin</BrowseItem>
+      <BrowseItem>Rolex</BrowseItem>
     </StyledBrowseCategoriesSide>
   )
 }

@@ -9,7 +9,7 @@ export const theme = {
   secondary: '#F5F5F5',
   borderColor: '#444444',
   textFont: "'Lato', sans-serif",
-  headFont: "'Playfair Display', serif",
+  headFont: "'Roboto Slab', serif",
 }
 
 export const GlobalStyle = createGlobalStyle`
@@ -18,10 +18,8 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 #root {
-    max-width: 100vw;
     min-height: 100vh;
-    margin: 0;
-    padding-top: 80px;
+    margin: 0 auto;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -45,15 +43,20 @@ p:hover {
     cursor: default
 }
 
-@media (max-width: 768px) {
-  #root {
-    padding-top: 120px;
-  }
-}
+
 `
 
 export const MainContent = styled.div`
   flex: 1;
+  display: flex;
+  padding: 80px 30px 0;
+  margin-bottom: 60px;
+  @media (max-width: 768px) {
+    padding: 180px 5px 0;
+  }
+  @media (min-width: 1440px) {
+    padding: 80px 200px 0;
+  }
 `
 
 export const PrimaryButton = styled.button`

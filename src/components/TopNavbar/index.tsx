@@ -1,5 +1,4 @@
-import { BiSearchAlt } from 'react-icons/bi'
-import { BsCartFill } from 'react-icons/bs'
+import { BiSearchAlt, BiCart } from 'react-icons/bi'
 import { MdAccountCircle } from 'react-icons/md'
 import { TfiMenuAlt } from 'react-icons/tfi'
 import { useDispatch } from 'react-redux'
@@ -44,7 +43,7 @@ export default function TopNavbar() {
           </NavButton>
           <NavTooltip>Account</NavTooltip>
           <NavButton onClick={() => dispatch(showCart())}>
-            <BsCartFill />
+            <BiCart />
             <CartItemsNumber>0</CartItemsNumber>
           </NavButton>
           <NavTooltip>Cart</NavTooltip>

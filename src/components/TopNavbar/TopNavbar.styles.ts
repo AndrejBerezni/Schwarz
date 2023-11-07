@@ -97,7 +97,7 @@ export const CartItemsNumber = styled.p`
   padding: 0 3px;
   margin: 0;
   border: 1px solid ${(props) => props.theme.primary};
-  border-radius: 5px;
+  border-radius: 2px;
   background-color: ${(props) => props.theme.navBgColor};
   z-index: 1;
 `

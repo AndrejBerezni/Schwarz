@@ -4,7 +4,7 @@ export const theme = {
   bgColor: '#111111',
   navBgColor: '#000000',
   textColor: '#FFFFFF',
-  secondaryText: '#666666',
+  secondaryText: '#777777',
   primary: '#ffd900',
   secondary: '#F5F5F5',
   borderColor: '#444444',
@@ -54,6 +54,24 @@ p:hover {
 
 export const MainContent = styled.div`
   flex: 1;
+`
+
+export const PrimaryButton = styled.button`
+  background-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.navBgColor};
+  border-radius: 6px;
+  border: none;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  transition: 0.3s;
+  font-family: ${(props) => props.theme.textFont};
+  font-weight: bold;
+  min-width: 120px;
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 5px -4px ${(props) => props.theme.primary};
+  }
 `
 
 //   card - background: linear-gradient(to bottom, #333333, #222222, #111111);

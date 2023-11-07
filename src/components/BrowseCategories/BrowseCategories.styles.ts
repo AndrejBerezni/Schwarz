@@ -88,5 +88,6 @@ export const BrowseItem = styled.li`
     cursor: pointer;
     background-color: ${(props) => props.theme.bgColor};
     padding-left: 20px;
+    color: ${(props) => props.theme.primary};
   }
 `

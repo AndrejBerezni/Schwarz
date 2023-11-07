@@ -4,6 +4,7 @@ export const theme = {
   bgColor: '#111111',
   navBgColor: '#000000',
   textColor: '#FFFFFF',
+  secondaryText: '#666666',
   primary: '#ffd900',
   secondary: '#F5F5F5',
   borderColor: '#444444',
@@ -17,9 +18,9 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 #root {
-    max-width: 1280px;
+    max-width: 100vw;
     min-height: 100vh;
-    margin: 0 auto;
+    margin: 0;
     padding-top: 80px;
     text-align: center;
     display: flex;

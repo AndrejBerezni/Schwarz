@@ -1,8 +1,8 @@
-import { StyledCart, CloseCartButton, CartBackgroundImage } from './Cart.styles'
-import { useSelector, useDispatch } from 'react-redux'
-import { getShowCart } from '../../store/sidebars/selectors'
-import { hideSidebars } from '../../store/sidebars'
 import { BsCart4 } from 'react-icons/bs'
+import { useSelector, useDispatch } from 'react-redux'
+import { StyledCart, CloseCartButton, CartBackgroundImage } from './Cart.styles'
+import { hideSidebars } from '../../store/sidebars'
+import { getShowCart } from '../../store/sidebars/selectors'
 
 export default function Cart() {
   const dispatch = useDispatch()

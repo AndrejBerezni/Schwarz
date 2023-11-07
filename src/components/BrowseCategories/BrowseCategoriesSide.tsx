@@ -1,12 +1,12 @@
+import { useDispatch, useSelector } from 'react-redux'
 import {
   StyledBrowseCategoriesSide,
   CloseBrowseSide,
   BrowseSideTitle,
   BrowseItem,
 } from './BrowseCategories.styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { getShowCategories } from '../../store/sidebars/selectors'
 import { hideSidebars } from '../../store/sidebars'
+import { getShowCategories } from '../../store/sidebars/selectors'
 
 export default function BrowseCategoriesSide() {
   const dispatch = useDispatch()

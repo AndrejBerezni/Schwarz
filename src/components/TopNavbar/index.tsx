@@ -2,6 +2,8 @@ import { BiSearchAlt } from 'react-icons/bi'
 import { BsCartFill } from 'react-icons/bs'
 import { MdAccountCircle } from 'react-icons/md'
 import { TfiMenuAlt } from 'react-icons/tfi'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
 import {
   StyledTopNavbar,
   NavTitle,
@@ -12,9 +14,7 @@ import {
   NavTooltip,
   CartItemsNumber,
 } from './TopNavbar.styles'
-import { useDispatch } from 'react-redux'
 import { showCart, showCategories } from '../../store/sidebars'
-import { useNavigate } from 'react-router'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()

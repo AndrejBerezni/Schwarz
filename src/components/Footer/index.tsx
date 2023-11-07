@@ -1,9 +1,9 @@
+import { StyledFooter, FooterText } from './Footer.styles'
+
 export default function Footer() {
   return (
-    <>
-      <p>Subscribe to our newsletter</p>
-      <input type="text"></input>
-      <button>Subscribe</button>
-    </>
+    <StyledFooter>
+      <FooterText>Copyright © Schwarz 2023. All rights reserved</FooterText>
+    </StyledFooter>
   )
 }

@@ -67,7 +67,7 @@ export const PrimaryButton = styled.button`
   padding: 10px 15px;
   text-transform: uppercase;
   transition: 0.3s;
-  font-family: ${(props) => props.theme.textFont};
+  font-family: ${(props) => props.theme.headFontFont};
   font-weight: bold;
   min-width: 120px;
   &:hover {

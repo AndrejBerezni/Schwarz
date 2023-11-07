@@ -5,6 +5,7 @@ export const StyledHero = styled.section`
   height: 400px;
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: space-between;
   margin: 0;
   padding: 0;
@@ -84,6 +85,6 @@ export const HeroBoxLink = styled.a`
   &:hover {
     cursor: pointer;
     transform: translateY(-2px);
-    text-shadow: 0px 3px 4px ${(props) => props.theme.secondaryText};
+    text-shadow: 0px 1px 2px ${(props) => props.theme.secondaryText};
   }
 `

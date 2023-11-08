@@ -6,6 +6,7 @@ import {
   FeaturedCarouselInner,
   FeaturedCarouselTitle,
   FeaturedCarouselCommand,
+  FeaturedCarouselRight,
 } from './FeaturedCarousel.styles'
 import ProductCard from '../ProductCard'
 
@@ -47,7 +48,15 @@ export default function FeaturedCarousel() {
       >
         <PiArrowCircleRightFill />
       </FeaturedCarouselCommand>
-      <FeaturedCarouselInner first={first}>
+      <FeaturedCarouselRight />
+      <FeaturedCarouselInner first={first} length={productsArr.length}>
+        {productsArr.map((item) => (
+          <ProductCard key={item} />
+        ))}
+        {/* Adding again array of items,
+         because I was not able to arrange
+          not having empty space on the right inside carousel
+           when the last item from array was set as first: */}
         {productsArr.map((item) => (
           <ProductCard key={item} />
         ))}

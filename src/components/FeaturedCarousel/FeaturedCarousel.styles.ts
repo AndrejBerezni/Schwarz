@@ -11,10 +11,12 @@ export const StyledFeaturedCarousel = styled.div`
   gap: 10px;
   overflow-x: hidden;
   position: relative;
+  z-index: 1;
 `
 
 interface IFeaturedCarouselInnerProps {
   first: number
+  length: number
 }
 
 export const FeaturedCarouselInner = styled.div<IFeaturedCarouselInnerProps>`
@@ -25,6 +27,16 @@ export const FeaturedCarouselInner = styled.div<IFeaturedCarouselInnerProps>`
   top: 28px;
   left: -${(props) => props.first * 250}px;
   transition: left 0.5s ease-out;
+`
+
+export const FeaturedCarouselRight = styled.div`
+  height: 320px;
+  width: 1px;
+  position: absolute;
+  top: 28px;
+  right: -1px;
+  box-shadow: 0px 0px 8px ${(props) => props.theme.primary};
+  z-index: 1;
 `
 
 export const FeaturedCarouselTitle = styled.h3`

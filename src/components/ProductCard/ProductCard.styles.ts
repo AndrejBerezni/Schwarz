@@ -7,6 +7,7 @@ export const ProductCardImg = styled.img`
 `
 
 export const StyledProductCard = styled.div`
+  min-width: 240px;
   width: 240px;
   height: 320px;
   background: linear-gradient(to bottom, #222222, #111111, #000000);

@@ -3,12 +3,16 @@ import { styled } from 'styled-components'
 export const StyledHeroCarousel = styled.div`
   min-width: 280px;
   height: 400px;
+  min-height: 400px;
   flex: 1;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid ${(props) => props.theme.borderColor};
   position: relative;
   padding: 0;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 interface IHeroCarouselItemProps {

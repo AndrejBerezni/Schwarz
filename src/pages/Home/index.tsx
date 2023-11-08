@@ -1,11 +1,16 @@
 import { Outlet } from 'react-router'
+import { StyledHome } from './Home.styles'
 import BrowseCategories from '../../components/BrowseCategories'
+import FeaturedCarousel from '../../components/FeaturedCarousel'
 
 export default function Home() {
   return (
-    <>
-      <BrowseCategories />
-      <Outlet />
-    </>
+    <StyledHome>
+      <div style={{ display: 'flex' }}>
+        <BrowseCategories />
+        <Outlet />
+      </div>
+      <FeaturedCarousel />
+    </StyledHome>
   )
 }

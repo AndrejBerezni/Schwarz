@@ -20,7 +20,6 @@ export const HeroDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-  height: 400px;
   padding: 0;
   margin: 0;
 `
@@ -45,7 +44,7 @@ export const HeroBox = styled.div`
   overflow: hidden;
   text-transform: uppercase;
   @media (max-width: 768px) {
-    width: 280px;
+    width: 100%;
     height: 280px;
     padding: 30px;
   }

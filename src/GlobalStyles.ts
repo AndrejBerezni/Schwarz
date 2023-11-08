@@ -24,6 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     gap: 0;
+    overflow-x:hidden;
 }
 
 body {

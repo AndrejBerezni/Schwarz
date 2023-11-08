@@ -10,7 +10,6 @@ import {
 import HeroCarousel from './HeroCarousel'
 import watch from '../../assets/featuredwatch.png'
 import watch2 from '../../assets/featuredwatch2.png'
-import ProductCard from '../ProductCard'
 
 export default function Hero() {
   return (

@@ -79,7 +79,6 @@ export const NavTooltip = styled.div`
   padding: 8px 0 0;
   border-radius: 4px;
   font-size: 14px;
-  z-index: 1;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;

@@ -2,7 +2,6 @@ import { styled } from 'styled-components'
 
 export const StyledHero = styled.section`
   width: 100%;
-  height: 400px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -21,6 +20,7 @@ export const HeroDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
+  height: 400px;
   padding: 0;
   margin: 0;
 `

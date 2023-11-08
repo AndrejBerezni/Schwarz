@@ -4,6 +4,7 @@ export const StyledBrowseCategories = styled.ul`
   margin: 0 30px 0 0;
   height: 400px;
   width: 300px;
+  min-width: 300px;
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 10px;
   padding: 0;

@@ -32,9 +32,11 @@ export default function HeroCarouselPage({
       <HeroCarouselDiv>
         <HeroCarouselPageSubtitle>{subtitle}</HeroCarouselPageSubtitle>
         <HeroCarouselPageTitle>{title}</HeroCarouselPageTitle>
-        <PrimaryButton>{buttonText}</PrimaryButton>
+        <PrimaryButton onClick={() => navigate(link)}>
+          {buttonText}
+        </PrimaryButton>
       </HeroCarouselDiv>
-      <HeroCarouselImg src={img} onClick={() => navigate(link)} />
+      <HeroCarouselImg src={img} />
     </StyledHeroCarouselPage>
   )
 }

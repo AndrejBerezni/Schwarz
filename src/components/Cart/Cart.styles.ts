@@ -55,16 +55,49 @@ export const CartProductsSection = styled.section`
   }
 `
 
-export const CartProductDiv = styled.div`
+export const StyledCartProductDiv = styled.div`
   width: 100%;
-  border-top: 1px solid ${(props) => props.theme.borderColor};
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   width: 100%;
-  min-height: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1;
+  background-color: #00000099;
 `
 
-export const CartCheckoutSection = styled.section`
-  border-top: 1px solid ${(props) => props.theme.borderColor};
+export const CartImg = styled.img`
+  max-height: 60%;
+`
+
+export const CartTitle = styled.h5`
+  font-family: ${(props) => props.theme.headFont};
+  margin-bottom: 0;
+  text-align: start;
+`
+
+export const CartPrice = styled.p`
+  text-align: start;
+  font-weight: bold;
+  color: ${(props) => props.theme.primary};
+`
+
+export const CartDeleteBtn = styled.button`
+  color: ${(props) => props.theme.primary};
+  border: none;
+  font-size: 28px;
+  background-color: transparent;
+  transition: 0.3s;
+  &:hover {
+    color: red;
+    cursor: pointer;
+    transform: translateY(-2px);
+  }
+`
+
+export const StyledCartCheckoutSection = styled.section`
+  border-top: 2px solid ${(props) => props.theme.borderColor};
   height: 200px;
   display-flex;
   flex-direction: column;

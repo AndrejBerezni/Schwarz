@@ -21,6 +21,7 @@ export const MainProductBox = styled.div`
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  position: relative;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -102,5 +103,42 @@ export const MainProductImgBox = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     max-height: 500px;
+  }
+  position: relative;
+`
+
+export const MainProductTooltip = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  background-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.navBgColor};
+  border-radius: 5px;
+  opacity: 0;
+  width: fit-content;
+  padding: 5px 5px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: ${(props) => props.theme.headFont};
+  transition: 0.3s;
+  pointer-events: none;
+`
+
+export const MainProductFavBtn = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: ${(props) => props.theme.primary};
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    + ${MainProductTooltip} {
+      opacity: 1;
+      top: 10px;
+    }
   }
 `

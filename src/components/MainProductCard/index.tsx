@@ -10,10 +10,13 @@ import {
   MainProductPrice,
   MainProductImgBox,
   MainProductImg,
+  MainProductFavBtn,
+  MainProductTooltip,
 } from './MainProductCard.styles'
 import { PrimaryButton } from '../../GlobalStyles'
 import { formatPrice } from '../../utilities/formatPrice'
 import Counter from '../Counter'
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 
 interface IMainProductCardProps {
   product:
@@ -48,6 +51,10 @@ export default function MainProductCard({
             <MainProductImg src={product.img} />
           </MainProductImgBox>
           <MainProductBox>
+            <MainProductFavBtn>
+              <AiOutlineHeart />
+            </MainProductFavBtn>
+            <MainProductTooltip>Remove from wishlist</MainProductTooltip>
             <MainProductBrand>{product.brand}</MainProductBrand>
             <MainProductTitle>{product.name}</MainProductTitle>
             <MainProductDescription>

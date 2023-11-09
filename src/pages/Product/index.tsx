@@ -1,8 +1,8 @@
 import { useParams } from 'react-router'
-import MainProductCard from '../../components/MainProductCard'
-import FeaturedCarousel from '../../components/FeaturedCarousel'
 import watch from '../../assets/featuredwatch.png'
 import watch2 from '../../assets/featuredwatch2.png'
+import FeaturedCarousel from '../../components/FeaturedCarousel'
+import MainProductCard from '../../components/MainProductCard'
 
 //dummy data before implementing real one
 const products = [

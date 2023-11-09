@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { Navigate } from 'react-router'
 import {
   StyledMainProductCard,
   MainProductBox,
@@ -10,10 +12,8 @@ import {
   MainProductImg,
 } from './MainProductCard.styles'
 import { PrimaryButton } from '../../GlobalStyles'
-import { Navigate } from 'react-router'
-import { useState } from 'react'
-import Counter from '../Counter'
 import { formatPrice } from '../../utilities/formatPrice'
+import Counter from '../Counter'
 
 interface IMainProductCardProps {
   product:

@@ -60,15 +60,27 @@ export const MainContent = styled.div`
   }
 `
 
-export const PrimaryButton = styled.button`
-  background-color: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.navBgColor};
+interface IPrimaryButtonProps {
+  theme: {
+    primary: string
+    navBgColor: string
+    headFont: string
+  }
+  variant?: string
+}
+
+export const PrimaryButton = styled.button<IPrimaryButtonProps>`
+  background-color: ${(props) =>
+    props.variant === 'outline' ? props.theme.navBgColor : props.theme.primary};
+  color: ${(props) =>
+    props.variant === 'outline' ? props.theme.primary : props.theme.navBgColor};
   border-radius: 6px;
-  border: none;
+  border: ${(props) =>
+    props.variant === 'outline' ? `1px solid ${props.theme.primary}` : 'none'};
   padding: 10px 15px;
   text-transform: uppercase;
   transition: 0.3s;
-  font-family: ${(props) => props.theme.headFontFont};
+  font-family: ${(props) => props.theme.headFont};
   font-weight: bold;
   min-width: 120px;
   max-height: 50px;

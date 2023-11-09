@@ -10,6 +10,7 @@ import watch3 from '../../../assets//featuredwatch2.png'
 import watch from '../../../assets/carouselimg1.png'
 import watch2 from '../../../assets/featuredwatch.png'
 
+//just temporarily here until I start working with data
 const carouselData = [
   {
     id: uuidv4(),

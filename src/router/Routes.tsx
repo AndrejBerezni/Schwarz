@@ -30,7 +30,8 @@ export default function Router() {
           isAuth && currentUser.isAdmin ? <Admin /> : <Navigate to="/" />
         } // customers can't access admin portal
       />
-      <Route path="/products/:product" element={<Product />} />
+      <Route path="/products/:productId" element={<Product />} />
+      <Route path="/404" element={<NotFound />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

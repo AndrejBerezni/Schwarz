@@ -53,7 +53,7 @@ export const MainContent = styled.div`
   padding: 80px 30px 0;
   margin-bottom: 60px;
   @media (max-width: 768px) {
-    padding: 180px 5px 0;
+    padding: 140px 5px 0;
   }
   @media (min-width: 1440px) {
     padding: 80px 200px 0;
@@ -71,6 +71,7 @@ export const PrimaryButton = styled.button`
   font-family: ${(props) => props.theme.headFontFont};
   font-weight: bold;
   min-width: 120px;
+  max-height: 50px;
   &:hover {
     cursor: pointer;
     transform: translateY(-2px);

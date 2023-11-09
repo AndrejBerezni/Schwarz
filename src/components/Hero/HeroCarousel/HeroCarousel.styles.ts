@@ -2,7 +2,6 @@ import { styled } from 'styled-components'
 
 export const StyledHeroCarousel = styled.div`
   min-width: 280px;
-  height: 400px;
   min-height: 400px;
   flex: 1;
   border-radius: 10px;

@@ -10,6 +10,7 @@ import {
 } from './FeaturedCarousel.styles'
 import ProductCard from '../ProductCard'
 
+//just temporarily here until I start working with data
 const productsArr = [
   uuidv4(),
   uuidv4(),

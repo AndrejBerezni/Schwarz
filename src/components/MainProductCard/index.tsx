@@ -13,6 +13,7 @@ import { PrimaryButton } from '../../GlobalStyles'
 import { Navigate } from 'react-router'
 import { useState } from 'react'
 import Counter from '../Counter'
+import { formatPrice } from '../../utilities/formatPrice'
 
 interface IMainProductCardProps {
   product:
@@ -53,7 +54,9 @@ export default function MainProductCard({
               {product.description}
             </MainProductDescription>
             <MainProductAddDiv variant="main">
-              <MainProductPrice>{product.price} €</MainProductPrice>
+              <MainProductPrice>
+                {formatPrice(product.price)} €
+              </MainProductPrice>
               <MainProductAddDiv>
                 <Counter
                   increment={handleIncrement}

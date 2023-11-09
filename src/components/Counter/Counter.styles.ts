@@ -15,6 +15,7 @@ interface ICounterBtnProps {
   theme: {
     navBgColor: string
     primary: string
+    secondaryText: string
   }
   disabled?: boolean
 }
@@ -26,4 +27,12 @@ export const CounterBtn = styled.button<ICounterBtnProps>`
   background-color: ${(props) =>
     props.disabled ? props.theme.secondaryText : props.theme.primary};
   font-size: 1rem;
+  transition: 0.3s;
+  &:hover {
+    ${(props) =>
+      props.disabled
+        ? ''
+        : `
+    transform: translateY(-2px);
+    cursor: pointer;`}
 `

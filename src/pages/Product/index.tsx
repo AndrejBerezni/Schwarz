@@ -12,7 +12,7 @@ const products = [
     brand: 'cartier',
     description:
       'Medium model, automatic movement, rose gold, 2 interchangeable leather bracelets',
-    price: 16000,
+    price: 16010.44,
     img: watch,
   },
   {

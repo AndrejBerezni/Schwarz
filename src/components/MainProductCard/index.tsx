@@ -54,7 +54,7 @@ export default function MainProductCard({
             <MainProductFavBtn>
               <AiOutlineHeart />
             </MainProductFavBtn>
-            <MainProductTooltip>Remove from wishlist</MainProductTooltip>
+            <MainProductTooltip>Add to wishlist</MainProductTooltip>
             <MainProductBrand>{product.brand}</MainProductBrand>
             <MainProductTitle>{product.name}</MainProductTitle>
             <MainProductDescription>

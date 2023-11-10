@@ -2,8 +2,10 @@ import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Account from '../pages/Account'
 import Admin from '../pages/Admin'
-import Featured from '../pages/Featured'
+import Hero from '../components/Hero'
 import Home from '../pages/Home'
+import Orders from '../components/Orders'
+import Wishlist from '../components/Wishlist'
 import NotFound from '../pages/NotFound'
 import Product from '../pages/Product'
 import ProductList from '../pages/ProductList'
@@ -15,7 +17,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />}>
-        <Route index element={<Featured />} />
+        <Route index element={<Hero />} />
         <Route path="/:category" element={<ProductList />} />
       </Route>
       <Route
@@ -23,7 +25,10 @@ export default function Router() {
         element={
           isAuth && !currentUser.isAdmin ? <Account /> : <Navigate to="/" />
         } //admin users do not have customer account
-      />
+      >
+        <Route index element={<Orders />} />
+        <Route path="/account/wishlist" element={<Wishlist />} />
+      </Route>
       <Route
         path="/admin"
         element={

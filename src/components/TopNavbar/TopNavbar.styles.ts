@@ -77,14 +77,12 @@ export const NavTooltip = styled.div`
   font-style: italic;
   font-weight: 600;
   padding: 8px 0 0;
-  border-radius: 4px;
   font-size: 14px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: 0.3s;
   top: 0%;
   left: -100%;
-  position: absolute;
 `
 
 export const CartItemsNumber = styled.p`

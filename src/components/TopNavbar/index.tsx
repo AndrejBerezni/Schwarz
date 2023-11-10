@@ -38,7 +38,7 @@ export default function TopNavbar() {
           <TfiMenuAlt />
         </NavButton>
         <div>
-          <NavButton>
+          <NavButton onClick={() => navigate('/account')}>
             <MdAccountCircle />
           </NavButton>
           <NavTooltip>Account</NavTooltip>

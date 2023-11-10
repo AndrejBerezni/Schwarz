@@ -17,7 +17,7 @@ interface IAuthState {
 }
 
 const initialState: IAuthState = {
-  isAuth: false,
+  isAuth: true,
   user: {
     uid: '',
     isAdmin: false,

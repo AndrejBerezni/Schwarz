@@ -9,16 +9,16 @@ const reducers = combineReducers({
   sidebars: sidebarsReducer,
 })
 
-const persistedReducer = persistReducer(
-  {
-    key: 'root',
-    storage,
-  },
-  reducers
-)
+// const persistedReducer = persistReducer(
+//   {
+//     key: 'root',
+//     storage,
+//   },
+//   reducers
+// )
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: reducers, //persistedReducer,
   devTools: true,
 })
 

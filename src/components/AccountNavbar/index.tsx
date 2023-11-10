@@ -1,5 +1,6 @@
 import { StyledAccountNavbar, AccountNavLink } from './AccountNavbar.styles'
 import { useLocation } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export default function AccountNavbar() {
   const location = useLocation()
@@ -7,13 +8,15 @@ export default function AccountNavbar() {
   return (
     <StyledAccountNavbar>
       <AccountNavLink
-        href="/account"
+        as={Link}
+        to={'/account'}
         current={location.pathname === '/account'}
       >
         Orders
       </AccountNavLink>
       <AccountNavLink
-        href="/account/wishlist"
+        as={Link}
+        to={'/account/wishlist'}
         current={location.pathname === '/account/wishlist'}
       >
         Wishlist

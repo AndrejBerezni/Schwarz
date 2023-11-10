@@ -16,8 +16,10 @@ export const StyledTopNavbar = styled.div`
 
 export const NavTitle = styled.h5`
   font-family: ${(props) => props.theme.headFont};
+  text-decoration: none;
   color: ${(props) => props.theme.primary};
   font-size: x-large;
+  font-weight: 600;
   margin: 0;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px ${(props) => props.theme.bgColor};

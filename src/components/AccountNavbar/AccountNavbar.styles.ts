@@ -20,15 +20,33 @@ interface IAccountNavLinkProps {
 }
 
 export const AccountNavLink = styled.a<IAccountNavLinkProps>`
-  text-decoration: ${(props) => (props.current ? 'underline' : 'none')};
+  text-decoration: none;
   font-weight: 600;
   font-size: 24px;
   font-family: ${(props) => props.theme.textFont};
   color: ${(props) =>
     props.current ? props.theme.navBgColor : props.theme.secondaryText};
   transition: 0.3s;
+  position: relative;
   &:hover {
     color: ${(props) => props.theme.navBgColor};
-    text-decoration: underline;
+  }
+  &:hover:after {
+    width: 100%;
+    left: 0;
+  }
+  &:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 3px;
+    left: ${(props) => (props.current ? '0' : '50%')};
+    position: absolute;
+    background: ${(props) => props.theme.navBgColor};
+    transition:
+      width 0.3s ease 0s,
+      left 0.3s ease 0s;
+    width: ${(props) => (props.current ? '100%' : '0')};
   }
 `

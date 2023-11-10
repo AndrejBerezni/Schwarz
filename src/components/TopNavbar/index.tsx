@@ -2,7 +2,7 @@ import { BiSearchAlt, BiCart } from 'react-icons/bi'
 import { MdAccountCircle } from 'react-icons/md'
 import { TfiMenuAlt } from 'react-icons/tfi'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import {
   StyledTopNavbar,
   NavTitle,
@@ -17,12 +17,13 @@ import { showCart, showCategories } from '../../store/sidebars'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   return (
     <StyledTopNavbar>
       <NavDiv>
-        <NavTitle onClick={() => navigate('/')}>Schwarz</NavTitle>
+        <NavTitle as={Link} to="/">
+          Schwarz
+        </NavTitle>
       </NavDiv>
       <NavDiv>
         <NavInput type="text" placeholder="Search for products..."></NavInput>
@@ -38,7 +39,7 @@ export default function TopNavbar() {
           <TfiMenuAlt />
         </NavButton>
         <div>
-          <NavButton onClick={() => navigate('/account')}>
+          <NavButton as={Link} to="/account">
             <MdAccountCircle />
           </NavButton>
           <NavTooltip>Account</NavTooltip>

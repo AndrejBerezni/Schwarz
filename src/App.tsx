@@ -6,6 +6,7 @@ import NewsletterSection from './components/NewsletterSection'
 import TopNavbar from './components/TopNavbar'
 import { theme, GlobalStyle, MainContent } from './GlobalStyles'
 import Router from './router/Routes'
+import SignIn from './components/forms/SignIn'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <BrowseCategoriesSide />
       <NewsletterSection />
       <Footer />
+      <SignIn />
     </ThemeProvider>
   )
 }

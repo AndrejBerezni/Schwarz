@@ -16,7 +16,7 @@ export const StyledCart = styled.div<IStyledCartProps>`
   background-color: ${(props) => props.theme.navBgColor};
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 1;
   transition: right 0.6s ease-out;
   border-left: 1px solid ${(props) => props.theme.borderColor};
   @media (max-width: 768px) {

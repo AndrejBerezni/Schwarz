@@ -11,7 +11,7 @@ export const StyledTopNavbar = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  z-index: 2;
+  z-index: 1;
 `
 
 export const NavTitle = styled.h5`

@@ -36,7 +36,7 @@ export default function SignIn() {
     <Modal show={show}>
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
-        <h2>Sign In</h2>
+        <h2>Sign In to continue</h2>
         <StyledForm>
           <InputDiv>
             <FormLabel htmlFor="email">Email</FormLabel>

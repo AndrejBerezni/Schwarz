@@ -17,14 +17,14 @@ interface IAuthState {
 }
 
 const initialState: IAuthState = {
-  isAuth: true,
+  isAuth: false,
   user: {
     uid: '',
     isAdmin: false,
   },
   authForm: {
-    type: 'signIn',
-    show: true,
+    type: '',
+    show: false,
   },
 }
 

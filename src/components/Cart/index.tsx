@@ -29,6 +29,7 @@ export default function Cart() {
       <CartProductsSection>
         <CartProductDiv />
         <CartProductDiv />
+        <CartProductDiv />
       </CartProductsSection>
       <CartCheckoutSection totalPrice={34500} />
     </StyledCart>

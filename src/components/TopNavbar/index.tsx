@@ -1,8 +1,8 @@
 import { BiSearchAlt, BiCart } from 'react-icons/bi'
 import { MdAccountCircle } from 'react-icons/md'
 import { TfiMenuAlt } from 'react-icons/tfi'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   StyledTopNavbar,
   NavTitle,
@@ -14,9 +14,21 @@ import {
   CartItemsNumber,
 } from './TopNavbar.styles'
 import { showCart, showCategories } from '../../store/sidebars'
+import { getAuthStatus, getUser } from '../../store/authentication/selectors'
+import { showForm } from '../../store/authentication'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isAuth = useSelector(getAuthStatus)
+  const user = useSelector(getUser)
+
+  const handleAccountPageAccess = () =>
+    !isAuth
+      ? dispatch(showForm('signIn'))
+      : user.isAdmin
+      ? navigate('/admin')
+      : navigate('/account')
 
   return (
     <StyledTopNavbar>
@@ -39,7 +51,7 @@ export default function TopNavbar() {
           <TfiMenuAlt />
         </NavButton>
         <div>
-          <NavButton as={Link} to="/account">
+          <NavButton onClick={handleAccountPageAccess}>
             <MdAccountCircle />
           </NavButton>
           <NavTooltip>Account</NavTooltip>

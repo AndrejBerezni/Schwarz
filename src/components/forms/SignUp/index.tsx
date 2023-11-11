@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { PrimaryButton } from '../../../GlobalStyles'
 import {
   ModalOuter,
   ModalContent,
@@ -5,20 +7,18 @@ import {
   InputDiv,
   FormLabel,
   FormInput,
-  FormLink,
   CloseForm,
 } from '../forms.styles'
-import { useRef } from 'react'
-import { PrimaryButton } from '../../../GlobalStyles'
 
 export default function SignIn() {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
+  const confirmPasswordRef = useRef(null)
 
   return (
     <ModalOuter>
       <ModalContent>
-        <h2>Sign In</h2>
+        <h2>Sign Up</h2>
         <StyledForm>
           <InputDiv>
             <FormLabel htmlFor="email">Email</FormLabel>
@@ -37,17 +37,21 @@ export default function SignIn() {
               type="password"
               ref={passwordRef}
               required
-              placeholder="Enter your password here..."
+              placeholder="Create your password..."
             ></FormInput>
-            <FormLink>Forgot password?</FormLink>
           </InputDiv>
-          <PrimaryButton>Sign In</PrimaryButton>
+          <InputDiv>
+            <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+            <FormInput
+              id="confirmPassword"
+              type="password"
+              ref={confirmPasswordRef}
+              required
+              placeholder="Confirm password here..."
+            ></FormInput>
+          </InputDiv>
+          <PrimaryButton>Sign Up</PrimaryButton>
         </StyledForm>
-        <p>
-          Don't have an account? <FormLink>Sign up</FormLink>
-        </p>
-        <p>or</p>
-        <PrimaryButton variant="outline">Sign In with Google</PrimaryButton>
         <CloseForm>X</CloseForm>
       </ModalContent>
     </ModalOuter>

@@ -20,6 +20,8 @@ export const ModalContent = styled.div`
   width: 600px;
   height: fit-content;
   padding: 30px;
+  position: relative;
+  z-index: 2;
   @media (max-width: 768px) {
     width: 100%;
     height: 100%;
@@ -50,10 +52,15 @@ export const FormInput = styled.input`
   border: 2px solid ${(props) => props.theme.primary};
   border-radius: 5px;
   padding: 5px;
-  font-size: 20px;
+  font-size: 18px;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.primary};
   width: 100%;
+  &::placeholder {
+    color: ${(props) => props.theme.secondaryText};
+    font-size: 14px;
+    font-style: italic;
+  }
 `
 
 export const FormLink = styled.a`
@@ -65,5 +72,21 @@ export const FormLink = styled.a`
     color: ${(props) => props.theme.textColor};
     cursor: pointer;
     text-decoration: underline;
+  }
+`
+
+export const CloseForm = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: ${(props) => props.theme.primary};
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  transition: 0.3s;
+  &:hover {
+    color: ${(props) => props.theme.textColor};
+    cursor: pointer;
+    transform: translateY(-2px);
   }
 `

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { Navigate } from 'react-router'
 import {
   StyledMainProductCard,
@@ -16,7 +17,6 @@ import {
 import { PrimaryButton } from '../../GlobalStyles'
 import { formatPrice } from '../../utilities/formatPrice'
 import Counter from '../Counter'
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 
 interface IMainProductCardProps {
   product:

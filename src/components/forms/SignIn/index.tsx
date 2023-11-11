@@ -1,4 +1,10 @@
+import { useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { PrimaryButton } from '../../../GlobalStyles'
+import { showForm, hideForm } from '../../../store/authentication'
+import { getAuthForm } from '../../../store/authentication/selectors'
 import {
+  Modal,
   ModalOuter,
   ModalContent,
   StyledForm,
@@ -8,15 +14,27 @@ import {
   FormLink,
   CloseForm,
 } from '../forms.styles'
-import { useRef } from 'react'
-import { PrimaryButton } from '../../../GlobalStyles'
 
 export default function SignIn() {
+  const dispatch = useDispatch()
+  const authForm = useSelector(getAuthForm)
+  const show = authForm.type === 'signIn' && authForm.show
+
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
 
+  const handleClose = () => {
+    dispatch(hideForm())
+  }
+
+  const redirectToSignUp = () => {
+    dispatch(hideForm())
+    dispatch(showForm('signUp'))
+  }
+
   return (
-    <ModalOuter>
+    <Modal show={show}>
+      <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Sign In</h2>
         <StyledForm>
@@ -44,12 +62,13 @@ export default function SignIn() {
           <PrimaryButton>Sign In</PrimaryButton>
         </StyledForm>
         <p>
-          Don't have an account? <FormLink>Sign up</FormLink>
+          Don't have an account?{' '}
+          <FormLink onClick={redirectToSignUp}>Sign up</FormLink>
         </p>
         <p>or</p>
         <PrimaryButton variant="outline">Sign In with Google</PrimaryButton>
-        <CloseForm>X</CloseForm>
+        <CloseForm onClick={handleClose}>X</CloseForm>
       </ModalContent>
-    </ModalOuter>
+    </Modal>
   )
 }

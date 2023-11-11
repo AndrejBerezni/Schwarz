@@ -1,6 +1,10 @@
 import { useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { PrimaryButton } from '../../../GlobalStyles'
+import { hideForm } from '../../../store/authentication'
+import { getAuthForm } from '../../../store/authentication/selectors'
 import {
+  Modal,
   ModalOuter,
   ModalContent,
   StyledForm,
@@ -11,12 +15,21 @@ import {
 } from '../forms.styles'
 
 export default function SignIn() {
+  const dispatch = useDispatch()
+  const authForm = useSelector(getAuthForm)
+  const show = authForm.type === 'signUp' && authForm.show
+
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const confirmPasswordRef = useRef(null)
 
+  const handleClose = () => {
+    dispatch(hideForm())
+  }
+
   return (
-    <ModalOuter>
+    <Modal show={show}>
+      <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Sign Up</h2>
         <StyledForm>
@@ -52,8 +65,8 @@ export default function SignIn() {
           </InputDiv>
           <PrimaryButton>Sign Up</PrimaryButton>
         </StyledForm>
-        <CloseForm>X</CloseForm>
+        <CloseForm onClick={handleClose}>X</CloseForm>
       </ModalContent>
-    </ModalOuter>
+    </Modal>
   )
 }

@@ -11,7 +11,7 @@ export const StyledTopNavbar = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
 `
 
 export const NavTitle = styled.h5`
@@ -99,7 +99,6 @@ export const CartItemsNumber = styled.p`
   border: 1px solid ${(props) => props.theme.primary};
   border-radius: 2px;
   background-color: ${(props) => props.theme.navBgColor};
-  z-index: 1;
 `
 
 //using 'variant' prop was showing TS warning, therefore I am creating interface for props

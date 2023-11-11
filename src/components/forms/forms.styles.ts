@@ -1,5 +1,17 @@
 import { styled } from 'styled-components'
 
+interface IModalProps {
+  show: boolean
+}
+
+export const Modal = styled.div<IModalProps>`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: ${(props) => (props.show ? 'flex' : 'none')};
+  z-index: 3;
+`
+
 export const ModalOuter = styled.div`
   width: 100vw;
   height: 100vh;
@@ -7,7 +19,6 @@ export const ModalOuter = styled.div`
   top: 0;
   left: 0;
   background-color: #00000099;
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
@@ -20,7 +31,10 @@ export const ModalContent = styled.div`
   width: 600px;
   height: fit-content;
   padding: 30px;
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   @media (max-width: 768px) {
     width: 100%;

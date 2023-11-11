@@ -1,6 +1,6 @@
-import { StyledAccountNavbar, AccountNavLink } from './AccountNavbar.styles'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
+import { StyledAccountNavbar, AccountNavLink } from './AccountNavbar.styles'
 
 export default function AccountNavbar() {
   const location = useLocation()

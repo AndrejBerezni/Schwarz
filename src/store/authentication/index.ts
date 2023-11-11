@@ -23,8 +23,8 @@ const initialState: IAuthState = {
     isAdmin: false,
   },
   authForm: {
-    type: '',
-    show: false,
+    type: 'signIn',
+    show: true,
   },
 }
 

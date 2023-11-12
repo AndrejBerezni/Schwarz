@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { PrimaryButton } from '../../../GlobalStyles'
@@ -38,12 +38,12 @@ export default function SignIn() {
     dispatch(showForm('signUp'))
   }
 
-  const handleEmailSignIn = async (event) => {
+  const handleEmailSignIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
       const userId = await emailSignIn(
-        emailRef.current!.value.trim().toLowerCase(), //assert that is not null
-        passwordRef.current!.value //assert that is not null
+        emailRef.current!.value.trim().toLowerCase(),
+        passwordRef.current!.value
       )
       dispatch(
         signIn({

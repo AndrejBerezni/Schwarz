@@ -1,7 +1,8 @@
-import { useRef } from 'react'
+import { useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { PrimaryButton } from '../../../GlobalStyles'
-import { hideForm } from '../../../store/authentication'
+import { hideForm, signIn } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
 import {
   Modal,
@@ -13,18 +14,44 @@ import {
   FormInput,
   CloseForm,
 } from '../forms.styles'
+import { emailSignUp } from '../../../firebase/firebase-authentication'
 
 export default function SignIn() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const authForm = useSelector(getAuthForm)
   const show = authForm.type === 'signUp' && authForm.show
 
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-  const confirmPasswordRef = useRef(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+  const confirmPasswordRef = useRef<HTMLInputElement>(null)
 
   const handleClose = () => {
     dispatch(hideForm())
+  }
+
+  const handleEmailSignUp = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (passwordRef.current!.value !== confirmPasswordRef.current!.value) {
+      console.log('Passwords do not match!')
+      return
+    }
+    try {
+      const userId = await emailSignUp(
+        emailRef.current!.value.trim().toLowerCase(),
+        passwordRef.current!.value
+      )
+      dispatch(
+        signIn({
+          user: userId,
+          isAdmin: false,
+        })
+      )
+      dispatch(hideForm())
+      navigate('/account')
+    } catch (error: any) {
+      console.log(error.message)
+    }
   }
 
   return (
@@ -32,7 +59,7 @@ export default function SignIn() {
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Sign Up</h2>
-        <StyledForm>
+        <StyledForm onSubmit={handleEmailSignUp}>
           <InputDiv>
             <FormLabel htmlFor="email">Email</FormLabel>
             <FormInput
@@ -63,7 +90,7 @@ export default function SignIn() {
               placeholder="Confirm password here..."
             ></FormInput>
           </InputDiv>
-          <PrimaryButton>Sign Up</PrimaryButton>
+          <PrimaryButton type="submit">Sign Up</PrimaryButton>
         </StyledForm>
         <CloseForm onClick={handleClose}>X</CloseForm>
       </ModalContent>

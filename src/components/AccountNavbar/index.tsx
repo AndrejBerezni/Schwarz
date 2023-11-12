@@ -4,7 +4,6 @@ import { StyledAccountNavbar, AccountNavLink } from './AccountNavbar.styles'
 
 export default function AccountNavbar() {
   const location = useLocation()
-  console.log(location)
   return (
     <StyledAccountNavbar>
       <AccountNavLink

@@ -1,13 +1,14 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE__FIREBASE_apiKey,
-  authDomain: import.meta.env.schwarzluxurywatches.firebaseapp.com,
-  projectId: import.meta.env.VITE__FIREBASE_projectId,
-  storageBucket: import.meta.env.VITE__FIREBASE_storageBucket,
-  messagingSenderId: import.meta.env.VITE__FIREBASE_messagingSenderId,
-  appId: import.meta.env.VITE__FIREBASE_appId,
-  measurementId: import.meta.env.VITE__FIREBASE_measurementId,
+  authDomain: 'schwarzluxurywatches.firebaseapp.com',
+  projectId: 'schwarzluxurywatches',
+  storageBucket: 'schwarzluxurywatches.appspot.com',
+  messagingSenderId: '1014440496602',
+  appId: '1:1014440496602:web:90aa95d338d58de56284e3',
+  measurementId: 'G-ZP4CP4JZZG',
 }
 
 // Initialize Firebase

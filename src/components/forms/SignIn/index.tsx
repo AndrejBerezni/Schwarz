@@ -1,7 +1,8 @@
 import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { PrimaryButton } from '../../../GlobalStyles'
-import { showForm, hideForm } from '../../../store/authentication'
+import { showForm, hideForm, signIn } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
 import {
   Modal,
@@ -14,14 +15,19 @@ import {
   FormLink,
   CloseForm,
 } from '../forms.styles'
+import {
+  emailSignIn,
+  googleSignIn,
+} from '../../../firebase/firebase-authentication'
 
 export default function SignIn() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const authForm = useSelector(getAuthForm)
   const show = authForm.type === 'signIn' && authForm.show
 
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   const handleClose = () => {
     dispatch(hideForm())
@@ -32,16 +38,52 @@ export default function SignIn() {
     dispatch(showForm('signUp'))
   }
 
+  const handleEmailSignIn = async (event) => {
+    event.preventDefault()
+    try {
+      const userId = await emailSignIn(
+        emailRef.current!.value.trim().toLowerCase(), //assert that is not null
+        passwordRef.current!.value //assert that is not null
+      )
+      dispatch(
+        signIn({
+          user: userId,
+          isAdmin: false,
+        })
+      )
+      dispatch(hideForm())
+      navigate('/account')
+    } catch (error: any) {
+      console.log(error.message)
+    }
+  }
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const userId = await googleSignIn()
+      dispatch(
+        signIn({
+          user: userId,
+          isAdmin: false,
+        })
+      )
+      dispatch(hideForm())
+      navigate('/account')
+    } catch (error: any) {
+      console.log(error.message)
+    }
+  }
+
   return (
     <Modal show={show}>
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Sign In to continue</h2>
-        <StyledForm>
+        <StyledForm onSubmit={handleEmailSignIn}>
           <InputDiv>
-            <FormLabel htmlFor="email">Email</FormLabel>
+            <FormLabel htmlFor="emailSI">Email</FormLabel>
             <FormInput
-              id="email"
+              id="emailSI"
               type="email"
               ref={emailRef}
               required
@@ -49,9 +91,9 @@ export default function SignIn() {
             ></FormInput>
           </InputDiv>
           <InputDiv>
-            <FormLabel htmlFor="password">Password</FormLabel>
+            <FormLabel htmlFor="passwordSI">Password</FormLabel>
             <FormInput
-              id="password"
+              id="passwordSI"
               type="password"
               ref={passwordRef}
               required
@@ -59,14 +101,16 @@ export default function SignIn() {
             ></FormInput>
             <FormLink>Forgot password?</FormLink>
           </InputDiv>
-          <PrimaryButton>Sign In</PrimaryButton>
+          <PrimaryButton type="submit">Sign In</PrimaryButton>
         </StyledForm>
         <p>
           Don't have an account?{' '}
           <FormLink onClick={redirectToSignUp}>Sign up</FormLink>
         </p>
         <p>or</p>
-        <PrimaryButton variant="outline">Sign In with Google</PrimaryButton>
+        <PrimaryButton variant="outline" onClick={handleGoogleSignIn}>
+          Sign In with Google
+        </PrimaryButton>
         <CloseForm onClick={handleClose}>X</CloseForm>
       </ModalContent>
     </Modal>

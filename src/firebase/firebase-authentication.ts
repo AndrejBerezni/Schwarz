@@ -15,7 +15,7 @@ const auth = getAuth(app)
 //Google sign in
 const provider = new GoogleAuthProvider()
 
-export const signInWithGoogle = async () => {
+export const googleSignIn = async () => {
   try {
     const newUser = await signInWithPopup(auth, provider)
     return newUser.user.uid

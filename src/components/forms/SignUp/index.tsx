@@ -1,6 +1,7 @@
 import { useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
+import { emailSignUp } from '../../../firebase/firebase-authentication'
 import { PrimaryButton } from '../../../GlobalStyles'
 import { hideForm, signIn } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
@@ -14,7 +15,6 @@ import {
   FormInput,
   CloseForm,
 } from '../forms.styles'
-import { emailSignUp } from '../../../firebase/firebase-authentication'
 
 export default function SignIn() {
   const navigate = useNavigate()

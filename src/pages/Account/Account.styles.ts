@@ -7,6 +7,7 @@ export const StyledAccountPage = styled.main`
   justify-content: space-between;
   @media (max-width: 768px) {
     flex-direction: column-reverse;
+    gap: 20px;
   }
 `
 export const AccountPageSection = styled.section`

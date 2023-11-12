@@ -23,7 +23,8 @@ export const AccountNavLink = styled.a<IAccountNavLinkProps>`
   text-decoration: none;
   font-weight: 600;
   font-size: 24px;
-  font-family: ${(props) => props.theme.textFont};
+  font-family: ${(props) => props.theme.headFont};
+  font-style: italic;
   color: ${(props) =>
     props.current ? props.theme.navBgColor : props.theme.secondaryText};
   transition: 0.3s;

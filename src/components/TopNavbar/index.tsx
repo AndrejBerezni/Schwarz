@@ -13,9 +13,9 @@ import {
   NavTooltip,
   CartItemsNumber,
 } from './TopNavbar.styles'
-import { showCart, showCategories } from '../../store/sidebars'
-import { getAuthStatus, getUser } from '../../store/authentication/selectors'
 import { showForm } from '../../store/authentication'
+import { getAuthStatus, getUser } from '../../store/authentication/selectors'
+import { showCart, showCategories } from '../../store/sidebars'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()

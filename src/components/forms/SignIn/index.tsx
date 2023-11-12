@@ -1,6 +1,10 @@
 import { useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
+import {
+  emailSignIn,
+  googleSignIn,
+} from '../../../firebase/firebase-authentication'
 import { PrimaryButton } from '../../../GlobalStyles'
 import { showForm, hideForm, signIn } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
@@ -15,10 +19,6 @@ import {
   FormLink,
   CloseForm,
 } from '../forms.styles'
-import {
-  emailSignIn,
-  googleSignIn,
-} from '../../../firebase/firebase-authentication'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -78,7 +78,7 @@ export default function SignIn() {
     <Modal show={show}>
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
-        <h2>Sign In to continue</h2>
+        <h2>Sign In To Continue</h2>
         <StyledForm onSubmit={handleEmailSignIn}>
           <InputDiv>
             <FormLabel htmlFor="emailSI">Email</FormLabel>

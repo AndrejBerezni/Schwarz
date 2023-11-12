@@ -1,5 +1,3 @@
-import { app } from './firebase-config'
-
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,6 +6,7 @@ import {
   signInWithPopup,
   signOut,
 } from 'firebase/auth'
+import { app } from './firebase-config'
 
 //Initialize authentication
 const auth = getAuth(app)

@@ -8,6 +8,7 @@ import NewsletterSection from './components/NewsletterSection'
 import TopNavbar from './components/TopNavbar'
 import { theme, GlobalStyle, MainContent } from './GlobalStyles'
 import Router from './router/Routes'
+import Spinner from './components/Spinner'
 
 function App() {
   return (

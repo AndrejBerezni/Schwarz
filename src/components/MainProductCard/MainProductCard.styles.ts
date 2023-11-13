@@ -83,6 +83,11 @@ export const MainProductPrice = styled.p`
   }
 `
 
+export const MainProductPreviousPrice = styled(MainProductPrice)`
+  color: ${(props) => props.theme.textColor};
+  text-decoration: line-through;
+`
+
 export const MainProductImg = styled.img`
   max-width: 100%;
   max-height: 80%;

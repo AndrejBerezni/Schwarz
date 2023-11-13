@@ -9,6 +9,7 @@ import {
   MainProductDescription,
   MainProductAddDiv,
   MainProductPrice,
+  MainProductPreviousPrice,
   MainProductImgBox,
   MainProductImg,
   MainProductFavBtn,
@@ -27,7 +28,7 @@ export default function MainProductCard({
   product,
 }: Readonly<IMainProductCardProps>) {
   const [amount, setAmount] = useState<number>(1)
-
+  const [localWishlist, setLocalWishlist] = useState<boolean>(false)
   const handleIncrement = () => setAmount((prev) => prev + 1)
   const handleDecrement = () => {
     if (amount === 1) {
@@ -35,6 +36,8 @@ export default function MainProductCard({
     }
     setAmount((prev) => prev - 1)
   }
+  const handleWishlist = () => setLocalWishlist((prev) => !prev)
+
   return (
     <>
       {product ? (
@@ -43,19 +46,32 @@ export default function MainProductCard({
             <MainProductImg src={product.images[0]} />
           </MainProductImgBox>
           <MainProductBox>
-            <MainProductFavBtn>
-              <AiOutlineHeart />
+            <MainProductFavBtn onClick={handleWishlist}>
+              {localWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
             </MainProductFavBtn>
-            <MainProductTooltip>Add to wishlist</MainProductTooltip>
+            <MainProductTooltip>
+              {localWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+            </MainProductTooltip>
             <MainProductBrand>{product.metadata.brand}</MainProductBrand>
             <MainProductTitle>{product.name}</MainProductTitle>
             <MainProductDescription>
               {product.description}
             </MainProductDescription>
             <MainProductAddDiv variant="main">
-              <MainProductPrice>
-                {formatPrice(product.prices[0].unit_amount / 100)} €
-              </MainProductPrice>
+              {product.metadata.discount === '1' ? (
+                <>
+                  <MainProductPreviousPrice>
+                    {formatPrice(product.prices[0].unit_amount / 100)}€
+                  </MainProductPreviousPrice>
+                  <MainProductPrice>
+                    {formatPrice(product.prices[1].unit_amount / 100)}€
+                  </MainProductPrice>
+                </>
+              ) : (
+                <MainProductPrice>
+                  {formatPrice(product.prices[0].unit_amount / 100)}€
+                </MainProductPrice>
+              )}
               <MainProductAddDiv>
                 <Counter
                   increment={handleIncrement}

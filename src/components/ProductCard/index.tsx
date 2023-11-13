@@ -17,7 +17,9 @@ export default function ProductCard({ product }: Readonly<IProductCardProps>) {
   return (
     <StyledProductCard>
       <ProductCardBadgeContainer>
-        <ProductCardBadge>NEW</ProductCardBadge>
+        {product.metadata.new === '1' && (
+          <ProductCardBadge>NEW</ProductCardBadge>
+        )}
       </ProductCardBadgeContainer>
       <ProductCardImg src={product.images[0]} />
       {/* dont forget to limit number of characters later */}

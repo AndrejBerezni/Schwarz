@@ -25,7 +25,7 @@ export const FeaturedCarouselInner = styled.div<IFeaturedCarouselInnerProps>`
   margin: 0;
   position: absolute;
   top: 28px;
-  left: -${(props) => props.first * 250}px;
+  left: -${(props) => props.first * 290}px;
   transition: left 0.5s ease-out;
 `
 

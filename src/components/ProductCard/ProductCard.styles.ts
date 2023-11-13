@@ -8,14 +8,14 @@ export const ProductCardImg = styled.img`
 
 export const StyledProductCard = styled.div`
   min-width: 240px;
-  width: 240px;
+  width: 280px;
   height: 320px;
   background: linear-gradient(to bottom, #222222, #111111, #000000);
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: end;
   align-items: start;
   padding: 5px 5px 10px 10px;
   &:hover {
@@ -27,9 +27,6 @@ export const StyledProductCard = styled.div`
       transform: scale(1.2);
       filter: drop-shadow(0px 0px 4px ${(props) => props.theme.primary});
     }
-  }
-  @media (max-width: 768px) {
-    width: min(90%, 320px);
   }
 `
 
@@ -54,6 +51,9 @@ export const ProductCardText = styled.p`
   align-text: start;
   font-weight: bold;
   margin: 0;
+  &:nth-of-type(1) {
+    text-transform: capitalize;
+  }
 `
 
 export const ProductPrice = styled.p`

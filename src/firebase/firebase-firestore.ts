@@ -11,9 +11,15 @@ const db = getFirestore(app)
 
 //Get new products
 
-export const getNewProducts = async () => {
+export const getProducts = async (
+  metadataProp: string,
+  metadataCriteria: string
+) => {
   const productsArray: any[] = []
-  const q = query(collection(db, 'products'), where('metadata.new', '==', '1'))
+  const q = query(
+    collection(db, 'products'),
+    where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`)
+  )
   const querySnapshot = await getDocs(q)
 
   for (const doc of querySnapshot.docs) {

@@ -36,5 +36,4 @@ export interface IProduct {
   stripe_metadata_material: string
   stripe_metadata_new: string
   tax_code: null
-  // Add other properties as needed
 }

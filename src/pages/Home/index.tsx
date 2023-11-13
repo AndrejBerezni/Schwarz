@@ -3,14 +3,14 @@ import { StyledHome } from './Home.styles'
 import BrowseCategories from '../../components/BrowseCategories'
 import FeaturedCarousel from '../../components/FeaturedCarousel'
 import { useEffect, useState } from 'react'
-import { getNewProducts } from '../../firebase/firebase-firestore'
+import { getProducts } from '../../firebase/firebase-firestore'
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([])
 
   useEffect(() => {
     const setCarouselProducts = async () => {
-      const newProducts = await getNewProducts()
+      const newProducts = await getProducts('new', '1')
       setProducts(newProducts)
     }
 

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router'
 import {
   StyledProductCard,
   ProductCardImg,
@@ -14,15 +15,15 @@ interface IProductCardProps {
 }
 
 export default function ProductCard({ product }: Readonly<IProductCardProps>) {
+  const navigate = useNavigate()
   return (
-    <StyledProductCard>
+    <StyledProductCard onClick={() => navigate(`/products/${product.docId}`)}>
       <ProductCardBadgeContainer>
         {product.metadata.new === '1' && (
           <ProductCardBadge>NEW</ProductCardBadge>
         )}
       </ProductCardBadgeContainer>
       <ProductCardImg src={product.images[0]} />
-      {/* dont forget to limit number of characters later */}
       <ProductCardText>{product.metadata.brand}</ProductCardText>
       <ProductCardText>
         {product.name.length > 25

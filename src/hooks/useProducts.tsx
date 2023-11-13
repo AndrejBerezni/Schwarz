@@ -20,7 +20,7 @@ export default function useProducts({
     }
 
     fetchProducts()
-  }, [metadataCriteria])
+  }, [metadataProp, metadataCriteria])
 
   return products
 }

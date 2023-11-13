@@ -14,22 +14,14 @@ import {
   MainProductFavBtn,
   MainProductTooltip,
 } from './MainProductCard.styles'
+import { IProduct } from '../../compiler/productInterface'
 import { PrimaryButton } from '../../GlobalStyles'
 import { formatPrice } from '../../utilities/formatPrice'
 import Counter from '../Counter'
 
 interface IMainProductCardProps {
-  product:
-    | {
-        id: string
-        name: string
-        brand: string
-        description: string
-        price: number
-        img: string
-      }
-    | undefined
-} // with real data, this logic of product being undefined and navigating to 404 should be move up to Product page
+  product: IProduct
+}
 
 export default function MainProductCard({
   product,
@@ -48,21 +40,21 @@ export default function MainProductCard({
       {product ? (
         <StyledMainProductCard>
           <MainProductImgBox>
-            <MainProductImg src={product.img} />
+            <MainProductImg src={product.images[0]} />
           </MainProductImgBox>
           <MainProductBox>
             <MainProductFavBtn>
               <AiOutlineHeart />
             </MainProductFavBtn>
             <MainProductTooltip>Add to wishlist</MainProductTooltip>
-            <MainProductBrand>{product.brand}</MainProductBrand>
+            <MainProductBrand>{product.metadata.brand}</MainProductBrand>
             <MainProductTitle>{product.name}</MainProductTitle>
             <MainProductDescription>
               {product.description}
             </MainProductDescription>
             <MainProductAddDiv variant="main">
               <MainProductPrice>
-                {formatPrice(product.price)} €
+                {formatPrice(product.prices[0].unit_amount / 100)} €
               </MainProductPrice>
               <MainProductAddDiv>
                 <Counter

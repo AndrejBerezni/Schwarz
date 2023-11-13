@@ -1,6 +1,8 @@
 import {
+  doc,
   getFirestore,
   getDocs,
+  getDoc,
   collection,
   query,
   where,
@@ -39,4 +41,28 @@ export const getProducts = async (
   }
 
   return productsArray
+}
+
+export const getSingleProduct = async (docId: string) => {
+  try {
+    const docRef = doc(db, 'products', docId)
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+      const prices: any[] = []
+      const priceQuery = collection(db, 'products', docId, 'prices')
+      const priceSnapshot = await getDocs(priceQuery)
+
+      priceSnapshot.forEach((item) => {
+        prices.push(item.data())
+      })
+
+      const productData = docSnap.data()
+      productData.prices = prices
+      productData.docId = docSnap.id
+
+      return productData
+    }
+  } catch (error: any) {
+    throw new Error(error.message)
+  }
 }

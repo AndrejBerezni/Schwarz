@@ -5,7 +5,7 @@ interface IPrice {
   description: null
   interval: null
   interval_count: null
-  metadata: {}
+  metadata: any
   product: string
   recurring: null
   tax_behavior: string

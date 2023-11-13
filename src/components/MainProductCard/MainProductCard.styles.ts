@@ -85,12 +85,15 @@ export const MainProductPrice = styled.p`
 
 export const MainProductImg = styled.img`
   max-width: 100%;
-  max-height: 100%;
+  max-height: 80%;
   transition: 0.3s;
 `
 
 export const MainProductImgBox = styled.div`
   background: linear-gradient(to bottom, #333333, #222222, #111111, #000000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 40%;
   border-radius: 10px;
@@ -104,7 +107,6 @@ export const MainProductImgBox = styled.div`
     width: 100%;
     max-height: 500px;
   }
-  position: relative;
 `
 
 export const MainProductTooltip = styled.div`

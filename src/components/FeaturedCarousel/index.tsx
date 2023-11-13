@@ -7,17 +7,24 @@ import {
   FeaturedCarouselCommand,
   FeaturedCarouselRight,
 } from './FeaturedCarousel.styles'
-import { IProduct } from '../../compiler/productInterface'
+import useProducts from '../../hooks/useProducts'
 import ProductCard from '../ProductCard'
 import Spinner from '../Spinner'
 
 interface IFeaturedCarouselProps {
-  products: IProduct[]
+  useProductsData: {
+    metadataProp: string
+    metadataCriteria: string
+  }
+  title: string
 }
 
 export default function FeaturedCarousel({
-  products,
+  useProductsData,
+  title,
 }: Readonly<IFeaturedCarouselProps>) {
+  const products = useProducts(useProductsData)
+
   const [first, setFirst] = useState(0)
 
   const handleSlide = (direction: string) => {
@@ -34,7 +41,7 @@ export default function FeaturedCarousel({
         <Spinner />
       ) : (
         <>
-          <FeaturedCarouselTitle>Latest products</FeaturedCarouselTitle>
+          <FeaturedCarouselTitle>{title}</FeaturedCarouselTitle>
           <FeaturedCarouselCommand
             side="left"
             disabled={first === 0}

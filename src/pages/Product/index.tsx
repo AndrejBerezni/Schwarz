@@ -1,37 +1,47 @@
-import { useParams } from 'react-router'
-import watch from '../../assets/featuredwatch.png'
-import watch2 from '../../assets/featuredwatch2.png'
+import { useState, useEffect } from 'react'
+import { useParams, Navigate } from 'react-router'
+import { IProduct } from '../../compiler/productInterface'
 import FeaturedCarousel from '../../components/FeaturedCarousel'
 import MainProductCard from '../../components/MainProductCard'
-
-//dummy data before implementing real one
-const products = [
-  {
-    id: 'santosdumont',
-    name: 'Santos-Dumont Watch',
-    brand: 'cartier',
-    description:
-      'Medium model, automatic movement, rose gold, 2 interchangeable leather bracelets',
-    price: 16010.44,
-    img: watch,
-  },
-  {
-    id: 'panthere',
-    name: 'LA PANTHÈRE DE CARTIER WATCH',
-    brand: 'cartier',
-    description: '22.2 mm, quartz movement, yellow gold, diamonds, metal strap',
-    price: 79000,
-    img: watch2,
-  },
-]
+import Spinner from '../../components/Spinner'
+import { getSingleProduct } from '../../firebase/firebase-firestore'
 
 export default function Product() {
   const { productId } = useParams()
+  const [product, setProduct] = useState<IProduct | null>(null)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const currentProduct = await getSingleProduct(productId!)
+        setProduct(currentProduct as IProduct)
+      } catch (error: any) {
+        console.error('Error fetching product:', error.message)
+      }
+    }
+    fetchProduct()
+  }, [productId])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      <MainProductCard product={products.find((el) => el.id === productId)} />
-      <FeaturedCarousel />
+      {product !== null ? (
+        product ? (
+          <>
+            <MainProductCard product={product} />
+            <FeaturedCarousel
+              useProductsData={{
+                metadataProp: 'collection',
+                metadataCriteria: product.metadata.collection,
+              }}
+              title="Related Products"
+            />
+          </>
+        ) : (
+          <Navigate to="/404" />
+        )
+      ) : (
+        <Spinner />
+      )}
     </div>
   )
 }

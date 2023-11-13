@@ -7,8 +7,8 @@ import {
   FeaturedCarouselCommand,
   FeaturedCarouselRight,
 } from './FeaturedCarousel.styles'
-import ProductCard from '../ProductCard'
 import { IProduct } from '../../compiler/productInterface'
+import ProductCard from '../ProductCard'
 
 interface IFeaturedCarouselProps {
   products: IProduct[]

@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import {
   StyledBrowseCategoriesSide,
   CloseBrowseSide,
@@ -10,6 +11,7 @@ import { getShowCategories } from '../../store/sidebars/selectors'
 
 export default function BrowseCategoriesSide() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const show = useSelector(getShowCategories)
 
   return (
@@ -18,11 +20,17 @@ export default function BrowseCategoriesSide() {
         X
       </CloseBrowseSide>
       <BrowseSideTitle>Browse Brands</BrowseSideTitle>
-      <BrowseItem>Cartier</BrowseItem>
-      <BrowseItem>Patek Philippe</BrowseItem>
-      <BrowseItem>Vacheron Constantin</BrowseItem>
-      <BrowseItem>Ulysse Nardin</BrowseItem>
-      <BrowseItem>Rolex</BrowseItem>
+      <BrowseItem onClick={() => navigate('/cartier')}>Cartier</BrowseItem>
+      <BrowseItem onClick={() => navigate('/patek_philippe')}>
+        Patek Philippe
+      </BrowseItem>
+      <BrowseItem onClick={() => navigate('/vacheron_constantine')}>
+        Vacheron Constantin
+      </BrowseItem>
+      <BrowseItem onClick={() => navigate('/ulysee_nardin')}>
+        Ulysse Nardin
+      </BrowseItem>
+      <BrowseItem onClick={() => navigate('/rolex')}>Rolex</BrowseItem>
     </StyledBrowseCategoriesSide>
   )
 }

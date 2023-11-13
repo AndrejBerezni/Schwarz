@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getProducts } from '../firebase/firebase-firestore'
 import { IProduct } from '../compiler/productInterface'
+import { getProducts } from '../firebase/firebase-firestore'
 
 interface IuseProductsProps {
   metadataProp: string
@@ -20,7 +20,7 @@ export default function useProducts({
     }
 
     fetchProducts()
-  }, [])
+  }, [metadataCriteria])
 
   return products
 }

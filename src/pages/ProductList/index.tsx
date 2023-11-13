@@ -1,8 +1,14 @@
 import { useParams } from 'react-router'
 import { Navigate } from 'react-router-dom'
-import { ProductsContainer } from './ProductList.styles'
-import { convertBrandString } from '../../utilities/convertBrandString'
+import {
+  StyledProductList,
+  ProductsContainer,
+  ProductsTitle,
+  ProductsHeader,
+} from './ProductList.styles'
+import ProductCard from '../../components/ProductCard'
 import useProducts from '../../hooks/useProducts'
+import { convertBrandString } from '../../utilities/convertBrandString'
 
 const categories = [
   'cartier',
@@ -23,10 +29,18 @@ export default function ProductList() {
   return (
     <>
       {categories.includes(category as string) ? (
-        <div>
-          <h1>{category}</h1>
-          <ProductsContainer></ProductsContainer>
-        </div>
+        <StyledProductList>
+          <ProductsHeader>
+            <ProductsTitle>{brand}</ProductsTitle>
+            <p>filters to go here...</p>
+          </ProductsHeader>
+
+          <ProductsContainer>
+            {products.map((item) => (
+              <ProductCard key={`${item.docId}p`} product={item} />
+            ))}
+          </ProductsContainer>
+        </StyledProductList>
       ) : (
         <Navigate to="/404" />
       )}

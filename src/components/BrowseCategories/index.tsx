@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router'
 import {
   StyledBrowseCategories,
   BrowseTitle,
@@ -5,14 +6,21 @@ import {
 } from './BrowseCategories.styles'
 
 export default function BrowseCategories() {
+  const navigate = useNavigate()
   return (
     <StyledBrowseCategories>
       <BrowseTitle>Browse Brands</BrowseTitle>
-      <BrowseItem>Cartier</BrowseItem>
-      <BrowseItem>Patek Philippe</BrowseItem>
-      <BrowseItem>Vacheron Constantin</BrowseItem>
-      <BrowseItem>Ulysse Nardin</BrowseItem>
-      <BrowseItem>Rolex</BrowseItem>
+      <BrowseItem onClick={() => navigate('/cartier')}>Cartier</BrowseItem>
+      <BrowseItem onClick={() => navigate('/patek_philippe')}>
+        Patek Philippe
+      </BrowseItem>
+      <BrowseItem onClick={() => navigate('/vacheron_constantine')}>
+        Vacheron Constantin
+      </BrowseItem>
+      <BrowseItem onClick={() => navigate('/ulysee_nardin')}>
+        Ulysse Nardin
+      </BrowseItem>
+      <BrowseItem onClick={() => navigate('/rolex')}>Rolex</BrowseItem>
     </StyledBrowseCategories>
   )
 }

@@ -24,7 +24,11 @@ export default function ProductCard({ product }: Readonly<IProductCardProps>) {
       <ProductCardImg src={product.images[0]} />
       {/* dont forget to limit number of characters later */}
       <ProductCardText>{product.metadata.brand}</ProductCardText>
-      <ProductCardText>{product.name}</ProductCardText>
+      <ProductCardText>
+        {product.name.length > 25
+          ? `${product.name.slice(0, 25)}...`
+          : product.name}
+      </ProductCardText>
       <ProductPrice>
         {`${formatPrice(product.prices[0].unit_amount / 100)} €`}
       </ProductPrice>

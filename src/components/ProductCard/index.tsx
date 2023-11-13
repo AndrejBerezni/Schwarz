@@ -5,7 +5,9 @@ import {
   ProductCardBadgeContainer,
   ProductCardBadge,
   ProductCardText,
+  ProductPriceDiv,
   ProductPrice,
+  PreviousProductPrice,
 } from './ProductCard.styles'
 import { IProduct } from '../../compiler/productInterface'
 import { formatPrice } from '../../utilities/formatPrice'
@@ -22,6 +24,9 @@ export default function ProductCard({ product }: Readonly<IProductCardProps>) {
         {product.metadata.new === '1' && (
           <ProductCardBadge>NEW</ProductCardBadge>
         )}
+        {product.metadata.discount === '1' && (
+          <ProductCardBadge>{product.prices[1].description}</ProductCardBadge>
+        )}
       </ProductCardBadgeContainer>
       <ProductCardImg src={product.images[0]} />
       <ProductCardText>{product.metadata.brand}</ProductCardText>
@@ -30,9 +35,21 @@ export default function ProductCard({ product }: Readonly<IProductCardProps>) {
           ? `${product.name.slice(0, 25)}...`
           : product.name}
       </ProductCardText>
-      <ProductPrice>
-        {`${formatPrice(product.prices[0].unit_amount / 100)} €`}
-      </ProductPrice>
+      {/* if product is on discount, it will have 2 elements in prices array (second is the new price) */}
+      {product.metadata.discount === '1' ? (
+        <ProductPriceDiv>
+          <PreviousProductPrice>
+            {formatPrice(product.prices[0].unit_amount / 100)}€
+          </PreviousProductPrice>
+          <ProductPrice>
+            {formatPrice(product.prices[1].unit_amount / 100)}€
+          </ProductPrice>
+        </ProductPriceDiv>
+      ) : (
+        <ProductPrice>
+          {formatPrice(product.prices[0].unit_amount / 100)}€
+        </ProductPrice>
+      )}
     </StyledProductCard>
   )
 }

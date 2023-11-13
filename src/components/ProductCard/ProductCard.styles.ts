@@ -34,7 +34,7 @@ export const ProductCardBadgeContainer = styled.div`
   display: flex;
   justify-content: end;
   align-self: end;
-  gap: 5px;
+  gap: 10px;
   padding: 0 15px;
 `
 
@@ -56,9 +56,21 @@ export const ProductCardText = styled.p`
   }
 `
 
+export const ProductPriceDiv = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+`
+
 export const ProductPrice = styled.p`
   font-family: ${(props) => props.theme.headFont};
   color: ${(props) => props.theme.primary};
   font-size: 20px;
   margin-top: 20px;
+  display: inline-block;
+`
+export const PreviousProductPrice = styled(ProductPrice)`
+  color: ${(props) => props.theme.textColor};
+  text-decoration: line-through;
 `

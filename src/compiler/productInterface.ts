@@ -27,6 +27,7 @@ export interface IProduct {
     collection: string
     material: string
     new: string
+    discount?: string
   }
   name: string
   prices: IPrice[]
@@ -35,5 +36,6 @@ export interface IProduct {
   stripe_metadata_collection: string
   stripe_metadata_material: string
   stripe_metadata_new: string
+  stripe_metadata_discount?: string
   tax_code: null
 }

@@ -15,8 +15,7 @@ export const StyledFeaturedCarousel = styled.div`
 `
 
 interface IFeaturedCarouselInnerProps {
-  first: number
-  length: number
+  firstElement: number
 }
 
 export const FeaturedCarouselInner = styled.div<IFeaturedCarouselInnerProps>`
@@ -25,7 +24,7 @@ export const FeaturedCarouselInner = styled.div<IFeaturedCarouselInnerProps>`
   margin: 0;
   position: absolute;
   top: 28px;
-  left: -${(props) => props.first * 290}px;
+  left: -${(props) => props.firstElement * 290}px;
   transition: left 0.5s ease-out;
 `
 
@@ -50,7 +49,7 @@ interface IFeaturedCarouselCommandProps {
     primary: string
     secondary: string
   }
-  side: string
+  direction: string
   disabled: boolean
 }
 
@@ -62,7 +61,7 @@ export const FeaturedCarouselCommand = styled.div<IFeaturedCarouselCommandProps>
   color: ${(props) =>
     props.disabled ? props.theme.secondaryText : props.theme.primary};
   transition: 0.3s;
-  ${(props) => (props.side === 'left' ? `left: 0` : `right: 0`)};
+  ${(props) => (props.direction === 'left' ? `left: 0` : `right: 0`)};
   &:hover {
     ${(props) =>
       props.disabled

@@ -9,23 +9,19 @@ import {
   FeaturedCarouselRight,
 } from './FeaturedCarousel.styles'
 import ProductCard from '../ProductCard'
+import { IProduct } from '../../compiler/productInterface'
 
-//just temporarily here until I start working with data
-const productsArr = [
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-  uuidv4(),
-]
+interface IFeaturedCarouselProps {
+  products: IProduct[]
+}
 
-export default function FeaturedCarousel() {
+export default function FeaturedCarousel({
+  products,
+}: Readonly<IFeaturedCarouselProps>) {
   const [first, setFirst] = useState(0)
 
   const handleSlide = (direction: string) => {
-    if (direction === 'right' && first < productsArr.length - 1) {
+    if (direction === 'right' && first < products.length - 1) {
       setFirst((prev) => prev + 1)
     } else if (direction === 'left' && first > 0) {
       setFirst((prev) => prev - 1)
@@ -44,22 +40,22 @@ export default function FeaturedCarousel() {
       </FeaturedCarouselCommand>
       <FeaturedCarouselCommand
         side="right"
-        disabled={first === productsArr.length - 1}
+        disabled={first === products.length - 1}
         onClick={() => handleSlide('right')}
       >
         <PiArrowCircleRightFill />
       </FeaturedCarouselCommand>
       <FeaturedCarouselRight />
-      <FeaturedCarouselInner first={first} length={productsArr.length}>
-        {productsArr.map((item) => (
-          <ProductCard key={item} />
+      <FeaturedCarouselInner first={first} length={products.length}>
+        {products.map((item) => (
+          <ProductCard key={item.docId} product={item} />
         ))}
         {/* Adding again array of items,
          because I was not able to arrange
           not having empty space on the right inside carousel
            when the last item from array was set as first: */}
-        {productsArr.map((item) => (
-          <ProductCard key={item} />
+        {products.map((item) => (
+          <ProductCard key={`${item.docId}2`} product={item} />
         ))}
       </FeaturedCarouselInner>
     </StyledFeaturedCarousel>

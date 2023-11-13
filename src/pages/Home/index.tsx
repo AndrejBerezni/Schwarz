@@ -22,7 +22,7 @@ export default function Home() {
         <BrowseCategories />
         <Outlet />
       </div>
-      <FeaturedCarousel />
+      <FeaturedCarousel products={products} />
     </StyledHome>
   )
 }

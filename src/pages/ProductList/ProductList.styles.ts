@@ -8,7 +8,9 @@ export const StyledProductList = styled.div`
 
 export const ProductsContainer = styled.div`
   width: 100%;
+  min-height: 400px;
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-around;

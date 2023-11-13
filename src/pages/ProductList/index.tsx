@@ -9,6 +9,7 @@ import {
 import ProductCard from '../../components/ProductCard'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
+import Spinner from '../../components/Spinner'
 
 const categories = [
   'cartier',
@@ -36,9 +37,13 @@ export default function ProductList() {
           </ProductsHeader>
 
           <ProductsContainer>
-            {products.map((item) => (
-              <ProductCard key={`${item.docId}p`} product={item} />
-            ))}
+            {products.length === 0 ? (
+              <Spinner />
+            ) : (
+              products.map((item) => (
+                <ProductCard key={`${item.docId}p`} product={item} />
+              ))
+            )}
           </ProductsContainer>
         </StyledProductList>
       ) : (

@@ -9,6 +9,7 @@ import {
 } from './FeaturedCarousel.styles'
 import { IProduct } from '../../compiler/productInterface'
 import ProductCard from '../ProductCard'
+import Spinner from '../Spinner'
 
 interface IFeaturedCarouselProps {
   products: IProduct[]
@@ -29,34 +30,40 @@ export default function FeaturedCarousel({
 
   return (
     <StyledFeaturedCarousel>
-      <FeaturedCarouselTitle>Latest products</FeaturedCarouselTitle>
-      <FeaturedCarouselCommand
-        side="left"
-        disabled={first === 0}
-        onClick={() => handleSlide('left')}
-      >
-        <PiArrowCircleLeftFill />
-      </FeaturedCarouselCommand>
-      <FeaturedCarouselCommand
-        side="right"
-        disabled={first === products.length - 1}
-        onClick={() => handleSlide('right')}
-      >
-        <PiArrowCircleRightFill />
-      </FeaturedCarouselCommand>
-      <FeaturedCarouselRight />
-      <FeaturedCarouselInner first={first} length={products.length}>
-        {products.map((item) => (
-          <ProductCard key={item.docId} product={item} />
-        ))}
-        {/* Adding again array of items,
+      {products.length === 0 ? (
+        <Spinner />
+      ) : (
+        <>
+          <FeaturedCarouselTitle>Latest products</FeaturedCarouselTitle>
+          <FeaturedCarouselCommand
+            side="left"
+            disabled={first === 0}
+            onClick={() => handleSlide('left')}
+          >
+            <PiArrowCircleLeftFill />
+          </FeaturedCarouselCommand>
+          <FeaturedCarouselCommand
+            side="right"
+            disabled={first === products.length - 1}
+            onClick={() => handleSlide('right')}
+          >
+            <PiArrowCircleRightFill />
+          </FeaturedCarouselCommand>
+          <FeaturedCarouselRight />
+          <FeaturedCarouselInner first={first} length={products.length}>
+            {products.map((item) => (
+              <ProductCard key={item.docId} product={item} />
+            ))}
+            {/* Adding again array of items,
          because I was not able to arrange
           not having empty space on the right inside carousel
            when the last item from array was set as first: */}
-        {products.map((item) => (
-          <ProductCard key={`${item.docId}2`} product={item} />
-        ))}
-      </FeaturedCarouselInner>
+            {products.map((item) => (
+              <ProductCard key={`${item.docId}2`} product={item} />
+            ))}
+          </FeaturedCarouselInner>
+        </>
+      )}
     </StyledFeaturedCarousel>
   )
 }

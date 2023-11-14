@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app'
 import {
   doc,
   getFirestore,
@@ -8,6 +9,7 @@ import {
   where,
 } from 'firebase/firestore'
 import { app } from './firebase-config'
+import { IPrice, IProduct } from '../compiler/productInterface'
 
 const db = getFirestore(app)
 
@@ -16,8 +18,8 @@ const db = getFirestore(app)
 export const getProducts = async (
   metadataProp: string,
   metadataCriteria: string
-) => {
-  const productsArray: any[] = []
+): Promise<IProduct[]> => {
+  const productsArray = []
   const q = query(
     collection(db, 'products'),
     where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`)
@@ -25,19 +27,19 @@ export const getProducts = async (
   const querySnapshot = await getDocs(q)
 
   for (const doc of querySnapshot.docs) {
-    const prices: any[] = []
+    const prices: IPrice[] = []
     const priceQuery = collection(db, 'products', doc.id, 'prices')
     const priceSnapshot = await getDocs(priceQuery)
 
     priceSnapshot.forEach((item) => {
-      prices.push(item.data())
+      prices.push(item.data() as IPrice)
     })
 
     const productData = doc.data()
     productData.prices = prices
     productData.docId = doc.id
 
-    productsArray.push(productData)
+    productsArray.push(productData as IProduct)
   }
 
   return productsArray
@@ -48,12 +50,12 @@ export const getSingleProduct = async (docId: string) => {
     const docRef = doc(db, 'products', docId)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-      const prices: any[] = []
+      const prices: IPrice[] = []
       const priceQuery = collection(db, 'products', docId, 'prices')
       const priceSnapshot = await getDocs(priceQuery)
 
       priceSnapshot.forEach((item) => {
-        prices.push(item.data())
+        prices.push(item.data() as IPrice)
       })
 
       const productData = docSnap.data()
@@ -62,7 +64,9 @@ export const getSingleProduct = async (docId: string) => {
 
       return productData
     }
-  } catch (error: any) {
-    throw new Error(error.message)
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
   }
 }

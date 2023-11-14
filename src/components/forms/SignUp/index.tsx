@@ -1,4 +1,5 @@
 import { useRef, FormEvent } from 'react'
+import { FirebaseError } from 'firebase/app'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { emailSignUp } from '../../../firebase/firebase-authentication'
@@ -49,8 +50,10 @@ export default function SignIn() {
       )
       dispatch(hideForm())
       navigate('/account')
-    } catch (error: any) {
-      console.log(error.message)
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        console.log(error.message)
+      }
     }
   }
 

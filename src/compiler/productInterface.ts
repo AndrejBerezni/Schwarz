@@ -1,11 +1,13 @@
-interface IPrice {
+export interface IPrice {
   active: true
   billing_scheme: string
   currency: string
   description: null
   interval: null
   interval_count: null
-  metadata: any
+  metadata: {
+    type: 'map'
+  }
   product: string
   recurring: null
   tax_behavior: string

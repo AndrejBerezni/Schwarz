@@ -1,4 +1,5 @@
 import { useRef, FormEvent } from 'react'
+import { FirebaseError } from 'firebase/app'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import {
@@ -53,8 +54,11 @@ export default function SignIn() {
       )
       dispatch(hideForm())
       navigate('/account')
-    } catch (error: any) {
-      console.log(error.message)
+    } catch (error) {
+      // TS was throwing error if I left any, unknown or nothing to define error type
+      if (error instanceof FirebaseError) {
+        console.log(error.message)
+      }
     }
   }
 
@@ -69,8 +73,10 @@ export default function SignIn() {
       )
       dispatch(hideForm())
       navigate('/account')
-    } catch (error: any) {
-      console.log(error.message)
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        console.log(error.message)
+      }
     }
   }
 

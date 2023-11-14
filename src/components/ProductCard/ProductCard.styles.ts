@@ -71,6 +71,6 @@ export const ProductPrice = styled.p`
   display: inline-block;
 `
 export const PreviousProductPrice = styled(ProductPrice)`
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.secondaryText};
   text-decoration: line-through;
 `

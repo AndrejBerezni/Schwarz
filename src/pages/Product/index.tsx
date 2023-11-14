@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { FirebaseError } from 'firebase/app'
 import { useParams, Navigate } from 'react-router'
 import { IProduct } from '../../compiler/productInterface'
 import FeaturedCarousel from '../../components/FeaturedCarousel'
@@ -15,8 +16,10 @@ export default function Product() {
       try {
         const currentProduct = await getSingleProduct(productId!)
         setProduct(currentProduct as IProduct)
-      } catch (error: any) {
-        console.error('Error fetching product:', error.message)
+      } catch (error) {
+        if (error instanceof FirebaseError) {
+          throw new Error(error.message)
+        }
       }
     }
     fetchProduct()

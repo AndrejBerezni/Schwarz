@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -18,8 +19,10 @@ export const googleSignIn = async () => {
   try {
     const newUser = await signInWithPopup(auth, provider)
     return newUser.user.uid
-  } catch (error: any) {
-    throw new Error(error.message)
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
   }
 }
 
@@ -28,8 +31,10 @@ export const emailSignIn = async (email: string, password: string) => {
   try {
     const newUser = await signInWithEmailAndPassword(auth, email, password)
     return newUser.user.uid
-  } catch (error: any) {
-    throw new Error(error.message)
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
   }
 }
 
@@ -38,8 +43,10 @@ export const emailSignUp = async (email: string, password: string) => {
   try {
     const newUser = await createUserWithEmailAndPassword(auth, email, password)
     return newUser.user.uid
-  } catch (error: any) {
-    throw new Error(error.message)
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
   }
 }
 

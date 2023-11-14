@@ -1,5 +1,4 @@
 import { MdDeleteForever } from 'react-icons/md'
-import watch from '../../../assets/featuredwatch.png'
 import { formatPrice } from '../../../utilities/formatPrice'
 import Counter from '../../Counter'
 import {
@@ -9,18 +8,47 @@ import {
   CartPrice,
   StyledCartProductDiv,
 } from '../Cart.styles'
+import { ICartItem } from '../../../compiler/cartItemInterface'
+import {
+  increaseItemCountInCart,
+  decreaseItemCountInCart,
+  removeItemFromCart,
+} from '../../../store/cart'
+import { useDispatch } from 'react-redux'
 
-export default function CartProductDiv() {
+interface ICartProductDivProps {
+  product: ICartItem
+}
+
+export default function CartProductDiv({
+  product,
+}: Readonly<ICartProductDivProps>) {
+  const dispatch = useDispatch()
+
+  const handleIncreaseCount = () => {
+    dispatch(increaseItemCountInCart(product))
+  }
+  const handleDecreaseCount = () => {
+    if (product.count > 1) dispatch(decreaseItemCountInCart(product))
+  }
+
+  const handleRemoveItem = () => {
+    dispatch(removeItemFromCart(product))
+  }
   return (
     <StyledCartProductDiv>
-      <Counter amount={1} />
+      <Counter
+        amount={product.count}
+        increment={handleIncreaseCount}
+        decrement={handleDecreaseCount}
+      />
 
-      <CartImg src={watch} />
+      <CartImg src={product.image} />
       <div>
-        <CartTitle>Santos-Dumont Watch</CartTitle>
-        <CartPrice>{formatPrice(28500)} €</CartPrice>
+        <CartTitle>{product.name}</CartTitle>
+        <CartPrice>{formatPrice(product.totalPrice)} €</CartPrice>
       </div>
-      <CartDeleteBtn>
+      <CartDeleteBtn onClick={handleRemoveItem}>
         <MdDeleteForever />
       </CartDeleteBtn>
     </StyledCartProductDiv>

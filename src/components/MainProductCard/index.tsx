@@ -56,9 +56,11 @@ export default function MainProductCard({
       totalPrice,
       priceId: product.prices[parseInt(product.metadata.discount)].priceId,
       count: amount,
+      image: product.images[0],
     }
 
     dispatch(addItemToCart(cartItem))
+    setAmount(1)
   }
 
   return (

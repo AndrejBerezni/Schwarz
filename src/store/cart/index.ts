@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ICartItem } from '../../compiler/cartItemInterface'
+import { count } from 'firebase/firestore'
 
 const initialState: ICartItem[] = []
 
@@ -8,12 +9,14 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action) => {
-      // product is already in cart, increase amount
+      // if product is already in cart, increase amount
       if (state.some((item: ICartItem) => action.payload.id === item.id)) {
         const itemIndex = state.findIndex(
           (item) => action.payload.id === item.id
         )
         state[itemIndex].count += action.payload.count
+        state[itemIndex].totalPrice =
+          state[itemIndex].count * state[itemIndex].price
       } else {
         state.push(action.payload)
       }
@@ -26,11 +29,15 @@ export const cartSlice = createSlice({
     increaseItemCountInCart: (state, action) => {
       const itemIndex = state.findIndex((item) => action.payload.id === item.id)
       state[itemIndex].count += 1
+      state[itemIndex].totalPrice =
+        state[itemIndex].count * state[itemIndex].price
     },
     decreaseItemCountInCart: (state, action) => {
       const itemIndex = state.findIndex((item) => action.payload.id === item.id)
       if (state[itemIndex].count > 1) {
         state[itemIndex].count -= 1
+        state[itemIndex].totalPrice =
+          state[itemIndex].count * state[itemIndex].price
       }
       //user will need to press delete button to remove item from cart, therefore I am not adding logic if count is equal to 1
     },

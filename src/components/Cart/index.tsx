@@ -13,10 +13,12 @@ import {
   BrowseSideTitle,
   CloseBrowseSide,
 } from '../BrowseCategories/BrowseCategories.styles'
+import { getCartItems } from '../../store/cart/selectors'
 
 export default function Cart() {
   const dispatch = useDispatch()
   const show = useSelector(getShowCart)
+  const cartItems = useSelector(getCartItems)
   return (
     <StyledCart show={show}>
       <CloseBrowseSide onClick={() => dispatch(hideSidebars())}>
@@ -27,9 +29,9 @@ export default function Cart() {
         <BsCart4 />
       </CartBackgroundImage>
       <CartProductsSection>
-        <CartProductDiv />
-        <CartProductDiv />
-        <CartProductDiv />
+        {cartItems.map((item) => (
+          <CartProductDiv product={item} key={item.id} />
+        ))}
       </CartProductsSection>
       <CartCheckoutSection totalPrice={34500} />
     </StyledCart>

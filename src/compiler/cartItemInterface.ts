@@ -5,4 +5,5 @@ export interface ICartItem {
   totalPrice: number
   priceId: string
   count: number
+  image: string
 }

@@ -16,12 +16,15 @@ import {
 import { showForm } from '../../store/authentication'
 import { getAuthStatus, getUser } from '../../store/authentication/selectors'
 import { showCart, showCategories } from '../../store/sidebars'
+import { getCartItems } from '../../store/cart/selectors'
+import { calculateTotalItems } from '../../utilities/cartCalculations'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isAuth = useSelector(getAuthStatus)
   const user = useSelector(getUser)
+  const cart = useSelector(getCartItems)
 
   const handleAccountPageAccess = () =>
     !isAuth
@@ -57,7 +60,7 @@ export default function TopNavbar() {
           <NavTooltip>Account</NavTooltip>
           <NavButton onClick={() => dispatch(showCart())}>
             <BiCart />
-            <CartItemsNumber>0</CartItemsNumber>
+            <CartItemsNumber>{calculateTotalItems(cart)}</CartItemsNumber>
           </NavButton>
           <NavTooltip>Cart</NavTooltip>
         </div>

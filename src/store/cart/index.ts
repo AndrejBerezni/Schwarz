@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ICartItem } from '../../compiler/cartItemInterface'
-import { calculateTotalPrice } from '../../utilities/calculateTotalPrice'
+import { calculateTotalPrice } from '../../utilities/cartCalculations'
 
 interface ICartState {
   items: ICartItem[]

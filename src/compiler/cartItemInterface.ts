@@ -7,3 +7,8 @@ export interface ICartItem {
   count: number
   image: string
 }
+
+export interface ILineItem {
+  price: string
+  quantity: number
+}

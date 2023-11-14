@@ -48,7 +48,7 @@ export default function SignIn() {
       )
       dispatch(
         signIn({
-          user: userId,
+          uid: userId,
           isAdmin: false,
         })
       )
@@ -67,7 +67,7 @@ export default function SignIn() {
       const userId = await googleSignIn()
       dispatch(
         signIn({
-          user: userId,
+          uid: userId,
           isAdmin: false,
         })
       )

@@ -20,6 +20,7 @@ export default function Cart() {
   const show = useSelector(getShowCart)
   const cartItems = useSelector(getCartItems)
   const total = useSelector(getTotalPrice)
+
   return (
     <StyledCart show={show}>
       <CloseBrowseSide onClick={() => dispatch(hideSidebars())}>

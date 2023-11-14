@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE__FIREBASE_apiKey,
+  apiKey: import.meta.env.VITE_FIREBASE_apiKey,
   authDomain: 'schwarzluxurywatches.firebaseapp.com',
   projectId: 'schwarzluxurywatches',
   storageBucket: 'schwarzluxurywatches.appspot.com',

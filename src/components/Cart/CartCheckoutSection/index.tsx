@@ -6,7 +6,11 @@ import {
   CartCheckoutTotal,
 } from '../Cart.styles'
 import { clearCart } from '../../../store/cart'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { createCheckout } from '../../../stripe/checkout'
+import { getAuthStatus, getUser } from '../../../store/authentication/selectors'
+import { showForm } from '../../../store/authentication'
+import { getCartItems } from '../../../store/cart/selectors'
 
 interface ICartCheckoutSectionProps {
   totalPrice: number
@@ -16,6 +20,20 @@ export default function CartCheckoutSection({
   totalPrice,
 }: Readonly<ICartCheckoutSectionProps>) {
   const dispatch = useDispatch()
+  const user = useSelector(getUser)
+  const isAuth = useSelector(getAuthStatus)
+  const cartItems = useSelector(getCartItems)
+
+  const handleCheckout = async () => {
+    if (cartItems.length === 0) {
+      throw new Error('Your cart is empty, please add products.')
+    }
+    if (!isAuth) {
+      dispatch(showForm('signIn'))
+      return
+    }
+    await createCheckout(cartItems, user.uid)
+  }
 
   return (
     <StyledCartCheckoutSection>
@@ -24,7 +42,7 @@ export default function CartCheckoutSection({
         <PrimaryButton variant="outline" onClick={() => dispatch(clearCart())}>
           Clear Cart
         </PrimaryButton>
-        <PrimaryButton>Checkout</PrimaryButton>
+        <PrimaryButton onClick={handleCheckout}>Checkout</PrimaryButton>
       </CartCheckoutDiv>
     </StyledCartCheckoutSection>
   )

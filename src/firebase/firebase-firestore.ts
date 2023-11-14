@@ -11,7 +11,7 @@ import {
 import { app } from './firebase-config'
 import { IPrice, IProduct } from '../compiler/productInterface'
 
-const db = getFirestore(app)
+export const db = getFirestore(app)
 
 //Get new products
 

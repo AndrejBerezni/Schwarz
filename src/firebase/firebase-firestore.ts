@@ -32,7 +32,9 @@ export const getProducts = async (
     const priceSnapshot = await getDocs(priceQuery)
 
     priceSnapshot.forEach((item) => {
-      prices.push(item.data() as IPrice)
+      const priceObject: IPrice = item.data() as IPrice
+      priceObject.priceId = item.id
+      prices.push(priceObject)
     })
 
     const productData = doc.data()
@@ -55,7 +57,10 @@ export const getSingleProduct = async (docId: string) => {
       const priceSnapshot = await getDocs(priceQuery)
 
       priceSnapshot.forEach((item) => {
-        prices.push(item.data() as IPrice)
+        const priceObject: IPrice = item.data() as IPrice
+        //we need priceId for handling checkout
+        priceObject.priceId = item.id
+        prices.push(priceObject)
       })
 
       const productData = docSnap.data()

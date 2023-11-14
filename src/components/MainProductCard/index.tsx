@@ -19,6 +19,9 @@ import { IProduct } from '../../compiler/productInterface'
 import { PrimaryButton } from '../../GlobalStyles'
 import { formatPrice } from '../../utilities/formatPrice'
 import Counter from '../Counter'
+import { addItemToCart } from '../../store/cart'
+import { ICartItem } from '../../compiler/cartItemInterface'
+import { useDispatch } from 'react-redux'
 
 interface IMainProductCardProps {
   product: IProduct
@@ -27,8 +30,13 @@ interface IMainProductCardProps {
 export default function MainProductCard({
   product,
 }: Readonly<IMainProductCardProps>) {
-  const [amount, setAmount] = useState<number>(1)
+  const dispatch = useDispatch()
+
   const [localWishlist, setLocalWishlist] = useState<boolean>(false)
+  const handleWishlist = () => setLocalWishlist((prev) => !prev)
+
+  const [amount, setAmount] = useState<number>(1)
+
   const handleIncrement = () => setAmount((prev) => prev + 1)
   const handleDecrement = () => {
     if (amount === 1) {
@@ -36,7 +44,22 @@ export default function MainProductCard({
     }
     setAmount((prev) => prev - 1)
   }
-  const handleWishlist = () => setLocalWishlist((prev) => !prev)
+
+  const handleAddToCart = () => {
+    const price =
+      product.prices[parseInt(product.metadata.discount)].unit_amount / 100
+    const totalPrice = Math.round(amount * price * 100) / 100
+    const cartItem: ICartItem = {
+      id: product.docId,
+      name: product.name,
+      price,
+      totalPrice,
+      priceId: product.prices[parseInt(product.metadata.discount)].priceId,
+      count: amount,
+    }
+
+    dispatch(addItemToCart(cartItem))
+  }
 
   return (
     <>
@@ -78,7 +101,9 @@ export default function MainProductCard({
                   decrement={handleDecrement}
                   amount={amount}
                 />
-                <PrimaryButton>Add to cart</PrimaryButton>
+                <PrimaryButton onClick={handleAddToCart}>
+                  Add to cart
+                </PrimaryButton>
               </MainProductAddDiv>
             </MainProductAddDiv>
           </MainProductBox>

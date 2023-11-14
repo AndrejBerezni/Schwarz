@@ -1,4 +1,5 @@
 export interface IPrice {
+  priceId: string
   active: true
   billing_scheme: string
   currency: string
@@ -29,7 +30,7 @@ export interface IProduct {
     collection: string
     material: string
     new: string
-    discount?: string
+    discount: string
   }
   name: string
   prices: IPrice[]

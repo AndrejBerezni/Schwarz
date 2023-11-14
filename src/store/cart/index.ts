@@ -1,8 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ICartItem } from '../../compiler/cartItemInterface'
-import { count } from 'firebase/firestore'
+import { calculateTotalPrice } from '../../utilities/calculateTotalPrice'
 
-const initialState: ICartItem[] = []
+interface ICartState {
+  items: ICartItem[]
+  total: number
+}
+
+const initialState: ICartState = {
+  items: [],
+  total: 0,
+}
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -10,34 +18,47 @@ export const cartSlice = createSlice({
   reducers: {
     addItemToCart: (state, action) => {
       // if product is already in cart, increase amount
-      if (state.some((item: ICartItem) => action.payload.id === item.id)) {
-        const itemIndex = state.findIndex(
+      if (
+        state.items.some((item: ICartItem) => action.payload.id === item.id)
+      ) {
+        const itemIndex = state.items.findIndex(
           (item) => action.payload.id === item.id
         )
-        state[itemIndex].count += action.payload.count
-        state[itemIndex].totalPrice =
-          state[itemIndex].count * state[itemIndex].price
+        state.items[itemIndex].count += action.payload.count
+        state.items[itemIndex].totalPrice =
+          state.items[itemIndex].count * state.items[itemIndex].price
+        state.total = calculateTotalPrice(state.items)
       } else {
-        state.push(action.payload)
+        state.items.push(action.payload)
+        state.total = calculateTotalPrice(state.items)
       }
     },
     removeItemFromCart: (state, action) => {
-      const itemIndex = state.findIndex((item) => action.payload.id === item.id)
-      state.splice(itemIndex, 1)
+      const itemIndex = state.items.findIndex(
+        (item) => action.payload.id === item.id
+      )
+      state.items.splice(itemIndex, 1)
+      state.total = calculateTotalPrice(state.items)
     },
     clearCart: () => initialState,
     increaseItemCountInCart: (state, action) => {
-      const itemIndex = state.findIndex((item) => action.payload.id === item.id)
-      state[itemIndex].count += 1
-      state[itemIndex].totalPrice =
-        state[itemIndex].count * state[itemIndex].price
+      const itemIndex = state.items.findIndex(
+        (item) => action.payload.id === item.id
+      )
+      state.items[itemIndex].count += 1
+      state.items[itemIndex].totalPrice =
+        state.items[itemIndex].count * state.items[itemIndex].price
+      state.total = calculateTotalPrice(state.items)
     },
     decreaseItemCountInCart: (state, action) => {
-      const itemIndex = state.findIndex((item) => action.payload.id === item.id)
-      if (state[itemIndex].count > 1) {
-        state[itemIndex].count -= 1
-        state[itemIndex].totalPrice =
-          state[itemIndex].count * state[itemIndex].price
+      const itemIndex = state.items.findIndex(
+        (item) => action.payload.id === item.id
+      )
+      if (state.items[itemIndex].count > 1) {
+        state.items[itemIndex].count -= 1
+        state.items[itemIndex].totalPrice =
+          state.items[itemIndex].count * state.items[itemIndex].price
+        state.total = calculateTotalPrice(state.items)
       }
       //user will need to press delete button to remove item from cart, therefore I am not adding logic if count is equal to 1
     },

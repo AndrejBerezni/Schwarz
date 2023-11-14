@@ -7,18 +7,19 @@ import {
 } from './Cart.styles'
 import CartCheckoutSection from './CartCheckoutSection'
 import CartProductDiv from './CartProductDiv'
+import { getCartItems, getTotalPrice } from '../../store/cart/selectors'
 import { hideSidebars } from '../../store/sidebars'
 import { getShowCart } from '../../store/sidebars/selectors'
 import {
   BrowseSideTitle,
   CloseBrowseSide,
 } from '../BrowseCategories/BrowseCategories.styles'
-import { getCartItems } from '../../store/cart/selectors'
 
 export default function Cart() {
   const dispatch = useDispatch()
   const show = useSelector(getShowCart)
   const cartItems = useSelector(getCartItems)
+  const total = useSelector(getTotalPrice)
   return (
     <StyledCart show={show}>
       <CloseBrowseSide onClick={() => dispatch(hideSidebars())}>
@@ -33,7 +34,7 @@ export default function Cart() {
           <CartProductDiv product={item} key={item.id} />
         ))}
       </CartProductsSection>
-      <CartCheckoutSection totalPrice={34500} />
+      <CartCheckoutSection totalPrice={total} />
     </StyledCart>
   )
 }

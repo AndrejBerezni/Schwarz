@@ -1,4 +1,11 @@
 import { MdDeleteForever } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
+import { ICartItem } from '../../../compiler/cartItemInterface'
+import {
+  increaseItemCountInCart,
+  decreaseItemCountInCart,
+  removeItemFromCart,
+} from '../../../store/cart'
 import { formatPrice } from '../../../utilities/formatPrice'
 import Counter from '../../Counter'
 import {
@@ -8,13 +15,6 @@ import {
   CartPrice,
   StyledCartProductDiv,
 } from '../Cart.styles'
-import { ICartItem } from '../../../compiler/cartItemInterface'
-import {
-  increaseItemCountInCart,
-  decreaseItemCountInCart,
-  removeItemFromCart,
-} from '../../../store/cart'
-import { useDispatch } from 'react-redux'
 
 interface ICartProductDivProps {
   product: ICartItem

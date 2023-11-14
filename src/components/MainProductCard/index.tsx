@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
 import { Navigate } from 'react-router'
 import {
   StyledMainProductCard,
@@ -15,13 +16,12 @@ import {
   MainProductFavBtn,
   MainProductTooltip,
 } from './MainProductCard.styles'
+import { ICartItem } from '../../compiler/cartItemInterface'
 import { IProduct } from '../../compiler/productInterface'
 import { PrimaryButton } from '../../GlobalStyles'
+import { addItemToCart } from '../../store/cart'
 import { formatPrice } from '../../utilities/formatPrice'
 import Counter from '../Counter'
-import { addItemToCart } from '../../store/cart'
-import { ICartItem } from '../../compiler/cartItemInterface'
-import { useDispatch } from 'react-redux'
 
 interface IMainProductCardProps {
   product: IProduct

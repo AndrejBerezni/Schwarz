@@ -8,17 +8,31 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action) => {
-      state.push(action.payload)
+      // product is already in cart, increase amount
+      if (state.some((item: ICartItem) => action.payload.id === item.id)) {
+        const itemIndex = state.findIndex(
+          (item) => action.payload.id === item.id
+        )
+        state[itemIndex].count += action.payload.count
+      } else {
+        state.push(action.payload)
+      }
     },
     removeItemFromCart: (state, action) => {
-      return state
+      const itemIndex = state.findIndex((item) => action.payload.id === item.id)
+      state.splice(itemIndex, 1)
     },
     clearCart: () => initialState,
     increaseItemCountInCart: (state, action) => {
-      return state
+      const itemIndex = state.findIndex((item) => action.payload.id === item.id)
+      state[itemIndex].count += 1
     },
     decreaseItemCountInCart: (state, action) => {
-      return state
+      const itemIndex = state.findIndex((item) => action.payload.id === item.id)
+      if (state[itemIndex].count > 1) {
+        state[itemIndex].count -= 1
+      }
+      //user will need to press delete button to remove item from cart, therefore I am not adding logic if count is equal to 1
     },
   },
 })

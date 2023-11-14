@@ -7,6 +7,7 @@ import { hideSidebars } from '../../store/sidebars'
 
 export default function Account() {
   const dispatch = useDispatch()
+
   return (
     <StyledAccountPage onClick={() => dispatch(hideSidebars())}>
       <AccountPageSection>

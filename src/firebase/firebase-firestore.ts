@@ -9,12 +9,12 @@ import {
   where,
 } from 'firebase/firestore'
 import { app } from './firebase-config'
+import { IOrder } from '../compiler/orderInterface'
 import { IPrice, IProduct } from '../compiler/productInterface'
 
 export const db = getFirestore(app)
 
-//Get new products
-
+// Get products
 export const getProducts = async (
   metadataProp: string,
   metadataCriteria: string
@@ -47,6 +47,7 @@ export const getProducts = async (
   return productsArray
 }
 
+// Get single product
 export const getSingleProduct = async (docId: string) => {
   try {
     const docRef = doc(db, 'products', docId)
@@ -74,4 +75,15 @@ export const getSingleProduct = async (docId: string) => {
       throw new Error(error.message)
     }
   }
+}
+
+// Get past orders
+export const getOrdersForUser = async (userId: string) => {
+  const ordersArray: IOrder[] = []
+  const q = query(collection(db, 'customers', userId, 'payments'))
+  const querySnapshot = await getDocs(q)
+
+  querySnapshot.forEach((doc) => ordersArray.push(doc.data() as IOrder))
+
+  return ordersArray
 }

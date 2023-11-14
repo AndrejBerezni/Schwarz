@@ -15,8 +15,8 @@ import {
 } from './TopNavbar.styles'
 import { showForm } from '../../store/authentication'
 import { getAuthStatus, getUser } from '../../store/authentication/selectors'
-import { showCart, showCategories } from '../../store/sidebars'
 import { getCartItems } from '../../store/cart/selectors'
+import { showCart, showCategories } from '../../store/sidebars'
 import { calculateTotalItems } from '../../utilities/cartCalculations'
 
 export default function TopNavbar() {

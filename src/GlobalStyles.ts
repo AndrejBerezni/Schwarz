@@ -71,7 +71,11 @@ interface IPrimaryButtonProps {
 
 export const PrimaryButton = styled.button<IPrimaryButtonProps>`
   background-color: ${(props) =>
-    props.variant === 'outline' ? props.theme.navBgColor : props.theme.primary};
+    props.disabled
+      ? props.theme.secondaryText
+      : props.variant === 'outline'
+      ? props.theme.navBgColor
+      : props.theme.primary};
   color: ${(props) =>
     props.variant === 'outline' ? props.theme.primary : props.theme.navBgColor};
   border-radius: 6px;

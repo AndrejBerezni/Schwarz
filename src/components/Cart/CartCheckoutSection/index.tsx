@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PrimaryButton } from '../../../GlobalStyles'
 import { showForm } from '../../../store/authentication'
@@ -11,7 +12,6 @@ import {
   CartCheckoutDiv,
   CartCheckoutTotal,
 } from '../Cart.styles'
-import { useState } from 'react'
 
 interface ICartCheckoutSectionProps {
   totalPrice: number

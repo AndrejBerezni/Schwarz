@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
 import { FirebaseError } from 'firebase/app'
+import { useDispatch } from 'react-redux'
 import { useParams, Navigate } from 'react-router'
 import { IProduct } from '../../compiler/productInterface'
 import FeaturedCarousel from '../../components/FeaturedCarousel'
 import MainProductCard from '../../components/MainProductCard'
 import Spinner from '../../components/Spinner'
 import { getSingleProduct } from '../../firebase/firebase-firestore'
+import { hideSidebars } from '../../store/sidebars'
 
 export default function Product() {
+  const dispatch = useDispatch()
   const { productId } = useParams()
   const [product, setProduct] = useState<IProduct | null>(null)
 
@@ -26,7 +29,10 @@ export default function Product() {
   }, [productId])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+      onClick={() => dispatch(hideSidebars())}
+    >
       {product !== null ? (
         product ? (
           <>

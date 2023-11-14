@@ -1,6 +1,6 @@
-import { ICartItem, ILineItem } from '../compiler/cartItemInterface'
 import { loadStripe } from '@stripe/stripe-js'
 import { collection, addDoc, onSnapshot } from 'firebase/firestore'
+import { ICartItem, ILineItem } from '../compiler/cartItemInterface'
 import { db } from '../firebase/firebase-firestore'
 
 export const createCheckout = async (items: ICartItem[], userId: string) => {

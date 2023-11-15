@@ -137,3 +137,12 @@ export const checkWishlist = async (userId: string, product: IProduct) => {
     return false
   }
 }
+
+// Get wishlist
+export const getWishlist = async (userId: string) => {
+  const wishlistRef = doc(db, 'wishlist', userId)
+  const wishlistSnap = await getDoc(wishlistRef)
+  if (wishlistSnap.exists()) {
+    return wishlistSnap.data().wishlist
+  }
+}

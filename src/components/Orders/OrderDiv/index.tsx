@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   StyledOrderDiv,
   OrderDivProp,
@@ -6,9 +7,8 @@ import {
   OrderTitle,
 } from './OrderDiv.styles'
 import { IOrder } from '../../../compiler/orderInterface'
-import { formatPrice } from '../../../utilities/formatPrice'
-import { useEffect, useState } from 'react'
 import { getPaymentDate } from '../../../stripe/paymentDate'
+import { formatPrice } from '../../../utilities/formatPrice'
 
 interface IOrderDivProps {
   order: IOrder
@@ -31,7 +31,7 @@ export default function OrderDiv({ order }: Readonly<IOrderDivProps>) {
       }
     }
     fetchDate()
-  }, [])
+  }, [order.id])
 
   return (
     <StyledOrderDiv>

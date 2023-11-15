@@ -18,17 +18,17 @@ import {
 } from './MainProductCard.styles'
 import { ICartItem } from '../../compiler/cartItemInterface'
 import { IProduct } from '../../compiler/productInterface'
-import { PrimaryButton } from '../../GlobalStyles'
-import { addItemToCart } from '../../store/cart'
-import { formatPrice } from '../../utilities/formatPrice'
-import Counter from '../Counter'
-import { convertProductToCartItem } from '../../utilities/convertProductToCartItem'
 import {
   addToWishlist,
   removeFromWishlist,
   checkWishlist,
 } from '../../firebase/firebase-firestore'
+import { PrimaryButton } from '../../GlobalStyles'
 import { getUser, getAuthStatus } from '../../store/authentication/selectors'
+import { addItemToCart } from '../../store/cart'
+import { convertProductToCartItem } from '../../utilities/convertProductToCartItem'
+import { formatPrice } from '../../utilities/formatPrice'
+import Counter from '../Counter'
 
 interface IMainProductCardProps {
   product: IProduct

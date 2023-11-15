@@ -1,5 +1,5 @@
-import { IProduct } from '../compiler/productInterface'
 import { ICartItem } from '../compiler/cartItemInterface'
+import { IProduct } from '../compiler/productInterface'
 
 export const convertProductToCartItem = (
   product: IProduct,

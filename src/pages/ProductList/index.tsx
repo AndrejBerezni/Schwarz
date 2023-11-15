@@ -8,9 +8,9 @@ import {
 } from './ProductList.styles'
 import ProductCard from '../../components/ProductCard'
 import Spinner from '../../components/Spinner'
+import { categories } from '../../data/categories'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
-import { categories } from '../../data/categories'
 
 export default function ProductList() {
   const { category } = useParams()

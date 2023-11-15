@@ -14,3 +14,7 @@ Schwarz is an e-commerce app selling luxury watches, integrated with Stripe for 
 - Firebase (auth, firestore, hosting and Stripe extension)
 - styled-components
 - Cypress
+
+## Credits
+
+Letter S icons created by [arnikahossain - Flaticon](https://www.flaticon.com/free-icons/letter-s)

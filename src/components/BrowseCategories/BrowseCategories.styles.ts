@@ -27,7 +27,7 @@ export const StyledBrowseCategoriesSide = styled.ul<IStyledBrowseCategoriesSideP
   width: 100%;
   background-color: ${(props) => props.theme.navBgColor};
   height: 100vh;
-  z-index: 1;
+  z-index: 2;
   transition: left 0.6s ease-out;
   margin: 0;
   padding: 0;

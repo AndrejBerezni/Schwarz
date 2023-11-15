@@ -121,3 +121,19 @@ export const removeFromWishlist = async (userId: string, product: IProduct) => {
     wishlist: arrayRemove(product),
   })
 }
+
+// Check if product is on wishlist
+export const checkWishlist = async (userId: string, product: IProduct) => {
+  const hasWishlist = await checkIfWishlistExists(userId)
+  if (!hasWishlist) {
+    return false
+  }
+  const wishlistRef = doc(db, 'wishlist', userId)
+  const wishlistSnap = await getDoc(wishlistRef)
+  if (wishlistSnap.exists()) {
+    const wishlist = wishlistSnap.data().wishlist
+    return wishlist.some((item: IProduct) => item.docId === product.docId)
+  } else {
+    return false
+  }
+}

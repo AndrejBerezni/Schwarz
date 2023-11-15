@@ -22,6 +22,7 @@ import { PrimaryButton } from '../../GlobalStyles'
 import { addItemToCart } from '../../store/cart'
 import { formatPrice } from '../../utilities/formatPrice'
 import Counter from '../Counter'
+import { convertProductToCartItem } from '../../utilities/convertProductToCartItem'
 
 interface IMainProductCardProps {
   product: IProduct
@@ -46,19 +47,7 @@ export default function MainProductCard({
   }
 
   const handleAddToCart = () => {
-    const price =
-      product.prices[parseInt(product.metadata.discount)].unit_amount / 100
-    const totalPrice = Math.round(amount * price * 100) / 100
-    const cartItem: ICartItem = {
-      id: product.docId,
-      name: product.name,
-      price,
-      totalPrice,
-      priceId: product.prices[parseInt(product.metadata.discount)].priceId,
-      count: amount,
-      image: product.images[0],
-    }
-
+    const cartItem: ICartItem = convertProductToCartItem(product, amount)
     dispatch(addItemToCart(cartItem))
     setAmount(1)
   }

@@ -4,9 +4,13 @@ import {
   getFirestore,
   getDocs,
   getDoc,
+  updateDoc,
+  setDoc,
   collection,
   query,
   where,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore'
 import { app } from './firebase-config'
 import { IOrder } from '../compiler/orderInterface'
@@ -86,4 +90,34 @@ export const getOrdersForUser = async (userId: string) => {
   querySnapshot.forEach((doc) => ordersArray.push(doc.data() as IOrder))
 
   return ordersArray
+}
+
+// Check if user has wishlist
+const checkIfWishlistExists = async (userId: string): Promise<boolean> => {
+  const docRef = doc(db, 'wishlist', userId)
+  const docSnapshot = await getDoc(docRef)
+  return docSnapshot.exists()
+}
+
+// Add product to wishlist
+export const addToWishlist = async (userId: string, product: IProduct) => {
+  const wishlistExists = await checkIfWishlistExists(userId)
+  const wishlistRef = doc(db, 'wishlist', userId)
+  if (wishlistExists) {
+    await updateDoc(wishlistRef, {
+      wishlist: arrayUnion(product),
+    })
+  } else {
+    await setDoc(wishlistRef, {
+      wishlist: [product],
+    })
+  }
+}
+
+// Remove product from wishlist
+export const removeFromWishlist = async (userId: string, product: IProduct) => {
+  const wishlistRef = doc(db, 'wishlist', userId)
+  await updateDoc(wishlistRef, {
+    wishlist: arrayRemove(product),
+  })
 }

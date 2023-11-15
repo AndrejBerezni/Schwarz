@@ -10,14 +10,7 @@ import ProductCard from '../../components/ProductCard'
 import Spinner from '../../components/Spinner'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
-
-const categories = [
-  'cartier',
-  'patek_philippe',
-  'vacheron_constantine',
-  'rolex',
-  'ulysee_nardin',
-]
+import { categories } from '../../data/categories'
 
 export default function ProductList() {
   const { category } = useParams()

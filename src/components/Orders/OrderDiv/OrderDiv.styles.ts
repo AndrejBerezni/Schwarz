@@ -32,3 +32,8 @@ export const OrderDivDetail = styled.span`
   text-transform: uppercase;
   display: block;
 `
+export const OrderTitle = styled.h4`
+  color: ${(props) => props.theme.primary};
+  font-family: ${(props) => props.theme.headFont};
+  align-self: center;
+`

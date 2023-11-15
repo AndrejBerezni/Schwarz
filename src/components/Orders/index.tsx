@@ -23,7 +23,7 @@ export default function Orders() {
   return (
     <StyledOrders>
       {orders.length > 0 ? (
-        orders.map((order) => <OrderDiv order={order} />)
+        orders.map((order) => <OrderDiv order={order} key={order.id} />)
       ) : (
         <OrderDivItem>
           <OrderDivProp>No orders to show</OrderDivProp>

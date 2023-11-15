@@ -3,17 +3,43 @@ import {
   OrderDivProp,
   OrderDivDetail,
   OrderDivItem,
+  OrderTitle,
 } from './OrderDiv.styles'
 import { IOrder } from '../../../compiler/orderInterface'
 import { formatPrice } from '../../../utilities/formatPrice'
+import { useEffect, useState } from 'react'
+import { getPaymentDate } from '../../../stripe/paymentDate'
 
 interface IOrderDivProps {
   order: IOrder
 }
 
 export default function OrderDiv({ order }: Readonly<IOrderDivProps>) {
+  const [orderDate, setOrderDate] = useState<string>('')
+
+  useEffect(() => {
+    const fetchDate = async () => {
+      try {
+        const paymentDate = await getPaymentDate(order.id)
+        if (paymentDate) {
+          setOrderDate(paymentDate)
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message)
+        }
+      }
+    }
+    fetchDate()
+  }, [])
+
   return (
     <StyledOrderDiv>
+      <OrderTitle>Order ID - {order.id}</OrderTitle>
+      <OrderDivItem>
+        <OrderDivProp>Date: </OrderDivProp>
+        <OrderDivDetail>{orderDate}</OrderDivDetail>
+      </OrderDivItem>
       <OrderDivItem>
         <OrderDivProp>Amount spent: </OrderDivProp>
         <OrderDivDetail>

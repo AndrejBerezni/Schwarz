@@ -41,20 +41,22 @@ export default function OrderDiv({ order }: Readonly<IOrderDivProps>) {
         <OrderDivDetail>{orderDate}</OrderDivDetail>
       </OrderDivItem>
       <OrderDivItem>
-        <OrderDivProp>Amount spent: </OrderDivProp>
+        <OrderDivProp>Total amount: </OrderDivProp>
         <OrderDivDetail>
           {formatPrice(order.amount / 100)} {order.currency}
         </OrderDivDetail>
       </OrderDivItem>
-      <OrderDivItem>
-        <OrderDivProp>Items:</OrderDivProp>
-        {order.items.map((item) => (
-          <OrderDivDetail>
-            {item.description} - {item.quantity} x{' '}
-            {formatPrice(item.price.unit_amount / 100)} {order.currency}
-          </OrderDivDetail>
-        ))}
-      </OrderDivItem>
+      {order.items && (
+        <OrderDivItem>
+          <OrderDivProp>Items:</OrderDivProp>
+          {order.items.map((item) => (
+            <OrderDivDetail>
+              {item.description} - {item.quantity} x{' '}
+              {formatPrice(item.price.unit_amount / 100)} {order.currency}
+            </OrderDivDetail>
+          ))}
+        </OrderDivItem>
+      )}
       <OrderDivItem>
         <OrderDivProp>Payment Method:</OrderDivProp>
         <OrderDivDetail> {order.payment_method_types[0]}</OrderDivDetail>

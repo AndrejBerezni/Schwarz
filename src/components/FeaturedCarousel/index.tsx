@@ -68,7 +68,7 @@ export default function FeaturedCarousel({
               <ProductCard key={item.docId} product={item} />
             ))}
             {/* Adding again array of items,
-         because I was not able to arrange
+         because I did not arrange
           not having empty space on the right inside carousel
            when the last item from array was set as first: */}
             {products.slice(0, 5).map((item) => (

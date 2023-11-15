@@ -35,4 +35,10 @@ export const CounterBtn = styled.button<ICounterBtnProps>`
         : `
     transform: translateY(-2px);
     cursor: pointer;`}
+    &:active {
+      box-shadow: 0 0 3px
+        ${(props) =>
+          props.disabled ? props.theme.secondaryText : props.theme.navBgColor}
+        inset;
+    }
 `

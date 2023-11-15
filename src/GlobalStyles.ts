@@ -93,6 +93,14 @@ export const PrimaryButton = styled.button<IPrimaryButtonProps>`
     transform: translateY(-2px);
     box-shadow: 0px 5px 5px -4px ${(props) => props.theme.primary};
   }
+  &:active {
+    box-shadow: 0 0 4px
+      ${(props) =>
+        props.variant === 'outline'
+          ? props.theme.primary
+          : props.theme.navBgColor}
+      inset;
+  }
 `
 
 //   card - background: linear-gradient(to bottom, #333333, #222222, #111111);

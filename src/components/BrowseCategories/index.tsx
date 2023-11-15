@@ -10,17 +10,18 @@ export default function BrowseCategories() {
   return (
     <StyledBrowseCategories>
       <BrowseTitle>Browse Brands</BrowseTitle>
+      <BrowseItem onClick={() => navigate('/all')}>All Brands</BrowseItem>
       <BrowseItem onClick={() => navigate('/cartier')}>Cartier</BrowseItem>
       <BrowseItem onClick={() => navigate('/patek_philippe')}>
         Patek Philippe
       </BrowseItem>
-      <BrowseItem onClick={() => navigate('/vacheron_constantine')}>
-        Vacheron Constantin
-      </BrowseItem>
+      <BrowseItem onClick={() => navigate('/rolex')}>Rolex</BrowseItem>
       <BrowseItem onClick={() => navigate('/ulysee_nardin')}>
         Ulysse Nardin
       </BrowseItem>
-      <BrowseItem onClick={() => navigate('/rolex')}>Rolex</BrowseItem>
+      <BrowseItem onClick={() => navigate('/vacheron_constantine')}>
+        Vacheron Constantin
+      </BrowseItem>
     </StyledBrowseCategories>
   )
 }

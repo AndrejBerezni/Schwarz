@@ -25,7 +25,9 @@ export default function ProductList() {
       {categories.includes(category as string) ? (
         <StyledProductList>
           <ProductsHeader>
-            <ProductsTitle>{brand}</ProductsTitle>
+            <ProductsTitle>
+              {brand === 'all' ? 'Schwarz Catalogue' : brand}
+            </ProductsTitle>
             <p>filters to go here...</p>
           </ProductsHeader>
 

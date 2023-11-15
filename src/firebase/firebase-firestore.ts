@@ -24,10 +24,13 @@ export const getProducts = async (
   metadataCriteria: string
 ): Promise<IProduct[]> => {
   const productsArray = []
-  const q = query(
-    collection(db, 'products'),
-    where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`)
-  )
+  const q =
+    metadataCriteria === 'all'
+      ? collection(db, 'products')
+      : query(
+          collection(db, 'products'),
+          where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`)
+        )
   const querySnapshot = await getDocs(q)
 
   for (const doc of querySnapshot.docs) {

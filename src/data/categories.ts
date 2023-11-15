@@ -1,4 +1,5 @@
 export const categories = [
+  'all',
   'cartier',
   'patek_philippe',
   'vacheron_constantine',

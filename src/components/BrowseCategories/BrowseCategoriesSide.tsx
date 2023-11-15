@@ -14,23 +14,29 @@ export default function BrowseCategoriesSide() {
   const navigate = useNavigate()
   const show = useSelector(getShowCategories)
 
+  const handleClick = (url: string) => {
+    navigate(url)
+    dispatch(hideSidebars())
+  }
+
   return (
     <StyledBrowseCategoriesSide show={show}>
       <CloseBrowseSide onClick={() => dispatch(hideSidebars())}>
         X
       </CloseBrowseSide>
       <BrowseSideTitle>Browse Brands</BrowseSideTitle>
-      <BrowseItem onClick={() => navigate('/cartier')}>Cartier</BrowseItem>
-      <BrowseItem onClick={() => navigate('/patek_philippe')}>
+      <BrowseItem onClick={() => handleClick('/all')}>All Brands</BrowseItem>
+      <BrowseItem onClick={() => handleClick('/cartier')}>Cartier</BrowseItem>
+      <BrowseItem onClick={() => handleClick('/patek_philippe')}>
         Patek Philippe
       </BrowseItem>
-      <BrowseItem onClick={() => navigate('/vacheron_constantine')}>
-        Vacheron Constantin
-      </BrowseItem>
-      <BrowseItem onClick={() => navigate('/ulysee_nardin')}>
+      <BrowseItem onClick={() => handleClick('/rolex')}>Rolex</BrowseItem>
+      <BrowseItem onClick={() => handleClick('/ulysee_nardin')}>
         Ulysse Nardin
       </BrowseItem>
-      <BrowseItem onClick={() => navigate('/rolex')}>Rolex</BrowseItem>
+      <BrowseItem onClick={() => handleClick('/vacheron_constantine')}>
+        Vacheron Constantin
+      </BrowseItem>
     </StyledBrowseCategoriesSide>
   )
 }

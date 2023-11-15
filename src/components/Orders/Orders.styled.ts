@@ -1,6 +1,13 @@
 import { styled } from 'styled-components'
 
-export const StyledOrders = styled.section`
+interface IStyledOrdersProps {
+  theme: {
+    navBgColor: string
+    borderColor: string
+  }
+}
+
+export const StyledOrders = styled.section<IStyledOrdersProps>`
   width: 100%;
   max-height: 540px;
   padding-left: 8px;

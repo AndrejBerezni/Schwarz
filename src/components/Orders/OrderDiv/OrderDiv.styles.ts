@@ -16,10 +16,12 @@ export const StyledOrderDiv = styled.div`
 export const OrderDivItem = styled.p`
   padding-left: 20px;
   margin: 10px;
+  position: relative;
+  min-height: 40px;
 `
 
 export const OrderDivProp = styled.span`
-  color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.secondaryText};
   font-size: 20px;
   text-transform: capitalize;
   text-align: start;

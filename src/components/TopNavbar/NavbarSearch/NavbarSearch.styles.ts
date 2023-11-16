@@ -12,18 +12,17 @@ export const SearchResultsBox = styled.ul`
   overflow-y: scroll;
   z-index: 2;
   border: none;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 0 5px;
   &::-webkit-scrollbar {
     width: 8px;
   }
   &::-webkit-scrollbar-track {
     background-color: ${(props) => props.theme.textColor};
-    border-left: 1px solid ${(props) => props.theme.navBgColor};
+    border-radius: 0 0 5px 0;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: ${(props) => props.theme.borderColor};
-    border-left: 1px solid ${(props) => props.theme.navBgColor};
+    background-color: ${(props) => props.theme.primary};
   }
 `
 
@@ -43,11 +42,15 @@ export const SearchResultArrow = styled.div`
   font-size: 22px;
 `
 
+export const SearchResultName = styled.p`
+  transition: 0.3s ease-out;
+`
+
 export const SearchResult = styled.li`
   width: 100%;
   background-color: white;
   min-height: 100px;
-  color: ${(props) => props.theme.navBgColor};
+  color: ${(props) => props.theme.bgColor};
   font-weight: 600;
   font-size: 16px;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
@@ -60,11 +63,14 @@ export const SearchResult = styled.li`
   &:hover {
     cursor: pointer;
     background: linear-gradient(to left, #222222, #111111, #000000);
-    border-radius: 5px;
-    font-size: 18px;
     color: ${(props) => props.theme.primary};
     ${SearchResultArrow} {
       visibility: visible;
+    }
+
+    ${SearchResultName} {
+      transform: translateX(20px);
+      font-weight: 900;
     }
     ${SearchImg} {
       max-height: 75px;

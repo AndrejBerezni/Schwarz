@@ -177,8 +177,8 @@ export const searchProducts = async (searchTerm: string) => {
   const brandQuery = query(
     collection(db, 'products'),
     orderBy('metadata.brand'),
-    where('metadata.brand', '>=', searchTerm),
-    where('metadata.brand', '<=', searchTerm + `\uf8ff`),
+    where('metadata.brand', '>=', searchTerm.toLowerCase()),
+    where('metadata.brand', '<=', searchTerm.toLowerCase() + `\uf8ff`),
     limit(5)
   )
   const brandResultsSnapshot = await getDocs(brandQuery)

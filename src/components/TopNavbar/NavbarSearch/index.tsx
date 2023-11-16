@@ -10,6 +10,7 @@ import {
   SearchImg,
   SearchResultDiv,
   SearchResultArrow,
+  SearchResultName,
 } from './NavbarSearch.styles'
 import { IProduct } from '../../../compiler/productInterface'
 import { searchProducts } from '../../../firebase/firebase-firestore'
@@ -64,11 +65,11 @@ export default function NavbarSearch() {
               onClick={() => handleClick(item.docId)}
               key={`${item.docId}-sr`}
             >
-              <p>
+              <SearchResultName>
                 {item.name.length > 25
                   ? `${item.name.slice(0, 25)}...`
                   : item.name}
-              </p>
+              </SearchResultName>
               <SearchResultDiv>
                 <SearchImg src={item.images[0]} />
                 <SearchResultArrow>

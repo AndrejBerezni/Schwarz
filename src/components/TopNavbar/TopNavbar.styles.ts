@@ -56,6 +56,12 @@ export const NavSearchIcon = styled(NavDiv)`
   position: absolute;
   top: 0;
   right: 0;
+  &:hover {
+    cursor: pointer;
+    > * {
+      transform: scale(1.2);
+    }
+  }
 `
 
 export const NavInput = styled.input`

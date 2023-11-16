@@ -3,6 +3,7 @@ import { MdAccountCircle } from 'react-icons/md'
 import { TfiMenuAlt } from 'react-icons/tfi'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import NavbarSearch from './NavbarSearch'
 import {
   StyledTopNavbar,
   NavTitle,
@@ -16,7 +17,6 @@ import { getAuthStatus, getUser } from '../../store/authentication/selectors'
 import { getCartItems } from '../../store/cart/selectors'
 import { showCart, showCategories } from '../../store/sidebars'
 import { calculateTotalItems } from '../../utilities/cartCalculations'
-import NavbarSearch from './NavbarSearch'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()

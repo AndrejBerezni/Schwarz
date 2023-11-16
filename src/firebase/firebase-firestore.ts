@@ -9,6 +9,7 @@ import {
   collection,
   query,
   where,
+  limit,
   orderBy,
   arrayUnion,
   arrayRemove,
@@ -153,13 +154,17 @@ export const getWishlist = async (userId: string) => {
 
 //Search products
 //This search works only if search term matches start of the name or brand
+//I need to find a way to query Firestore to get items that contain search term, not only that start with search term
+//Furthermore, Firestore did not allow me to combine multiple where statements related to different fields, so I needed to
+//write 2 queries - one for name and other for metadata.brand
 export const searchProducts = async (searchTerm: string) => {
   const searchResults: IProduct[] = []
   const nameQuery = query(
     collection(db, 'products'),
     orderBy('name'),
     where('name', '>=', searchTerm.toUpperCase()),
-    where('name', '<=', searchTerm.toUpperCase() + `\uf8ff`)
+    where('name', '<=', searchTerm.toUpperCase() + `\uf8ff`),
+    limit(5)
   )
   const nameResultsSnapshot = await getDocs(nameQuery)
 
@@ -173,7 +178,8 @@ export const searchProducts = async (searchTerm: string) => {
     collection(db, 'products'),
     orderBy('metadata.brand'),
     where('metadata.brand', '>=', searchTerm),
-    where('metadata.brand', '<=', searchTerm + `\uf8ff`)
+    where('metadata.brand', '<=', searchTerm + `\uf8ff`),
+    limit(5)
   )
   const brandResultsSnapshot = await getDocs(brandQuery)
 

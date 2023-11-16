@@ -1,9 +1,9 @@
-import { NavDiv, NavInput, NavSearchIcon } from '../TopNavbar.styles'
-import { BiSearchAlt } from 'react-icons/bi'
-import { searchProducts } from '../../../firebase/firebase-firestore'
-import { debounce } from 'lodash'
 import { useState, ChangeEvent } from 'react'
-import { IProduct } from '../../../compiler/productInterface'
+import { debounce } from 'lodash'
+import { BiSearchAlt } from 'react-icons/bi'
+import { IoMdArrowRoundForward } from 'react-icons/io'
+import { RiCloseCircleLine } from 'react-icons/ri'
+import { useNavigate } from 'react-router'
 import {
   SearchResult,
   SearchResultsBox,
@@ -11,8 +11,9 @@ import {
   SearchResultDiv,
   SearchResultArrow,
 } from './NavbarSearch.styles'
-import { IoMdArrowRoundForward } from 'react-icons/io'
-import { useNavigate } from 'react-router'
+import { IProduct } from '../../../compiler/productInterface'
+import { searchProducts } from '../../../firebase/firebase-firestore'
+import { NavDiv, NavInput, NavSearchIcon } from '../TopNavbar.styles'
 
 export default function NavbarSearch() {
   const navigate = useNavigate()
@@ -39,15 +40,22 @@ export default function NavbarSearch() {
     navigate(`/products/${productId}`)
   }
 
+  const handleDeleteInput = () => {
+    if (input !== '') {
+      setInput('')
+    }
+  }
+
   return (
     <NavDiv>
       <NavInput
         type="text"
         placeholder="Search for products..."
         onChange={handleChange}
+        value={input}
       ></NavInput>
-      <NavSearchIcon>
-        <BiSearchAlt />
+      <NavSearchIcon onClick={handleDeleteInput}>
+        {input === '' ? <BiSearchAlt /> : <RiCloseCircleLine />}
       </NavSearchIcon>
       {input.length > 2 && (
         <SearchResultsBox>
@@ -56,7 +64,11 @@ export default function NavbarSearch() {
               onClick={() => handleClick(item.docId)}
               key={`${item.docId}-sr`}
             >
-              <p>{item.name}</p>
+              <p>
+                {item.name.length > 25
+                  ? `${item.name.slice(0, 25)}...`
+                  : item.name}
+              </p>
               <SearchResultDiv>
                 <SearchImg src={item.images[0]} />
                 <SearchResultArrow>

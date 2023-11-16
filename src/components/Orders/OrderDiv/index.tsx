@@ -50,7 +50,7 @@ export default function OrderDiv({ order }: Readonly<IOrderDivProps>) {
         <OrderDivItem>
           <OrderDivProp>Items:</OrderDivProp>
           {order.items.map((item) => (
-            <OrderDivDetail>
+            <OrderDivDetail key={`${item.id}-oi`}>
               {item.description} - {item.quantity} x{' '}
               {formatPrice(item.price.unit_amount / 100)} {order.currency}
             </OrderDivDetail>

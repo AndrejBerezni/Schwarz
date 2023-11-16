@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   FilterBox,
   StyledFilters,
@@ -7,7 +8,6 @@ import {
   FilterInputDiv,
   FilterSubtitle,
 } from './Filters.styles'
-import { useState } from 'react'
 
 export default function Filters() {
   const [showFilters, setShowFilters] = useState<boolean>(false)

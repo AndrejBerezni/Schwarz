@@ -28,5 +28,10 @@ export const filterSlice = createSlice({
     removeFilter: (state, action: PayloadAction<IApplyFilterPayload>) => {
       state[action.payload.filterName] = false
     },
+    clearFilters: () => initialState,
   },
 })
+
+export const { applyFilter, removeFilter, clearFilters } = filterSlice.actions
+
+export default filterSlice.reducer

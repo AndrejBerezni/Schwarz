@@ -6,12 +6,12 @@ import {
   ProductsTitle,
   ProductsHeader,
 } from './ProductList.styles'
+import Filters from '../../components/Filters'
 import ProductCard from '../../components/ProductCard'
 import Spinner from '../../components/Spinner'
 import { categories } from '../../data/categories'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
-import Filters from '../../components/Filters'
 
 export default function ProductList() {
   const { category } = useParams()

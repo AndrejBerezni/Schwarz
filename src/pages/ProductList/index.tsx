@@ -11,6 +11,7 @@ import Spinner from '../../components/Spinner'
 import { categories } from '../../data/categories'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
+import Filters from '../../components/Filters'
 
 export default function ProductList() {
   const { category } = useParams()
@@ -28,7 +29,7 @@ export default function ProductList() {
             <ProductsTitle>
               {brand === 'all' ? 'Schwarz Catalogue' : brand}
             </ProductsTitle>
-            <p>filters to go here...</p>
+            <Filters />
           </ProductsHeader>
 
           <ProductsContainer>

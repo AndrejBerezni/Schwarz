@@ -9,6 +9,7 @@ import {
   collection,
   query,
   where,
+  orderBy,
   arrayUnion,
   arrayRemove,
 } from 'firebase/firestore'
@@ -141,11 +142,38 @@ export const checkWishlist = async (userId: string, product: IProduct) => {
   }
 }
 
-// Get wishlist
+//Get wishlist
 export const getWishlist = async (userId: string) => {
   const wishlistRef = doc(db, 'wishlist', userId)
   const wishlistSnap = await getDoc(wishlistRef)
   if (wishlistSnap.exists()) {
     return wishlistSnap.data().wishlist
   }
+}
+
+//Search products
+//This search works only if search term matches start of the name or brand
+export const searchProducts = async (searchTerm: string) => {
+  const searchResults: IProduct[] = []
+  const nameQuery = query(
+    collection(db, 'products'),
+    orderBy('name'),
+    where('name', '>=', searchTerm.toUpperCase()),
+    where('name', '<=', searchTerm.toUpperCase() + `\uf8ff`)
+  )
+  const nameResultsSnapshot = await getDocs(nameQuery)
+  nameResultsSnapshot.forEach((doc) =>
+    searchResults.push(doc.data() as IProduct)
+  )
+
+  const brandQuery = query(
+    collection(db, 'products'),
+    orderBy('metadata.brand'),
+    where('metadata.brand', '>=', searchTerm),
+    where('metadata.brand', '<=', searchTerm + `\uf8ff`)
+  )
+  const resultsSnapshot = await getDocs(brandQuery)
+  resultsSnapshot.forEach((doc) => searchResults.push(doc.data() as IProduct))
+
+  console.log(searchResults)
 }

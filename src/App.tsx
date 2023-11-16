@@ -9,17 +9,7 @@ import TopNavbar from './components/TopNavbar'
 import { theme, GlobalStyle, MainContent } from './GlobalStyles'
 import Router from './router/Routes'
 
-import { useEffect } from 'react'
-import { searchProducts } from './firebase/firebase-firestore'
-
 function App() {
-  useEffect(() => {
-    const testFetch = async () => {
-      await searchProducts('cart')
-    }
-
-    testFetch()
-  }, [])
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

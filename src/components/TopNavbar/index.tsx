@@ -1,4 +1,4 @@
-import { BiSearchAlt, BiCart } from 'react-icons/bi'
+import { BiCart } from 'react-icons/bi'
 import { MdAccountCircle } from 'react-icons/md'
 import { TfiMenuAlt } from 'react-icons/tfi'
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,8 +7,6 @@ import {
   StyledTopNavbar,
   NavTitle,
   NavDiv,
-  NavSearchIcon,
-  NavInput,
   NavButton,
   NavTooltip,
   CartItemsNumber,
@@ -18,6 +16,7 @@ import { getAuthStatus, getUser } from '../../store/authentication/selectors'
 import { getCartItems } from '../../store/cart/selectors'
 import { showCart, showCategories } from '../../store/sidebars'
 import { calculateTotalItems } from '../../utilities/cartCalculations'
+import NavbarSearch from './NavbarSearch'
 
 export default function TopNavbar() {
   const dispatch = useDispatch()
@@ -40,12 +39,7 @@ export default function TopNavbar() {
           Schwarz
         </NavTitle>
       </NavDiv>
-      <NavDiv>
-        <NavInput type="text" placeholder="Search for products..."></NavInput>
-        <NavSearchIcon>
-          <BiSearchAlt />
-        </NavSearchIcon>
-      </NavDiv>
+      <NavbarSearch />
       <NavDiv>
         <NavButton
           variant="mobile-only"

@@ -162,9 +162,12 @@ export const searchProducts = async (searchTerm: string) => {
     where('name', '<=', searchTerm.toUpperCase() + `\uf8ff`)
   )
   const nameResultsSnapshot = await getDocs(nameQuery)
-  nameResultsSnapshot.forEach((doc) =>
-    searchResults.push(doc.data() as IProduct)
-  )
+
+  for (const doc of nameResultsSnapshot.docs) {
+    const productData = doc.data()
+    productData.docId = doc.id
+    searchResults.push(productData as IProduct)
+  }
 
   const brandQuery = query(
     collection(db, 'products'),
@@ -172,8 +175,13 @@ export const searchProducts = async (searchTerm: string) => {
     where('metadata.brand', '>=', searchTerm),
     where('metadata.brand', '<=', searchTerm + `\uf8ff`)
   )
-  const resultsSnapshot = await getDocs(brandQuery)
-  resultsSnapshot.forEach((doc) => searchResults.push(doc.data() as IProduct))
+  const brandResultsSnapshot = await getDocs(brandQuery)
 
-  console.log(searchResults)
+  for (const doc of brandResultsSnapshot.docs) {
+    const productData = doc.data()
+    productData.docId = doc.id
+    searchResults.push(productData as IProduct)
+  }
+
+  return searchResults
 }

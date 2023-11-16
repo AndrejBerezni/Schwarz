@@ -70,7 +70,7 @@ interface Outcome {
 }
 
 interface Refunds {
-  data: any[]
+  data: unknown[]
   has_more: boolean
   object: string
   url: string
@@ -97,7 +97,7 @@ interface Charge {
   disputed: boolean
   livemode: boolean
   receipt_email: null
-  metadata: any
+  metadata: unknown
   balance_transaction: string
   receipt_number: null
   dispute: null
@@ -106,7 +106,7 @@ interface Charge {
   source: null
   application_fee: null
   status: string
-  fraud_details: any
+  fraud_details: unknown
   on_behalf_of: null
   application: null
   paid: boolean
@@ -147,7 +147,7 @@ interface Price {
   livemode: boolean
   billing_scheme: string
   custom_unit_amount: null
-  metadata: any
+  metadata: unknown
   currency: string
   type: string
   object: string
@@ -181,13 +181,13 @@ interface PaymentMethodOptions {
 
 export interface IOrder {
   amount_details: {
-    tip: {}
+    tip: unknown
   }
   application: null
   description: null
   shipping: null
   capture_method: string
-  metadata: any
+  metadata: unknown
   processing: null
   invoice: null
   canceled_at: null

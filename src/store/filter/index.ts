@@ -19,6 +19,12 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     applyFilter: (state, action) => {
+      if (action.payload === 'men') {
+        state.women = false
+      }
+      if (action.payload === 'women') {
+        state.men = false
+      }
       state[action.payload as keyof IFilterState] = true
     },
     removeFilter: (state, action) => {

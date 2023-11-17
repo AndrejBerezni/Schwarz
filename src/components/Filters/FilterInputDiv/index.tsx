@@ -1,12 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { IFilterState, applyFilter, removeFilter } from '../../../store/filter'
+import { getFilters } from '../../../store/filter/selectors'
 import {
   StyledFilterInputDiv,
   FilterLabel,
   FilterOption,
 } from '../Filters.styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { getFilters } from '../../../store/filter/selectors'
-import { IFilterState } from '../../../store/filter'
-import { applyFilter, removeFilter } from '../../../store/filter'
 
 interface IFilterInputDivProps {
   filter: string
@@ -25,6 +24,7 @@ export default function FilterInputDiv({
       dispatch(removeFilter(filter))
     }
   }
+
   return (
     <StyledFilterInputDiv>
       <FilterLabel htmlFor={`filter-${filter}`}>

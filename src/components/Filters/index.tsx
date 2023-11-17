@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import FilterInputDiv from './FilterInputDiv'
+import FilterRadio from './FilterRadio'
 import { FilterBox, StyledFilters, FilterButton } from './Filters.styles'
 import { clearFilters } from '../../store/filter'
-import FilterRadio from './FilterRadio'
 
 export default function Filters() {
   const dispatch = useDispatch()
@@ -26,8 +26,12 @@ export default function Filters() {
       <FilterBox visible={showFilters}>
         <FilterInputDiv filter="Discount" key={`Discount-${filterKey}`} />
         <FilterInputDiv filter="New" key={`New-${filterKey}`} />
-        <FilterRadio filterValues={['men', 'women']} filterName="Collection" />
-        <FilterButton onClick={clearAllFilters} />
+        <FilterRadio
+          filterValues={['Men', 'Women']}
+          filterName="Collection"
+          key={`Collection-${filterKey}`}
+        />
+        <FilterButton onClick={clearAllFilters}>Clear All</FilterButton>
       </FilterBox>
     </StyledFilters>
   )

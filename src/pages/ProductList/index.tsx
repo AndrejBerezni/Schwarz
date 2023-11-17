@@ -19,6 +19,7 @@ export default function ProductList() {
   const products = useProducts({
     metadataProp: 'brand',
     metadataCriteria: brand,
+    applyListFilters: true,
   })
 
   return (

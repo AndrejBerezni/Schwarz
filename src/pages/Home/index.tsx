@@ -15,7 +15,11 @@ export default function Home() {
         <Outlet />
       </div>
       <FeaturedCarousel
-        useProductsData={{ metadataProp: 'new', metadataCriteria: '1' }}
+        useProductsData={{
+          metadataProp: 'new',
+          metadataCriteria: '1',
+          applyListFilters: false,
+        }}
         title="Latest Products"
       />
     </StyledHome>

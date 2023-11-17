@@ -54,16 +54,14 @@ export const SearchResult = styled.li`
   font-weight: 600;
   font-size: 16px;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
-  background: linear-gradient(to left, #ffffff, #fafafa, #e5e5e5);
+  background-color: ${(props) => props.theme.textColor};
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: 0.5s;
+  transition: 0.3s;
   &:hover {
     cursor: pointer;
-    background: linear-gradient(to left, #222222, #111111, #000000);
-    color: ${(props) => props.theme.primary};
     ${SearchResultArrow} {
       visibility: visible;
     }

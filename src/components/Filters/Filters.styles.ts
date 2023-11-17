@@ -26,6 +26,9 @@ export const StyledFilters = styled.div`
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `
 
 interface IFilterBoxProps {

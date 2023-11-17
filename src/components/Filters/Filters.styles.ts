@@ -1,11 +1,14 @@
 import { styled } from 'styled-components'
 
-export const FilterTitle = styled.p`
+export const FilterButton = styled.button`
   letter-spacing: 2px;
   font-weight: 600;
+  font-family: ${(props) => props.theme.textFont};
   color: ${(props) => props.theme.secondaryText};
-  text-transform: uppercase;
   transition: 0.3s;
+  border: none;
+  background: transparent;
+  font-size: 18px;
   &:hover {
     cursor: pointer;
     color: ${(props) => props.theme.textColor};
@@ -52,7 +55,7 @@ export const FilterBox = styled.div<IFilterBoxProps>`
   padding: 10px;
 `
 
-export const FilterInputDiv = styled.div`
+export const StyledFilterInputDiv = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -75,8 +78,4 @@ export const FilterSubtitle = styled.p`
   margin: 15px 0 0;
   color: ${(props) => props.theme.secondaryText};
   transition: 0.3s;
-  &:last-of-type:hover {
-    cursor: pointer;
-    color: ${(props) => props.theme.textColor};
-  }
 `

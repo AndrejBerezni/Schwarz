@@ -1,14 +1,10 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-interface IFilterState {
+export interface IFilterState {
   men: boolean
   women: boolean
   new: boolean
   discount: boolean
-}
-
-interface IApplyFilterPayload {
-  filterName: keyof IFilterState
 }
 
 const initialState: IFilterState = {
@@ -22,11 +18,11 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    applyFilter: (state, action: PayloadAction<IApplyFilterPayload>) => {
-      state[action.payload.filterName] = true
+    applyFilter: (state, action) => {
+      state[action.payload as keyof IFilterState] = true
     },
-    removeFilter: (state, action: PayloadAction<IApplyFilterPayload>) => {
-      state[action.payload.filterName] = false
+    removeFilter: (state, action) => {
+      state[action.payload as keyof IFilterState] = false
     },
     clearFilters: () => initialState,
   },

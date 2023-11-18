@@ -89,7 +89,10 @@ export const getSingleProduct = async (docId: string) => {
 // Get past orders
 export const getOrdersForUser = async (userId: string) => {
   const ordersArray: IOrder[] = []
-  const q = query(collection(db, 'customers', userId, 'payments'))
+  const q = query(
+    collection(db, 'customers', userId, 'payments'),
+    orderBy('created', 'desc')
+  )
   const querySnapshot = await getDocs(q)
 
   querySnapshot.forEach((doc) => ordersArray.push(doc.data() as IOrder))

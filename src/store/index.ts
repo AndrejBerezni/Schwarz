@@ -1,28 +1,26 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-// import { persistReducer } from 'redux-persist'
-// import storage from 'redux-persist/lib/storage'
-import authReducer from './authentication/index'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { authSlice } from './authentication/index'
 import cartReducer from './cart/index'
 import filterReducer from './filter/index'
 import sidebarsReducer from './sidebars/index'
 
+const authPersistConfig = {
+  key: 'authentication',
+  storage,
+  blacklist: ['cart', 'filter', 'sidebars'],
+}
+
 const reducers = combineReducers({
-  authentication: authReducer,
+  authentication: persistReducer(authPersistConfig, authSlice.reducer),
   sidebars: sidebarsReducer,
   cart: cartReducer,
   filter: filterReducer,
 })
 
-// const persistedReducer = persistReducer(
-//   {
-//     key: 'root',
-//     storage,
-//   },
-//   reducers
-// )
-
 export const store = configureStore({
-  reducer: reducers, //persistedReducer,
+  reducer: reducers,
   devTools: true,
 })
 

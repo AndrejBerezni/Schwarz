@@ -32,7 +32,7 @@ export default function useProducts({
     }
     setProducts([])
     fetchProducts()
-  }, [metadataProp, metadataCriteria, filters])
+  }, [metadataProp, metadataCriteria, filters, applyListFilters])
   //since this function is used to get data for carousel, carousel will also reload when you are filtering products
   //check if you can handle it differently, maybe write separate hook for fetching carousel products
 

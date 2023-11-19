@@ -17,6 +17,7 @@ import {
 import { app } from './firebase-config'
 import { IOrder } from '../compiler/orderInterface'
 import { IPrice, IProduct } from '../compiler/productInterface'
+import { IReview } from '../compiler/reviewInterface'
 
 export const db = getFirestore(app)
 
@@ -196,13 +197,6 @@ export const searchProducts = async (searchTerm: string) => {
 }
 
 //Add review
-interface IReview {
-  username: string
-  reviewText: string
-  rating: number
-  userId: string
-}
-
 export const addProductReview = async (
   newReview: IReview,
   productId: string

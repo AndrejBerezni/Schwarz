@@ -43,7 +43,7 @@ export const HeroBox = styled.div`
   align-items: center;
   overflow: hidden;
   text-transform: uppercase;
-  @media (max-width: 768px) {
+  @media (max-width: 929px) {
     width: 100%;
     height: 280px;
     padding: 30px;

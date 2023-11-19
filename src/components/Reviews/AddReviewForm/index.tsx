@@ -25,6 +25,7 @@ export default function AddReviews({ product }: Readonly<IReviewsProps>) {
       <ReviewTextarea
         placeholder="Your review goes here... ( max 400 characters )"
         rows={10}
+        maxLength={400}
         required
       />
       <PrimaryButton type="submit">Submit</PrimaryButton>

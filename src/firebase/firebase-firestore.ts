@@ -194,3 +194,48 @@ export const searchProducts = async (searchTerm: string) => {
 
   return searchResults
 }
+
+//Add review
+interface IReview {
+  username: string
+  reviewText: string
+  rating: number
+  userId: string
+}
+
+export const addProductReview = async (
+  newReview: IReview,
+  productId: string
+) => {
+  const reviewsRef = doc(db, 'reviews', productId)
+  const reviewsSnapshot = await getDoc(reviewsRef)
+  try {
+    if (reviewsSnapshot.exists()) {
+      // I don't want to allow one user to add more than 1 review for 1 product, therefore
+      // We are checking if review with the same userId already exists
+      const reviewsArray = reviewsSnapshot.data().reviews
+      const existingReviewIndex = reviewsArray.findIndex(
+        (review: IReview) => review.userId === newReview.userId
+      )
+      if (existingReviewIndex !== -1) {
+        reviewsArray[existingReviewIndex] = newReview
+
+        await updateDoc(reviewsRef, {
+          reviews: reviewsArray,
+        })
+      } else {
+        await updateDoc(reviewsRef, {
+          reviews: arrayUnion(newReview),
+        })
+      }
+    } else {
+      await setDoc(reviewsRef, {
+        reviews: [newReview],
+      })
+    }
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
+  }
+}

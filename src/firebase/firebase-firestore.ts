@@ -233,3 +233,14 @@ export const addProductReview = async (
     }
   }
 }
+
+//Get reviews
+export const getProductReviews = async (productId: string) => {
+  const reviewsRef = doc(db, 'reviews', productId)
+  const reviewsSnapshot = await getDoc(reviewsRef)
+  if (reviewsSnapshot.exists()) {
+    return reviewsSnapshot.data().reviews
+  } else {
+    return []
+  }
+}

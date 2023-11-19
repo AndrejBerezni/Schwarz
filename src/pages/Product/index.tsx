@@ -41,7 +41,6 @@ export default function Product() {
               useProductsData={{
                 metadataProp: 'collection',
                 metadataCriteria: product.metadata.collection,
-                applyListFilters: false,
               }}
               title="Related Products"
             />

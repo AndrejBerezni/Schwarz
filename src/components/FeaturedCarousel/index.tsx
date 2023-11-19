@@ -7,7 +7,7 @@ import {
   FeaturedCarouselCommand,
   FeaturedCarouselRight,
 } from './FeaturedCarousel.styles'
-import useProducts from '../../hooks/useProducts'
+import useCarouselProducts from '../../hooks/useCarouselProducts'
 import ProductCard from '../ProductCard'
 import Spinner from '../Spinner'
 
@@ -15,7 +15,6 @@ interface IFeaturedCarouselProps {
   useProductsData: {
     metadataProp: string
     metadataCriteria: string
-    applyListFilters: boolean
   }
   title: string
 }
@@ -29,7 +28,7 @@ export default function FeaturedCarousel({
   // and without that product data I could not fetch related products for carousel.
   // Since I am not able to call hook inside a hook,
   // I moved this to be called in a component that will be rendered only once product from Product page is defined
-  const products = useProducts(useProductsData)
+  const products = useCarouselProducts(useProductsData)
 
   const [firstIndex, setFirstIndex] = useState(0)
 

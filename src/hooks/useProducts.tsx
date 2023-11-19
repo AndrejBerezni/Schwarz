@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { IProduct } from '../compiler/productInterface'
-import { getProducts } from '../firebase/firebase-firestore'
+import { getAllProducts } from '../firebase/firebase-firestore'
 import { IFilterState } from '../store/filter'
 import { getFilters } from '../store/filter/selectors'
 import { filterProducts } from '../utilities/filterProducts'
@@ -22,7 +22,7 @@ export default function useProducts({
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const newProducts = await getProducts(metadataProp, metadataCriteria)
+      const newProducts = await getAllProducts(metadataProp, metadataCriteria)
       if (applyListFilters) {
         const filteredProducts = filterProducts(newProducts, filters)
         setProducts(filteredProducts)

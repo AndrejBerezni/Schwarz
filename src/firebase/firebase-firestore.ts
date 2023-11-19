@@ -21,7 +21,7 @@ import { IPrice, IProduct } from '../compiler/productInterface'
 export const db = getFirestore(app)
 
 // Get products
-export const getProducts = async (
+export const getAllProducts = async (
   metadataProp: string,
   metadataCriteria: string
 ): Promise<IProduct[]> => {

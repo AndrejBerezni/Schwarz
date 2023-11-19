@@ -5,6 +5,7 @@ import { useParams, Navigate } from 'react-router'
 import { IProduct } from '../../compiler/productInterface'
 import FeaturedCarousel from '../../components/FeaturedCarousel'
 import MainProductCard from '../../components/MainProductCard'
+import Reviews from '../../components/Reviews'
 import Spinner from '../../components/Spinner'
 import { getSingleProduct } from '../../firebase/firebase-firestore'
 import { hideSidebars } from '../../store/sidebars'
@@ -37,6 +38,7 @@ export default function Product() {
         product ? (
           <>
             <MainProductCard product={product} />
+            <Reviews product={product} />
             <FeaturedCarousel
               useProductsData={{
                 metadataProp: 'collection',

@@ -9,11 +9,24 @@ export const StyledProductList = styled.div`
 export const ProductsContainer = styled.div`
   width: 100%;
   min-height: 400px;
+  max-height: 700px;
+  overflow: auto;
+  padding: 20px;
   display: flex;
   position: relative;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-around;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: ${(props) => props.theme.primary};
+  }
+  background-color: ${(props) => props.theme.navBgColor};
+  border: 1px solid ${(props) => props.theme.borderColor};
+  border-radius: 10px;
 `
 
 export const ProductsHeader = styled.div`

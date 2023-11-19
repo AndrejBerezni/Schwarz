@@ -32,10 +32,11 @@ export default function ProductList() {
             </ProductsTitle>
             <Filters />
           </ProductsHeader>
-
           <ProductsContainer>
-            {products.length === 0 ? (
+            {products === null ? (
               <Spinner />
+            ) : products.length === 0 ? (
+              <h4>No products to show</h4>
             ) : (
               products.map((item) => (
                 <ProductCard key={`${item.docId}p`} product={item} />

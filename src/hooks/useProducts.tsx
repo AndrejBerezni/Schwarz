@@ -17,7 +17,7 @@ export default function useProducts({
   metadataCriteria,
   applyListFilters,
 }: Readonly<IuseProductsProps>) {
-  const [products, setProducts] = useState<IProduct[]>([])
+  const [products, setProducts] = useState<IProduct[] | null>([])
   const filters: IFilterState = useSelector(getFilters)
 
   useEffect(() => {
@@ -30,11 +30,9 @@ export default function useProducts({
         setProducts(newProducts)
       }
     }
-    setProducts([])
+    setProducts(null) //adding this to start Spinner when filters are changed, while waiting for new results - otherwise screen would display old results until new ones are fetched and user would not know what is going on
     fetchProducts()
   }, [metadataProp, metadataCriteria, filters, applyListFilters])
-  //since this function is used to get data for carousel, carousel will also reload when you are filtering products
-  //check if you can handle it differently, maybe write separate hook for fetching carousel products
 
   return products
 }

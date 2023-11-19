@@ -1,16 +1,16 @@
+import { useState, useEffect } from 'react'
+import { GoStarFill } from 'react-icons/go'
 import { IReviewsProps } from '..'
+import { IReview } from '../../../compiler/reviewInterface'
+import { getProductReviews } from '../../../firebase/firebase-firestore'
+import { calculateAverageRating } from '../../../utilities/calculateAverageRating'
+import Spinner from '../../Spinner'
+import ReviewCard from '../ReviewCard'
 import {
   StyledReviewsList,
   ReviewsTitle,
   ReviewsTitleStar,
 } from '../Reviews.styles'
-import { getProductReviews } from '../../../firebase/firebase-firestore'
-import { IReview } from '../../../compiler/reviewInterface'
-import { useState, useEffect } from 'react'
-import Spinner from '../../Spinner'
-import ReviewCard from '../ReviewCard'
-import { GoStarFill } from 'react-icons/go'
-import { calculateAverageRating } from '../../../utilities/calculateAverageRating'
 
 export default function ReviewsList({ product }: Readonly<IReviewsProps>) {
   const [reviews, setReviews] = useState<IReview[] | null>(null)
@@ -24,7 +24,7 @@ export default function ReviewsList({ product }: Readonly<IReviewsProps>) {
       setReviews(fetchedReviews)
     }
     fetchReviews()
-  }, [])
+  }, [product.docId])
 
   return (
     <StyledReviewsList>

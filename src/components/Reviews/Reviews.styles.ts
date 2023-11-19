@@ -57,7 +57,6 @@ export const StyledReviewsList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 20px;
   padding: 10px;
   background: linear-gradient(to bottom, #222222 0%, #111111 20%, #000000 60%);
   height: 400px;

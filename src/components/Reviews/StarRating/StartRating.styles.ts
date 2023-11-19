@@ -7,6 +7,7 @@ export const StarInputContainer = styled.div`
   width: 100%;
   padding: 0 5px;
   align-items: center;
+  color: ${(props) => props.theme.primary};
 `
 
 export const StarButton = styled.button`

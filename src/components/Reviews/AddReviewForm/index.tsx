@@ -1,6 +1,6 @@
 import { useState, MouseEvent, FormEvent, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { IReviewsProps } from '..'
+import { IProduct } from '../../../compiler/productInterface'
 import { IReview } from '../../../compiler/reviewInterface'
 import { addProductReview } from '../../../firebase/firebase-firestore'
 import { PrimaryButton } from '../../../GlobalStyles'
@@ -14,7 +14,15 @@ import {
 } from '../Reviews.styles'
 import StarRating from '../StarRating'
 
-export default function AddReviews({ product }: Readonly<IReviewsProps>) {
+interface IAddReviewProps {
+  product: IProduct
+  refreshReviews: () => void
+}
+
+export default function AddReviews({
+  product,
+  refreshReviews,
+}: Readonly<IAddReviewProps>) {
   const dispatch = useDispatch()
   const user = useSelector(getUser)
   const isAuth = useSelector(getAuthStatus)
@@ -40,10 +48,12 @@ export default function AddReviews({ product }: Readonly<IReviewsProps>) {
         rating,
         userId: user.uid,
       }
+      console.log(newReview)
       await addProductReview(newReview, product.docId)
       usernameRef.current.value = ''
       reviewTextRef.current.value = ''
       setRating(1)
+      refreshReviews()
     }
   }
 

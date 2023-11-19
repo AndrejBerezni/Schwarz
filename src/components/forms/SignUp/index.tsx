@@ -44,7 +44,7 @@ export default function SignIn() {
       )
       dispatch(
         signIn({
-          user: userId,
+          uid: userId,
           isAdmin: false,
         })
       )

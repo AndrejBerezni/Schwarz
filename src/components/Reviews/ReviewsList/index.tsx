@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { GoStarFill } from 'react-icons/go'
-import { IReviewsProps } from '..'
+import { IProduct } from '../../../compiler/productInterface'
 import { IReview } from '../../../compiler/reviewInterface'
 import { getProductReviews } from '../../../firebase/firebase-firestore'
 import { calculateAverageRating } from '../../../utilities/calculateAverageRating'
@@ -12,7 +12,15 @@ import {
   ReviewsTitleStar,
 } from '../Reviews.styles'
 
-export default function ReviewsList({ product }: Readonly<IReviewsProps>) {
+interface IReviewsListProps {
+  product: IProduct
+  reviewsRefreshed: boolean
+}
+
+export default function ReviewsList({
+  product,
+  reviewsRefreshed,
+}: Readonly<IReviewsListProps>) {
   const [reviews, setReviews] = useState<IReview[] | null>(null)
   const [productRating, setProductRating] = useState<string>('')
 
@@ -24,7 +32,7 @@ export default function ReviewsList({ product }: Readonly<IReviewsProps>) {
       setReviews(fetchedReviews)
     }
     fetchReviews()
-  }, [product.docId])
+  }, [product.docId, reviewsRefreshed])
 
   return (
     <StyledReviewsList>

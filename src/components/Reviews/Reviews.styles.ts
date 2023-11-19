@@ -63,16 +63,36 @@ export const StyledReviewsList = styled.ul`
   height: 400px;
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 10px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: ${(props) => props.theme.primary};
+  }
   @media (max-width: 768px) {
     width: 100%;
   }
 `
 
 export const ReviewsTitle = styled.h3`
+  letter-spacing: 2px;
   align-text: start;
   align-self: start;
+  vertical-align: end;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 18px;
   margin: 0;
+  display: flex;
+  align-items: center;
+`
+
+export const ReviewsTitleStar = styled.div`
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  color: ${(props) => props.theme.primary};
+  margin-left: 5px;
 `

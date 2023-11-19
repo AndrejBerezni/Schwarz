@@ -42,6 +42,7 @@ export const FeaturedCarouselTitle = styled.h3`
   margin: 0;
   text-transform: uppercase;
   font-size: 18px;
+  letter-spacing: 2px;
 `
 
 interface IFeaturedCarouselCommandProps {

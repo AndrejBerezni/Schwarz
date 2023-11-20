@@ -1,6 +1,6 @@
-import AdminNavbar from '../../components/AdminNavbar'
-import { StyledAdminPage, StyledAdminOutlet } from './Admin.styles'
 import { Outlet } from 'react-router'
+import { StyledAdminPage, StyledAdminOutlet } from './Admin.styles'
+import AdminNavbar from '../../components/admin/AdminNavbar'
 
 export default function Admin() {
   return (

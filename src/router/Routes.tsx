@@ -1,5 +1,10 @@
 import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import AddAdmins from '../components/admin/AddAdmins'
+import AdminDashboard from '../components/admin/AdminDashboard'
+import AdminOrders from '../components/admin/AdminOrders'
+import AdminProducts from '../components/admin/AdminProducts'
+import AdminSettings from '../components/admin/AdminSettings'
 import Hero from '../components/Hero'
 import Orders from '../components/Orders'
 import Wishlist from '../components/Wishlist'
@@ -34,7 +39,13 @@ export default function Router() {
         element={
           isAuth && currentUser.isAdmin ? <Admin /> : <Navigate to="/" />
         } // customers can't access admin portal
-      />
+      >
+        <Route index element={<AdminDashboard />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route path="/admin/admins" element={<AddAdmins />} />
+        <Route path="/admin/settings" element={<AdminSettings />} />
+      </Route>
       <Route path="/products/:productId" element={<Product />} />
       <Route path="/404" element={<NotFound />} />
       <Route path="*" element={<NotFound />} />

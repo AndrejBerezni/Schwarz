@@ -86,7 +86,7 @@ export default function AddReviews({
         required
         ref={reviewTextRef}
       />
-      <PrimaryButton type="submit">Submit</PrimaryButton>
+      {!user.isAdmin && <PrimaryButton type="submit">Submit</PrimaryButton>}
       {showAlert && alert.type === 'review' && <AlertMessage />}
     </StyledAddReviewForm>
   )

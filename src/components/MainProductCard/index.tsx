@@ -83,7 +83,7 @@ export default function MainProductCard({
             <MainProductImg src={product.images[0]} />
           </MainProductImgBox>
           <MainProductBox>
-            {isAuth && (
+            {isAuth && !user.isAdmin && (
               <>
                 <MainProductFavBtn>
                   {localWishlist ? (
@@ -117,16 +117,18 @@ export default function MainProductCard({
                   {formatPrice(product.prices[0].unit_amount / 100)}€
                 </MainProductPrice>
               )}
-              <MainProductAddDiv>
-                <Counter
-                  increment={handleIncrement}
-                  decrement={handleDecrement}
-                  amount={amount}
-                />
-                <PrimaryButton onClick={handleAddToCart}>
-                  Add to cart
-                </PrimaryButton>
-              </MainProductAddDiv>
+              {!user.isAdmin && (
+                <MainProductAddDiv>
+                  <Counter
+                    increment={handleIncrement}
+                    decrement={handleDecrement}
+                    amount={amount}
+                  />
+                  <PrimaryButton onClick={handleAddToCart}>
+                    Add to cart
+                  </PrimaryButton>
+                </MainProductAddDiv>
+              )}
             </MainProductAddDiv>
           </MainProductBox>
         </StyledMainProductCard>

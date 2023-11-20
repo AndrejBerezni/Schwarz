@@ -24,8 +24,6 @@ export default function NavbarSearch() {
   const debouncedSearchProducts = debounce(async (searchInput) => {
     const searchResults = await searchProducts(searchInput)
     setResults(searchResults)
-    console.log(results[0].docId)
-    console.log(results)
   }, 1000)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

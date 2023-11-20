@@ -9,12 +9,15 @@ import {
 import { IOrder } from '../../../compiler/orderInterface'
 import { getPaymentDate } from '../../../stripe/paymentDate'
 import { formatPrice } from '../../../utilities/formatPrice'
+import { useDispatch } from 'react-redux'
+import { displayAlert } from '../../../store/alert'
 
 interface IOrderDivProps {
   order: IOrder
 }
 
 export default function OrderDiv({ order }: Readonly<IOrderDivProps>) {
+  const dispatch = useDispatch()
   const [orderDate, setOrderDate] = useState<string>('')
 
   useEffect(() => {
@@ -26,7 +29,12 @@ export default function OrderDiv({ order }: Readonly<IOrderDivProps>) {
         }
       } catch (error) {
         if (error instanceof Error) {
-          console.log(error.message)
+          dispatch(
+            displayAlert({
+              type: 'order',
+              message: error.message,
+            })
+          )
         }
       }
     }

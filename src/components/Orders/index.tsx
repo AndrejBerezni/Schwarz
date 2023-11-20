@@ -7,11 +7,15 @@ import { IOrder } from '../../compiler/orderInterface'
 import { getOrdersForUser } from '../../firebase/firebase-firestore'
 import { getUser } from '../../store/authentication/selectors'
 import Spinner from '../Spinner'
+import AlertMessage from '../AlertMessage'
+import { getShowAlert, getAlert } from '../../store/alert/selectors'
 
 export default function Orders() {
   const user = useSelector(getUser)
   const [orders, setOrders] = useState<IOrder[]>([])
   const [showSpinner, setShowSpinner] = useState<boolean>(false)
+  const showAlert = useSelector(getShowAlert)
+  const alert = useSelector(getAlert)
 
   useEffect(() => {
     setShowSpinner(true)
@@ -26,6 +30,7 @@ export default function Orders() {
 
   return (
     <StyledOrders>
+      {showAlert && alert.type === 'order' && <AlertMessage />}
       {showSpinner ? (
         <OrderDivItem>
           <Spinner />

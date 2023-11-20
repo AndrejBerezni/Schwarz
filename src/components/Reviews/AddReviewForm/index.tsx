@@ -48,7 +48,6 @@ export default function AddReviews({
         rating,
         userId: user.uid,
       }
-      console.log(newReview)
       await addProductReview(newReview, product.docId)
       usernameRef.current.value = ''
       reviewTextRef.current.value = ''

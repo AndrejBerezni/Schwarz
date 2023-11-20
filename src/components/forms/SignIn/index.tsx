@@ -20,6 +20,7 @@ import {
   FormLink,
   CloseForm,
 } from '../forms.styles'
+import AlertMessage from '../../AlertMessage'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -118,6 +119,11 @@ export default function SignIn() {
           Sign In with Google
         </PrimaryButton>
         <CloseForm onClick={handleClose}>X</CloseForm>
+        <AlertMessage
+          message={
+            'this is test message, something failed, probably.this is test message, something failed, probably'
+          }
+        />
       </ModalContent>
     </Modal>
   )

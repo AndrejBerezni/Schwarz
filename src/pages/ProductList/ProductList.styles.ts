@@ -40,4 +40,5 @@ export const ProductsTitle = styled.h2`
   text-transform: capitalize;
   font-family: ${(props) => props.theme.headFont};
   font-size: 28px;
+  margin: 0px;
 `

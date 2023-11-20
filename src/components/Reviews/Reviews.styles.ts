@@ -50,6 +50,7 @@ export const ReviewInput = styled.input`
 `
 
 export const StyledReviewsList = styled.ul`
+  position: relative;
   width: 55%;
   height: 400px;
   list-style: none;

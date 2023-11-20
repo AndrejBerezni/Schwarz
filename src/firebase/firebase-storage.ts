@@ -1,5 +1,4 @@
 import { FirebaseError } from 'firebase/app'
-import { app } from './firebase-config'
 import {
   getStorage,
   ref,
@@ -7,6 +6,7 @@ import {
   listAll,
   getDownloadURL,
 } from 'firebase/storage'
+import { app } from './firebase-config'
 
 const storage = getStorage(app)
 
@@ -37,8 +37,6 @@ export const retrieveImageFromFirebase = async (path: string) => {
     )
     const image = sortedImages[0]
     const imageUrl = await getDownloadURL(image)
-    console.log(image)
-    console.log(imageUrl)
     return imageUrl
   } catch (error) {
     if (error instanceof FirebaseError) {

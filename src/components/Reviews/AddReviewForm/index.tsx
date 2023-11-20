@@ -13,6 +13,9 @@ import {
   ReviewInput,
 } from '../Reviews.styles'
 import StarRating from '../StarRating'
+import { getShowAlert, getAlert } from '../../../store/alert/selectors'
+import { displayAlert } from '../../../store/alert'
+import AlertMessage from '../../AlertMessage'
 
 interface IAddReviewProps {
   product: IProduct
@@ -26,9 +29,13 @@ export default function AddReviews({
   const dispatch = useDispatch()
   const user = useSelector(getUser)
   const isAuth = useSelector(getAuthStatus)
+
   const [rating, setRating] = useState<number>(1)
   const reviewTextRef = useRef<HTMLTextAreaElement>(null)
   const usernameRef = useRef<HTMLInputElement>(null)
+
+  const showAlert = useSelector(getShowAlert)
+  const alert = useSelector(getAlert)
 
   const handleRatingClick = (event: MouseEvent, ratingValue: number) => {
     event.preventDefault()
@@ -53,6 +60,12 @@ export default function AddReviews({
       reviewTextRef.current.value = ''
       setRating(1)
       refreshReviews()
+      dispatch(
+        displayAlert({
+          type: 'review',
+          message: 'Review submitted!',
+        })
+      )
     }
   }
 
@@ -74,6 +87,7 @@ export default function AddReviews({
         ref={reviewTextRef}
       />
       <PrimaryButton type="submit">Submit</PrimaryButton>
+      {showAlert && alert.type === 'review' && <AlertMessage />}
     </StyledAddReviewForm>
   )
 }

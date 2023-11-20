@@ -5,12 +5,12 @@ import {
   HeroCarouselIndicatorItem,
 } from './HeroCarousel.styles'
 import HeroCarouselPage from './HeroCarouselPage/HeroCarouselPage'
-import { ICarouselItem } from '../../../compiler/carouselItemInterface'
-import { setupCarousel } from '../../../firebase/admin/firebase-admincontent'
+import { IHeroItem } from '../../../compiler/heroItemInterface'
+import { setupPageItems } from '../../../firebase/admin/firebase-admincontent'
 
 export default function HeroCarousel() {
   const [currentPage, setCurrentPage] = useState<number>(0)
-  const [carouselData, setCarouselData] = useState<ICarouselItem[]>([])
+  const [carouselData, setCarouselData] = useState<IHeroItem[]>([])
 
   const handlePageChange = (pageIndex: number) => {
     setCurrentPage(pageIndex)
@@ -18,7 +18,11 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     const fetchCarouselData = async () => {
-      const fetchedData = await setupCarousel()
+      const fetchedData = await setupPageItems([
+        'carousel1',
+        'carousel2',
+        'carousel3',
+      ])
       if (fetchedData) {
         setCarouselData(fetchedData)
       }

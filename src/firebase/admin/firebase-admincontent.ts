@@ -1,14 +1,13 @@
 import { FirebaseError } from 'firebase/app'
 import { doc, getDoc } from 'firebase/firestore'
-import { ICarouselItem } from '../../compiler/carouselItemInterface'
+import { IHeroItem } from '../../compiler/heroItemInterface'
 import { db } from '../firebase-firestore'
 import { retrieveImageFromFirebase } from '../firebase-storage'
 
-//Setup carousel - get data from firestore and storage and merge it into array of single items
-export const setupCarousel = async () => {
+//Setup page item - get data from firestore and storage and merge it into array of single items
+export const setupPageItems = async (docIds: string[]) => {
   try {
-    const result: ICarouselItem[] = []
-    const docIds = ['carousel1', 'carousel2', 'carousel3']
+    const result: IHeroItem[] = []
 
     for (const id of docIds) {
       const docRef = doc(db, 'content', id)

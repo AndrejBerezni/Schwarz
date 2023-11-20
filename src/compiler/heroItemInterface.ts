@@ -1,4 +1,4 @@
-export interface ICarouselItem {
+export interface IHeroItem {
   title: string
   subtitle: string
   buttonText: string

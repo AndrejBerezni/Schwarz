@@ -1,11 +1,11 @@
 import { useRef, FormEvent } from 'react'
-import { FirebaseError } from 'firebase/app'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { emailSignUp } from '../../../firebase/firebase-authentication'
 import { PrimaryButton } from '../../../GlobalStyles'
 import { hideForm, signIn } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
+import { getShowAlert, getAlert } from '../../../store/alert/selectors'
 import {
   Modal,
   ModalOuter,
@@ -16,12 +16,17 @@ import {
   FormInput,
   CloseForm,
 } from '../forms.styles'
+import AlertMessage from '../../AlertMessage'
+import { displayAlert } from '../../../store/alert'
+import { formatFirebaseError } from '../../../firebase/formatFirebaseError'
 
 export default function SignIn() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const authForm = useSelector(getAuthForm)
   const show = authForm.type === 'signUp' && authForm.show
+  const showAlert = useSelector(getShowAlert)
+  const alert = useSelector(getAlert)
 
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -34,7 +39,12 @@ export default function SignIn() {
   const handleEmailSignUp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (passwordRef.current!.value !== confirmPasswordRef.current!.value) {
-      console.log('Passwords do not match!')
+      dispatch(
+        displayAlert({
+          type: 'signUp',
+          message: 'Passwords do not match!',
+        })
+      )
       return
     }
     try {
@@ -51,8 +61,13 @@ export default function SignIn() {
       dispatch(hideForm())
       navigate('/account')
     } catch (error) {
-      if (error instanceof FirebaseError) {
-        console.log(error.message)
+      if (error instanceof Error) {
+        dispatch(
+          displayAlert({
+            type: 'signUp',
+            message: formatFirebaseError(error.message),
+          })
+        )
       }
     }
   }
@@ -96,6 +111,7 @@ export default function SignIn() {
           <PrimaryButton type="submit">Sign Up</PrimaryButton>
         </StyledForm>
         <CloseForm onClick={handleClose}>X</CloseForm>
+        {showAlert && alert.type === 'signUp' && <AlertMessage />}
       </ModalContent>
     </Modal>
   )

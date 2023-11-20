@@ -1,5 +1,4 @@
 import { useRef, FormEvent } from 'react'
-import { FirebaseError } from 'firebase/app'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import {
@@ -21,12 +20,17 @@ import {
   CloseForm,
 } from '../forms.styles'
 import AlertMessage from '../../AlertMessage'
+import { getShowAlert, getAlert } from '../../../store/alert/selectors'
+import { displayAlert } from '../../../store/alert'
+import { formatFirebaseError } from '../../../firebase/formatFirebaseError'
 
 export default function SignIn() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const authForm = useSelector(getAuthForm)
   const show = authForm.type === 'signIn' && authForm.show
+  const showAlert = useSelector(getShowAlert)
+  const alert = useSelector(getAlert)
 
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -57,8 +61,13 @@ export default function SignIn() {
       navigate('/account')
     } catch (error) {
       // TS was throwing error if I left any, unknown or nothing to define error type
-      if (error instanceof FirebaseError) {
-        console.log(error.message)
+      if (error instanceof Error) {
+        dispatch(
+          displayAlert({
+            type: 'signIn',
+            message: formatFirebaseError(error.message),
+          })
+        )
       }
     }
   }
@@ -74,9 +83,14 @@ export default function SignIn() {
       )
       dispatch(hideForm())
       navigate('/account')
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        console.log(error.message)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        dispatch(
+          displayAlert({
+            type: 'signIn',
+            message: formatFirebaseError(error.message),
+          })
+        )
       }
     }
   }
@@ -119,11 +133,7 @@ export default function SignIn() {
           Sign In with Google
         </PrimaryButton>
         <CloseForm onClick={handleClose}>X</CloseForm>
-        <AlertMessage
-          message={
-            'this is test message, something failed, probably.this is test message, something failed, probably'
-          }
-        />
+        {showAlert && alert.type === 'signIn' && <AlertMessage />}
       </ModalContent>
     </Modal>
   )

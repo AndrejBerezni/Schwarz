@@ -8,8 +8,16 @@ import NewsletterSection from './components/NewsletterSection'
 import TopNavbar from './components/TopNavbar'
 import { theme, GlobalStyle, MainContent } from './GlobalStyles'
 import Router from './router/Routes'
+import { retrieveImageFromFirebase } from './firebase/firebase-storage'
+import { useEffect } from 'react'
 
 function App() {
+  useEffect(() => {
+    const getThem = async () => {
+      retrieveImageFromFirebase('hero2')
+    }
+    getThem()
+  }, [])
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

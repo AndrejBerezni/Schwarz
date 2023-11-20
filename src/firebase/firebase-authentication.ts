@@ -12,7 +12,7 @@ import { app } from './firebase-config'
 import { db } from './firebase-firestore'
 
 //Initialize authentication
-const auth = getAuth(app)
+export const auth = getAuth(app)
 
 //Google sign in
 const provider = new GoogleAuthProvider()

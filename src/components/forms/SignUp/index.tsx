@@ -1,7 +1,10 @@
 import { useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { emailSignUp } from '../../../firebase/firebase-authentication'
+import {
+  emailSignUp,
+  checkIsAdmin,
+} from '../../../firebase/firebase-authentication'
 import { formatFirebaseError } from '../../../firebase/formatFirebaseError'
 import { PrimaryButton } from '../../../GlobalStyles'
 import { displayAlert } from '../../../store/alert'
@@ -52,14 +55,15 @@ export default function SignIn() {
         emailRef.current!.value.trim().toLowerCase(),
         passwordRef.current!.value
       )
+      const isAdmin = await checkIsAdmin()
       dispatch(
         signIn({
           uid: userId,
-          isAdmin: false,
+          isAdmin,
         })
       )
       dispatch(hideForm())
-      navigate('/account')
+      isAdmin ? navigate('/admin') : navigate('/account')
     } catch (error) {
       if (error instanceof Error) {
         dispatch(

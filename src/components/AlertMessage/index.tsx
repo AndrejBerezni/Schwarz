@@ -1,6 +1,6 @@
-import { StyledAlertMessage, AlertCloseBtn } from './AlertMessage.styles'
 import { IoMdCloseCircle } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
+import { StyledAlertMessage, AlertCloseBtn } from './AlertMessage.styles'
 import { hideAlert } from '../../store/alert'
 import { getAlert } from '../../store/alert/selectors'
 

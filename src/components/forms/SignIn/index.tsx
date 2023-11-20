@@ -2,12 +2,17 @@ import { useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import {
+  checkIsAdmin,
   emailSignIn,
   googleSignIn,
 } from '../../../firebase/firebase-authentication'
+import { formatFirebaseError } from '../../../firebase/formatFirebaseError'
 import { PrimaryButton } from '../../../GlobalStyles'
+import { displayAlert } from '../../../store/alert'
+import { getShowAlert, getAlert } from '../../../store/alert/selectors'
 import { showForm, hideForm, signIn } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
+import AlertMessage from '../../AlertMessage'
 import {
   Modal,
   ModalOuter,
@@ -19,10 +24,6 @@ import {
   FormLink,
   CloseForm,
 } from '../forms.styles'
-import AlertMessage from '../../AlertMessage'
-import { getShowAlert, getAlert } from '../../../store/alert/selectors'
-import { displayAlert } from '../../../store/alert'
-import { formatFirebaseError } from '../../../firebase/formatFirebaseError'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -51,14 +52,15 @@ export default function SignIn() {
         emailRef.current!.value.trim().toLowerCase(),
         passwordRef.current!.value
       )
+      const isAdmin = await checkIsAdmin()
       dispatch(
         signIn({
           uid: userId,
-          isAdmin: false,
+          isAdmin,
         })
       )
       dispatch(hideForm())
-      navigate('/account')
+      isAdmin ? navigate('/admin') : navigate('/account')
     } catch (error) {
       // TS was throwing error if I left any, unknown or nothing to define error type
       if (error instanceof Error) {
@@ -75,14 +77,15 @@ export default function SignIn() {
   const handleGoogleSignIn = async () => {
     try {
       const userId = await googleSignIn()
+      const isAdmin = await checkIsAdmin()
       dispatch(
         signIn({
           uid: userId,
-          isAdmin: false,
+          isAdmin,
         })
       )
       dispatch(hideForm())
-      navigate('/account')
+      isAdmin ? navigate('/admin') : navigate('/account')
     } catch (error: unknown) {
       if (error instanceof Error) {
         dispatch(

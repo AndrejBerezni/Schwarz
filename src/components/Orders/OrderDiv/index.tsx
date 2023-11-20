@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   StyledOrderDiv,
   OrderDivProp,
@@ -7,10 +8,9 @@ import {
   OrderTitle,
 } from './OrderDiv.styles'
 import { IOrder } from '../../../compiler/orderInterface'
+import { displayAlert } from '../../../store/alert'
 import { getPaymentDate } from '../../../stripe/paymentDate'
 import { formatPrice } from '../../../utilities/formatPrice'
-import { useDispatch } from 'react-redux'
-import { displayAlert } from '../../../store/alert'
 
 interface IOrderDivProps {
   order: IOrder
@@ -39,7 +39,7 @@ export default function OrderDiv({ order }: Readonly<IOrderDivProps>) {
       }
     }
     fetchDate()
-  }, [order.id])
+  }, [order.id, dispatch])
 
   return (
     <StyledOrderDiv>

@@ -2,10 +2,13 @@ import { useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { emailSignUp } from '../../../firebase/firebase-authentication'
+import { formatFirebaseError } from '../../../firebase/formatFirebaseError'
 import { PrimaryButton } from '../../../GlobalStyles'
+import { displayAlert } from '../../../store/alert'
+import { getShowAlert, getAlert } from '../../../store/alert/selectors'
 import { hideForm, signIn } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
-import { getShowAlert, getAlert } from '../../../store/alert/selectors'
+import AlertMessage from '../../AlertMessage'
 import {
   Modal,
   ModalOuter,
@@ -16,9 +19,6 @@ import {
   FormInput,
   CloseForm,
 } from '../forms.styles'
-import AlertMessage from '../../AlertMessage'
-import { displayAlert } from '../../../store/alert'
-import { formatFirebaseError } from '../../../firebase/formatFirebaseError'
 
 export default function SignIn() {
   const navigate = useNavigate()

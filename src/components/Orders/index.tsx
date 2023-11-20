@@ -5,10 +5,10 @@ import { OrderDivItem, OrderDivProp } from './OrderDiv/OrderDiv.styles'
 import { StyledOrders } from './Orders.styled'
 import { IOrder } from '../../compiler/orderInterface'
 import { getOrdersForUser } from '../../firebase/firebase-firestore'
-import { getUser } from '../../store/authentication/selectors'
-import Spinner from '../Spinner'
-import AlertMessage from '../AlertMessage'
 import { getShowAlert, getAlert } from '../../store/alert/selectors'
+import { getUser } from '../../store/authentication/selectors'
+import AlertMessage from '../AlertMessage'
+import Spinner from '../Spinner'
 
 export default function Orders() {
   const user = useSelector(getUser)

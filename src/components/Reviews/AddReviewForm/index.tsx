@@ -4,8 +4,11 @@ import { IProduct } from '../../../compiler/productInterface'
 import { IReview } from '../../../compiler/reviewInterface'
 import { addProductReview } from '../../../firebase/firebase-firestore'
 import { PrimaryButton } from '../../../GlobalStyles'
+import { displayAlert } from '../../../store/alert'
+import { getShowAlert, getAlert } from '../../../store/alert/selectors'
 import { showForm } from '../../../store/authentication'
 import { getUser, getAuthStatus } from '../../../store/authentication/selectors'
+import AlertMessage from '../../AlertMessage'
 import {
   StyledAddReviewForm,
   ReviewsTitle,
@@ -13,9 +16,6 @@ import {
   ReviewInput,
 } from '../Reviews.styles'
 import StarRating from '../StarRating'
-import { getShowAlert, getAlert } from '../../../store/alert/selectors'
-import { displayAlert } from '../../../store/alert'
-import AlertMessage from '../../AlertMessage'
 
 interface IAddReviewProps {
   product: IProduct

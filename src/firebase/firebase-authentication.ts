@@ -7,7 +7,9 @@ import {
   signInWithPopup,
   signOut,
 } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
 import { app } from './firebase-config'
+import { db } from './firebase-firestore'
 
 //Initialize authentication
 const auth = getAuth(app)
@@ -53,4 +55,15 @@ export const emailSignUp = async (email: string, password: string) => {
 //Sign out
 export const signOutUser = () => {
   signOut(getAuth())
+}
+
+//Check if user is admin
+export const checkIsAdmin = async () => {
+  const email = auth.currentUser?.email
+  if (email) {
+    const docRef = doc(db, 'administrators', email)
+    const docSnapshot = await getDoc(docRef)
+    return docSnapshot.exists()
+  }
+  return false
 }

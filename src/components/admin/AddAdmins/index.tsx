@@ -4,6 +4,19 @@ import {
   getAdmins,
 } from '../../../firebase/admin/firebase-adminsetup'
 import { useEffect, useState } from 'react'
+import AdminCard from './AdminCard'
+import {
+  AdminList,
+  AdminCardButton,
+  AddNewAdmin,
+  AddNewAdminInput,
+} from './AddAdmins.styles'
+import {
+  AdminTitle,
+  AdminSubitle,
+  AdminSpan,
+} from '../../../pages/Admin/Admin.styles'
+import { LiaUserCheckSolid } from 'react-icons/lia'
 
 export default function AddAdmins() {
   const [currentAdmin, setCurrentAdmin] = useState<string>('')
@@ -23,9 +36,26 @@ export default function AddAdmins() {
 
   return (
     <>
-      <h1>Add Admins</h1>
-      <p>Your account: {currentAdmin}</p>
-      <p>Other admins: {otherAdmins}</p>
+      <AdminTitle>Administrators</AdminTitle>
+      <AdminSubitle>
+        Your account: <AdminSpan>{currentAdmin}</AdminSpan>
+      </AdminSubitle>
+      <AdminList>
+        <AdminSubitle>Other admins:</AdminSubitle>
+        {otherAdmins.map((admin) => (
+          <AdminCard key={`${admin}-ac`} email={admin} />
+        ))}
+      </AdminList>
+      <AdminSubitle>Add new admin:</AdminSubitle>
+      <AddNewAdmin>
+        <AddNewAdminInput
+          type="email"
+          placeholder="Enter admin email address"
+        />
+        <AdminCardButton>
+          <LiaUserCheckSolid />
+        </AdminCardButton>
+      </AddNewAdmin>
     </>
   )
 }

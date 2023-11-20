@@ -11,6 +11,9 @@ export const StyledAdminNavbar = styled.ul`
   border-radius: 10px;
   padding: 20px;
   background-color: ${(props) => props.theme.navBgColor};
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 export const AdminNavLinkText = styled.p`

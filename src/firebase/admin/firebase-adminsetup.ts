@@ -1,6 +1,4 @@
 import { FirebaseError } from 'firebase/app'
-import { db } from '../firebase-firestore'
-import { auth } from '../firebase-authentication'
 import {
   collection,
   query,
@@ -9,6 +7,8 @@ import {
   deleteDoc,
   getDocs,
 } from 'firebase/firestore'
+import { auth } from '../firebase-authentication'
+import { db } from '../firebase-firestore'
 
 //Add admin
 export const addStoreAdmin = async (email: string) => {

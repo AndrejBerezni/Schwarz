@@ -1,27 +1,28 @@
-import {
-  addStoreAdmin,
-  removeStoreAdmin,
-  getAdmins,
-} from '../../../firebase/admin/firebase-adminsetup'
-import { useEffect, useState } from 'react'
-import AdminCard from './AdminCard'
+import { useEffect, useState, useRef } from 'react'
+import { LiaUserCheckSolid } from 'react-icons/lia'
 import {
   AdminList,
   AdminCardButton,
   AddNewAdmin,
   AddNewAdminInput,
 } from './AddAdmins.styles'
+import AdminCard from './AdminCard'
+import {
+  addStoreAdmin,
+  removeStoreAdmin,
+  getAdmins,
+} from '../../../firebase/admin/firebase-adminsetup'
 import {
   AdminTitle,
   AdminSubitle,
   AdminSpan,
 } from '../../../pages/Admin/Admin.styles'
-import { LiaUserCheckSolid } from 'react-icons/lia'
 
 export default function AddAdmins() {
   const [currentAdmin, setCurrentAdmin] = useState<string>('')
   const [otherAdmins, setOtherAdmins] = useState<string[]>([])
   const [refreshList, setRefreshList] = useState<boolean>(false)
+  const emailRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     const fetchAdmins = async () => {
@@ -32,7 +33,19 @@ export default function AddAdmins() {
       }
     }
     fetchAdmins()
-  }, [])
+  }, [refreshList])
+
+  const handleRemoveAdmin = async (email: string) => {
+    await removeStoreAdmin(email)
+    setRefreshList((prev) => !prev)
+  }
+  const handleAddAdmin = async () => {
+    if (emailRef.current) {
+      await addStoreAdmin(emailRef.current.value)
+      emailRef.current.value = ''
+      setRefreshList((prev) => !prev)
+    }
+  }
 
   return (
     <>
@@ -40,10 +53,14 @@ export default function AddAdmins() {
       <AdminSubitle>
         Your account: <AdminSpan>{currentAdmin}</AdminSpan>
       </AdminSubitle>
+      <AdminSubitle>Other admins:</AdminSubitle>
       <AdminList>
-        <AdminSubitle>Other admins:</AdminSubitle>
         {otherAdmins.map((admin) => (
-          <AdminCard key={`${admin}-ac`} email={admin} />
+          <AdminCard
+            key={`${admin}-ac`}
+            email={admin}
+            handleClick={handleRemoveAdmin}
+          />
         ))}
       </AdminList>
       <AdminSubitle>Add new admin:</AdminSubitle>
@@ -51,8 +68,9 @@ export default function AddAdmins() {
         <AddNewAdminInput
           type="email"
           placeholder="Enter admin email address"
+          ref={emailRef}
         />
-        <AdminCardButton>
+        <AdminCardButton onClick={handleAddAdmin}>
           <LiaUserCheckSolid />
         </AdminCardButton>
       </AddNewAdmin>

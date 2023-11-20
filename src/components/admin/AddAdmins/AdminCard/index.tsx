@@ -1,19 +1,23 @@
+import { LiaUserTimesSolid } from 'react-icons/lia'
 import {
   StyledAdminCard,
   AdminCardText,
   AdminCardButton,
 } from '../AddAdmins.styles'
-import { LiaUserTimesSolid } from 'react-icons/lia'
 
 interface IAdminCardProps {
   email: string
+  handleClick: (email: string) => void
 }
 
-export default function AdminCard({ email }: Readonly<IAdminCardProps>) {
+export default function AdminCard({
+  email,
+  handleClick,
+}: Readonly<IAdminCardProps>) {
   return (
     <StyledAdminCard>
       <AdminCardText>{email}</AdminCardText>
-      <AdminCardButton variant="danger">
+      <AdminCardButton variant="danger" onClick={() => handleClick(email)}>
         <LiaUserTimesSolid />
       </AdminCardButton>
     </StyledAdminCard>

@@ -23,6 +23,11 @@ export const StyledAdminOutlet = styled.div`
   flex-direction: column;
   align-items: start;
   padding: 20px;
+  @media (max-width: 768px) {
+    width: 100%;
+    align-items: center;
+    padding: 2px;
+  }
 `
 
 export const AdminTitle = styled.h1`

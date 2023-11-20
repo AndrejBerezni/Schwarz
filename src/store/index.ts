@@ -5,6 +5,7 @@ import { authSlice } from './authentication/index'
 import cartReducer from './cart/index'
 import filterReducer from './filter/index'
 import sidebarsReducer from './sidebars/index'
+import alertReducer from './alert/index'
 
 const authPersistConfig = {
   key: 'authentication',
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   sidebars: sidebarsReducer,
   cart: cartReducer,
   filter: filterReducer,
+  alert: alertReducer,
 })
 
 export const store = configureStore({

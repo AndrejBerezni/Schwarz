@@ -31,7 +31,7 @@ export const getPaymentDate = async (
 
 // Get payments for Admin page
 export const getPayments = async () => {
-  const payments = await stripeClient.paymentIntents.list()
+  const payments = await stripeClient.paymentIntents.list({ limit: 20 })
 
   const paymentDetails = await Promise.all(
     payments.data.map(async (item) => {
@@ -48,7 +48,7 @@ export const getPayments = async () => {
           currency: item.currency,
           status: item.status,
           customer: customer.email,
-          date: paymentDate.toLocaleString('en-US', options),
+          date: paymentDate.toLocaleString('en-US'),
         }
       } else {
         return {
@@ -57,11 +57,10 @@ export const getPayments = async () => {
           currency: item.currency,
           status: item.status,
           customer: 'Unknown',
-          date: paymentDate.toLocaleString('en-US', options),
+          date: paymentDate.toLocaleString('en-US'),
         }
       }
     })
   )
-  console.log(paymentDetails)
   return paymentDetails
 }

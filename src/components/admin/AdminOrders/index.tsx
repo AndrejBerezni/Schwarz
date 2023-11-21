@@ -1,7 +1,14 @@
-import { AdminTitle } from '../../../pages/Admin/Admin.styles'
 import { useEffect, useState } from 'react'
+import {
+  StyledTable,
+  StyledTableHeadRow,
+  StyledTableHeadCell,
+} from './AdminOrders.styles'
+import OrdersTableRow from './OrdersTableRow'
 import { IAdminViewOrder } from '../../../compiler/orderInterface'
+import { AdminTitle } from '../../../pages/Admin/Admin.styles'
 import { getPayments } from '../../../stripe/payments'
+import Spinner from '../../Spinner'
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState<IAdminViewOrder[]>([])
@@ -24,17 +31,21 @@ export default function AdminOrders() {
   return (
     <>
       <AdminTitle>Orders</AdminTitle>
-      <table>
-        <tr>
-          <th>Order ID</th>
-          <th>Amount</th>
-          <th>Currency</th>
-          <th>Status</th>
-          <th>Customer</th>
-          <th>Date</th>
-        </tr>
-        {/* {orders.length > 0 && orders.map(item =>)} */}
-      </table>
+      <StyledTable>
+        <StyledTableHeadRow>
+          <StyledTableHeadCell>Order ID</StyledTableHeadCell>
+          <StyledTableHeadCell>Amount</StyledTableHeadCell>
+          <StyledTableHeadCell>Currency</StyledTableHeadCell>
+          <StyledTableHeadCell>Status</StyledTableHeadCell>
+          <StyledTableHeadCell>Customer</StyledTableHeadCell>
+          <StyledTableHeadCell>Date</StyledTableHeadCell>
+        </StyledTableHeadRow>
+        {orders.length > 0 ? (
+          orders.map((item) => <OrdersTableRow order={item} />)
+        ) : (
+          <Spinner />
+        )}
+      </StyledTable>
     </>
   )
 }

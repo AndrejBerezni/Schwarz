@@ -32,9 +32,7 @@ export default function Orders() {
     <StyledOrders>
       {showAlert && alert.type === 'order' && <AlertMessage />}
       {showSpinner ? (
-        <OrderDivItem>
-          <Spinner />
-        </OrderDivItem>
+        <Spinner />
       ) : orders.length > 0 ? (
         orders.map((order) => <OrderDiv order={order} key={order.id} />)
       ) : (

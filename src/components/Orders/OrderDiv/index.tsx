@@ -9,7 +9,7 @@ import {
 } from './OrderDiv.styles'
 import { IOrder } from '../../../compiler/orderInterface'
 import { displayAlert } from '../../../store/alert'
-import { getPaymentDate } from '../../../stripe/paymentDate'
+import { getPaymentDate } from '../../../stripe/payments'
 import { formatPrice } from '../../../utilities/formatPrice'
 
 interface IOrderDivProps {

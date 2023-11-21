@@ -226,3 +226,12 @@ export interface IOrder {
   payment_method: string
   amount_received: number
 }
+
+export interface IAdminViewOrder {
+  orderId: string
+  amount: number
+  currency: string
+  status: string
+  customer: string | null
+  date: string
+}

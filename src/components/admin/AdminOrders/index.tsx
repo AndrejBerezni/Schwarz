@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
+import { IoReloadOutline } from 'react-icons/io5'
 import {
   StyledTable,
   StyledTableHeadRow,
   StyledTableHeadCell,
+  AdminLoadButton,
 } from './AdminOrders.styles'
 import OrdersTableRow from './OrdersTableRow'
 import { IAdminViewOrder } from '../../../compiler/orderInterface'
@@ -12,6 +14,8 @@ import Spinner from '../../Spinner'
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState<IAdminViewOrder[]>([])
+  const [allOrdersShown, setAllOrdersShown] = useState<boolean>(false)
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -27,6 +31,15 @@ export default function AdminOrders() {
     }
     fetchOrders()
   }, [])
+
+  const loadMoreOrders = async () => {
+    const lastOrder: string = orders[orders.length - 1].orderId
+    const newOrders: IAdminViewOrder[] = await getPayments(lastOrder)
+    if (newOrders.length < 10) {
+      setAllOrdersShown(true)
+    }
+    setOrders((prev) => [...prev, ...newOrders])
+  }
 
   return (
     <>
@@ -46,6 +59,12 @@ export default function AdminOrders() {
           <Spinner />
         )}
       </StyledTable>
+      {!allOrdersShown && (
+        <AdminLoadButton onClick={loadMoreOrders}>
+          Load more
+          <IoReloadOutline />
+        </AdminLoadButton>
+      )}
     </>
   )
 }

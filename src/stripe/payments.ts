@@ -30,8 +30,11 @@ export const getPaymentDate = async (
 }
 
 // Get payments for Admin page
-export const getPayments = async () => {
-  const payments = await stripeClient.paymentIntents.list({ limit: 20 })
+export const getPayments = async (startAfter?: string) => {
+  const payments = await stripeClient.paymentIntents.list({
+    limit: 10,
+    starting_after: startAfter,
+  })
 
   const paymentDetails = await Promise.all(
     payments.data.map(async (item) => {

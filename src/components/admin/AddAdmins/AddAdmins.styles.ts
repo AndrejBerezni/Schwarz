@@ -12,7 +12,6 @@ export const StyledAdminCard = styled.li`
   color: ${(props) => props.theme.primary};
   max-width: 100%;
   background-color: ${(props) => props.theme.bgColor};
-  @media;
 `
 
 export const AdminCardText = styled.p`
@@ -53,13 +52,4 @@ export const AddNewAdmin = styled.div`
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
-`
-
-export const AddNewAdminInput = styled.input`
-  font-size: 18px;
-  border: 1px solid ${(props) => props.theme.borderColor};
-  color: ${(props) => props.theme.textColor};
-  background-color: ${(props) => props.theme.bgColor};
-  padding: 10px 5px;
-  border-radius: 5px;
 `

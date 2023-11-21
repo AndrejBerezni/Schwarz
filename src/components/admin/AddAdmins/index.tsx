@@ -1,11 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { LiaUserCheckSolid } from 'react-icons/lia'
-import {
-  AdminList,
-  AdminCardButton,
-  AddNewAdmin,
-  AddNewAdminInput,
-} from './AddAdmins.styles'
+import { AdminList, AdminCardButton, AddNewAdmin } from './AddAdmins.styles'
 import AdminCard from './AdminCard'
 import {
   addStoreAdmin,
@@ -14,8 +9,9 @@ import {
 } from '../../../firebase/admin/firebase-adminsetup'
 import {
   AdminTitle,
-  AdminSubitle,
+  AdminSubtitle,
   AdminSpan,
+  AdminInput,
 } from '../../../pages/Admin/Admin.styles'
 
 export default function AddAdmins() {
@@ -50,10 +46,10 @@ export default function AddAdmins() {
   return (
     <>
       <AdminTitle>Administrators</AdminTitle>
-      <AdminSubitle>
+      <AdminSubtitle>
         Your account: <AdminSpan>{currentAdmin}</AdminSpan>
-      </AdminSubitle>
-      <AdminSubitle>Other admins:</AdminSubitle>
+      </AdminSubtitle>
+      <AdminSubtitle>Other admins:</AdminSubtitle>
       <AdminList>
         {otherAdmins.map((admin) => (
           <AdminCard
@@ -63,9 +59,9 @@ export default function AddAdmins() {
           />
         ))}
       </AdminList>
-      <AdminSubitle>Add new admin:</AdminSubitle>
+      <AdminSubtitle>Add new admin:</AdminSubtitle>
       <AddNewAdmin>
-        <AddNewAdminInput
+        <AdminInput
           type="email"
           placeholder="Enter admin email address"
           ref={emailRef}

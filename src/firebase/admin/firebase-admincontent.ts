@@ -1,5 +1,5 @@
 import { FirebaseError } from 'firebase/app'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, collection, getDoc, getDocs } from 'firebase/firestore'
 import { IHeroItem } from '../../compiler/heroItemInterface'
 import { db } from '../firebase-firestore'
 import { retrieveImageFromFirebase } from '../firebase-storage'
@@ -28,6 +28,22 @@ export const setupPageItems = async (docIds: string[]) => {
     }
 
     return result
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
+  }
+}
+
+//Get all docs from content collection (used to list what can be edited)
+export const getUIElements = async () => {
+  try {
+    const elementsArr: string[] = []
+    const contentRef = collection(db, 'content')
+    const contentSnap = await getDocs(contentRef)
+    contentSnap.forEach((doc) => elementsArr.push(doc.id))
+
+    return elementsArr
   } catch (error) {
     if (error instanceof FirebaseError) {
       throw new Error(error.message)

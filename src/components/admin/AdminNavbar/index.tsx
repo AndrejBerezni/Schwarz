@@ -1,7 +1,8 @@
 import { BsWatch } from 'react-icons/bs'
 import { FaReceipt } from 'react-icons/fa6'
-import { MdOutlineAdminPanelSettings, MdOutlineSettings } from 'react-icons/md'
+import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { PiChartLineUpLight } from 'react-icons/pi'
+import { RiPagesLine } from 'react-icons/ri'
 import { useNavigate } from 'react-router'
 import {
   StyledAdminNavbar,
@@ -40,9 +41,9 @@ export default function AdminNavbar() {
         </AdminNavLinkIcon>
       </AdminNavLink>
       <AdminNavLink onClick={() => navigate('/admin/settings')}>
-        <AdminNavLinkText>Settings</AdminNavLinkText>
+        <AdminNavLinkText>Page Settings</AdminNavLinkText>
         <AdminNavLinkIcon>
-          <MdOutlineSettings />
+          <RiPagesLine />
         </AdminNavLinkIcon>
       </AdminNavLink>
     </StyledAdminNavbar>

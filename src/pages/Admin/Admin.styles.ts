@@ -34,11 +34,21 @@ export const AdminTitle = styled.h1`
   font-family: ${(props) => props.theme.headFont};
 `
 
-export const AdminSubitle = styled.h2`
+export const AdminSubtitle = styled.h2`
   align-text: start;
 `
 
 export const AdminSpan = styled.span`
   color: ${(props) => props.theme.primary};
   font-family: ${(props) => props.theme.headFont};
+`
+
+export const AdminInput = styled.input`
+  font-size: 18px;
+  border: 1px solid ${(props) => props.theme.borderColor};
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgColor};
+  padding: 10px 5px;
+  border-radius: 5px;
+  width: 100%;
 `

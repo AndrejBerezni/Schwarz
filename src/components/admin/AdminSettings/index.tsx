@@ -1,16 +1,16 @@
 import { useEffect, useState, useRef } from 'react'
+import { EditUIForm, StyledSelect, EditUILabel } from './AdminSettings.styles'
+import { IHeroItem } from '../../../compiler/heroItemInterface'
 import {
   setupPageItems,
   getUIElements,
 } from '../../../firebase/admin/firebase-admincontent'
-import { EditUIForm, StyledSelect, EditUILabel } from './AdminSettings.styles'
+import { PrimaryButton } from '../../../GlobalStyles'
 import {
   AdminTitle,
   AdminSubtitle,
   AdminInput,
 } from '../../../pages/Admin/Admin.styles'
-import { IHeroItem } from '../../../compiler/heroItemInterface'
-import { PrimaryButton } from '../../../GlobalStyles'
 export default function AdminSettings() {
   const [uiElements, setUiElements] = useState<string[]>([])
   const [currentElement, setCurrentElement] = useState<IHeroItem>({
@@ -44,6 +44,13 @@ export default function AdminSettings() {
     fetchUiElements()
   }, [])
 
+  // useEffect to handle the initial setting of currentElement
+  useEffect(() => {
+    if (uiElements.length > 0) {
+      handleSelectChange()
+    }
+  }, [uiElements])
+
   return (
     <>
       <AdminTitle>Edit Home Page Elements</AdminTitle>
@@ -69,6 +76,7 @@ export default function AdminSettings() {
             <AdminInput
               type="text"
               value={currentElement.title}
+              maxLength={32}
               onChange={(e) =>
                 setCurrentElement((prev) => ({
                   ...prev,
@@ -82,6 +90,7 @@ export default function AdminSettings() {
             <AdminInput
               type="text"
               value={currentElement.subtitle}
+              maxLength={24}
               onChange={(e) =>
                 setCurrentElement((prev) => ({
                   ...prev,
@@ -95,6 +104,7 @@ export default function AdminSettings() {
             <AdminInput
               type="text"
               value={currentElement.buttonText}
+              maxLength={16}
               onChange={(e) =>
                 setCurrentElement((prev) => ({
                   ...prev,

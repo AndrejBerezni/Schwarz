@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   StyledHero,
   HeroDiv,
@@ -37,7 +38,9 @@ export default function Hero() {
             <HeroBoxTextDiv>
               <HeroBoxTitle>{heroData[0].title}</HeroBoxTitle>
               <HeroBoxTitle>{heroData[0].subtitle}</HeroBoxTitle>
-              <HeroBoxLink>{heroData[0].buttonText}</HeroBoxLink>
+              <HeroBoxLink as={Link} to={heroData[0].link}>
+                {heroData[0].buttonText}
+              </HeroBoxLink>
             </HeroBoxTextDiv>
             <HeroBoxImg src={heroData[0].img} />
           </HeroBox>
@@ -45,7 +48,9 @@ export default function Hero() {
             <HeroBoxTextDiv>
               <HeroBoxTitle>{heroData[1].title}</HeroBoxTitle>
               <HeroBoxTitle>{heroData[1].subtitle}</HeroBoxTitle>
-              <HeroBoxLink>{heroData[1].buttonText}</HeroBoxLink>
+              <HeroBoxLink as={Link} to={heroData[1].link}>
+                {heroData[1].buttonText}
+              </HeroBoxLink>
             </HeroBoxTextDiv>
             <HeroBoxImg src={heroData[1].img} />
           </HeroBox>

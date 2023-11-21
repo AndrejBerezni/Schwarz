@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 export const StyledAlertMessage = styled.div`
   width: 100%;
   padding: 0px 40px 0px 0px;
-  margin: 10px;
+  margin: 10px 0;
   background-color: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.navBgColor};
   border: 2px solid ${(props) => props.theme.borderColor};

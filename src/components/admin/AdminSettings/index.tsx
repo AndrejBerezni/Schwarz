@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, FormEvent } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { EditUIForm, StyledSelect, EditUILabel } from './AdminSettings.styles'
 import { IHeroItem } from '../../../compiler/heroItemInterface'
 import {
@@ -12,8 +13,15 @@ import {
   AdminSubtitle,
   AdminInput,
 } from '../../../pages/Admin/Admin.styles'
+import { displayAlert } from '../../../store/alert'
+import { getShowAlert, getAlert } from '../../../store/alert/selectors'
+import AlertMessage from '../../AlertMessage'
 
 export default function AdminSettings() {
+  const dispatch = useDispatch()
+  const showAlert = useSelector(getShowAlert)
+  const alert = useSelector(getAlert)
+
   const [uiElements, setUiElements] = useState<string[]>([])
   const [currentElement, setCurrentElement] = useState<IHeroItem>({
     title: '',
@@ -22,6 +30,7 @@ export default function AdminSettings() {
     link: '',
     img: '',
   })
+
   const selectRef = useRef<HTMLSelectElement>(null)
   const titleRef = useRef<HTMLInputElement>(null)
   const subtitleRef = useRef<HTMLInputElement>(null)
@@ -61,17 +70,29 @@ export default function AdminSettings() {
   // Handle form submit
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    const newHeroItem: Omit<IHeroItem, 'img'> = {
-      title: titleRef.current!.value,
-      subtitle: subtitleRef.current!.value,
-      buttonText: buttonTextRef.current!.value,
-      link: linkRef.current!.value,
-    }
-    if (imageRef.current!.files) {
-      const image = imageRef.current!.files[0]
-      await updateUIElement(selectRef.current!.value, newHeroItem, image)
-    } else {
-      await updateUIElement(selectRef.current!.value, newHeroItem)
+    try {
+      const newHeroItem: Omit<IHeroItem, 'img'> = {
+        title: titleRef.current!.value,
+        subtitle: subtitleRef.current!.value,
+        buttonText: buttonTextRef.current!.value,
+        link: linkRef.current!.value,
+      }
+      if (imageRef.current!.files) {
+        const image = imageRef.current!.files[0]
+        await updateUIElement(selectRef.current!.value, newHeroItem, image)
+      } else {
+        await updateUIElement(selectRef.current!.value, newHeroItem)
+      }
+      dispatch(
+        displayAlert({
+          type: 'editUI',
+          message: 'Element successfully updated!',
+        })
+      )
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(displayAlert({ type: 'editUI', message: error.message }))
+      }
     }
   }
 
@@ -163,6 +184,7 @@ export default function AdminSettings() {
             <AdminInput type="file" ref={imageRef} />
           </EditUILabel>
           <PrimaryButton>Update</PrimaryButton>
+          {showAlert && alert.type === 'editUI' && <AlertMessage />}
         </EditUIForm>
       )}
     </>

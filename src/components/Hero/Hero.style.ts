@@ -72,6 +72,7 @@ export const HeroBoxTitle = styled.h5`
 
 export const HeroBoxLink = styled.a`
   text-wrap: nowrap;
+  text-decoration: none;
   display: inline-block;
   margin-top: 30px;
   text-align: left;

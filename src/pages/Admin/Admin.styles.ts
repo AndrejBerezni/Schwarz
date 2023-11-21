@@ -21,11 +21,10 @@ export const StyledAdminOutlet = styled.div`
   background-color: ${(props) => props.theme.navBgColor};
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   padding: 20px;
   @media (max-width: 768px) {
     width: 100%;
-    align-items: center;
     padding: 2px;
   }
 `

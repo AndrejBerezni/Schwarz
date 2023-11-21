@@ -13,7 +13,6 @@ const storage = getStorage(app)
 //Upload image
 export const uploadImageToFirebase = async (
   path: string,
-  imageName: string,
   imageUpload: File
 ) => {
   // Adding time to name, for sorting the images in the folder later
@@ -22,8 +21,7 @@ export const uploadImageToFirebase = async (
     .replace(/[-:.]/g, '')
     .replace('T', '_')
     .replace('Z', '')
-  const imageNameWithTimestamp: string = `${timestamp}_${imageName}`
-  const imageRef = ref(storage, `${path}/${imageNameWithTimestamp}`)
+  const imageRef = ref(storage, `${path}/${timestamp}`)
   await uploadBytes(imageRef, imageUpload)
 }
 

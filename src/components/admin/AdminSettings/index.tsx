@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, FormEvent } from 'react'
 import { EditUIForm, StyledSelect, EditUILabel } from './AdminSettings.styles'
 import { IHeroItem } from '../../../compiler/heroItemInterface'
 import {
   setupPageItems,
   getUIElements,
+  updateUIElement,
 } from '../../../firebase/admin/firebase-admincontent'
 import { PrimaryButton } from '../../../GlobalStyles'
 import {
@@ -11,6 +12,7 @@ import {
   AdminSubtitle,
   AdminInput,
 } from '../../../pages/Admin/Admin.styles'
+
 export default function AdminSettings() {
   const [uiElements, setUiElements] = useState<string[]>([])
   const [currentElement, setCurrentElement] = useState<IHeroItem>({
@@ -21,6 +23,11 @@ export default function AdminSettings() {
     img: '',
   })
   const selectRef = useRef<HTMLSelectElement>(null)
+  const titleRef = useRef<HTMLInputElement>(null)
+  const subtitleRef = useRef<HTMLInputElement>(null)
+  const buttonTextRef = useRef<HTMLInputElement>(null)
+  const linkRef = useRef<HTMLInputElement>(null)
+  const imageRef = useRef<HTMLInputElement>(null)
 
   //When element is selected, fetch its data and display in the edit form
   const handleSelectChange = async () => {
@@ -33,7 +40,7 @@ export default function AdminSettings() {
       }
     }
   }
-
+  // Setup select options based on what is in the database:
   useEffect(() => {
     const fetchUiElements = async () => {
       const fetchedElements = await getUIElements()
@@ -44,12 +51,29 @@ export default function AdminSettings() {
     fetchUiElements()
   }, [])
 
-  // useEffect to handle the initial setting of currentElement
+  // useEffect to handle the initial setting of currentElement:
   useEffect(() => {
     if (uiElements.length > 0) {
       handleSelectChange()
     }
   }, [uiElements])
+
+  // Handle form submit
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    const newHeroItem: Omit<IHeroItem, 'img'> = {
+      title: titleRef.current!.value,
+      subtitle: subtitleRef.current!.value,
+      buttonText: buttonTextRef.current!.value,
+      link: linkRef.current!.value,
+    }
+    if (imageRef.current!.files) {
+      const image = imageRef.current!.files[0]
+      await updateUIElement(selectRef.current!.value, newHeroItem, image)
+    } else {
+      await updateUIElement(selectRef.current!.value, newHeroItem)
+    }
+  }
 
   return (
     <>
@@ -70,13 +94,15 @@ export default function AdminSettings() {
         </StyledSelect>
       )}
       {currentElement && (
-        <EditUIForm>
+        <EditUIForm onSubmit={(e) => handleSubmit(e)}>
           <EditUILabel>
             Title:
             <AdminInput
+              required
               type="text"
               value={currentElement.title}
               maxLength={32}
+              ref={titleRef}
               onChange={(e) =>
                 setCurrentElement((prev) => ({
                   ...prev,
@@ -88,9 +114,11 @@ export default function AdminSettings() {
           <EditUILabel>
             Subtitle:
             <AdminInput
+              required
               type="text"
               value={currentElement.subtitle}
               maxLength={24}
+              ref={subtitleRef}
               onChange={(e) =>
                 setCurrentElement((prev) => ({
                   ...prev,
@@ -102,9 +130,11 @@ export default function AdminSettings() {
           <EditUILabel>
             Button Text:
             <AdminInput
+              required
               type="text"
               value={currentElement.buttonText}
               maxLength={16}
+              ref={buttonTextRef}
               onChange={(e) =>
                 setCurrentElement((prev) => ({
                   ...prev,
@@ -116,8 +146,10 @@ export default function AdminSettings() {
           <EditUILabel>
             Link to:
             <AdminInput
+              required
               type="text"
               value={currentElement.link}
+              ref={linkRef}
               onChange={(e) =>
                 setCurrentElement((prev) => ({
                   ...prev,
@@ -128,7 +160,7 @@ export default function AdminSettings() {
           </EditUILabel>
           <EditUILabel>
             Image:
-            <AdminInput type="file" />
+            <AdminInput type="file" ref={imageRef} />
           </EditUILabel>
           <PrimaryButton>Update</PrimaryButton>
         </EditUIForm>

@@ -4,11 +4,10 @@ import {
   StyledTable,
   StyledTableHeadRow,
   StyledTableHeadCell,
-  AdminLoadButton,
 } from './AdminOrders.styles'
 import OrdersTableRow from './OrdersTableRow'
 import { IAdminViewOrder } from '../../../compiler/orderInterface'
-import { AdminTitle } from '../../../pages/Admin/Admin.styles'
+import { AdminTitle, AdminLoadButton } from '../../../pages/Admin/Admin.styles'
 import { getPayments } from '../../../stripe/payments'
 import Spinner from '../../Spinner'
 

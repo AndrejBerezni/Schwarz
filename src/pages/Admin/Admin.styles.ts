@@ -51,3 +51,21 @@ export const AdminInput = styled.input`
   border-radius: 5px;
   width: 100%;
 `
+
+export const AdminLoadButton = styled.button`
+  margin: 20px;
+  border: none;
+  background: none;
+  color: ${(props) => props.theme.primary};
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 18px;
+  font-family: ${(props) => props.theme.textFont};
+  transition: 0.2s;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: ${(props) => props.theme.textColor};
+  }
+`

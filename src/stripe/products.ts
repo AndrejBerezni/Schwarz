@@ -2,8 +2,7 @@ import { stripeClient } from './stripe-config'
 
 export const getAllStripeProducts = async () => {
   try {
-    const productsResponse = await stripeClient.products.list({ limit: 10 })
-    console.log(productsResponse.data)
+    const productsResponse = await stripeClient.products.list({ limit: 20 })
     return productsResponse.data
   } catch (error) {
     if (error instanceof Error) {

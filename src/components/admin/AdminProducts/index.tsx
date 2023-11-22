@@ -36,6 +36,14 @@ export default function AdminProducts() {
     }
   }
 
+  const showLessProducts = async () => {
+    const newProducts: Stripe.Product[] | undefined = await getStripeProducts()
+    if (newProducts) {
+      setAllProductsShown(false)
+      setStripeProducts(newProducts)
+    }
+  }
+
   return (
     <>
       <AdminTitle>Products</AdminTitle>
@@ -45,7 +53,9 @@ export default function AdminProducts() {
           <AdminProductCard product={product} />
         ))}
       </AdminProductsContainer>
-      {!allProductsShown && (
+      {allProductsShown ? (
+        <AdminLoadButton onClick={showLessProducts}>Show less</AdminLoadButton>
+      ) : (
         <AdminLoadButton onClick={loadMoreProducts}>
           Load more
           <IoReloadOutline />

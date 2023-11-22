@@ -39,6 +39,13 @@ export const AdminProductCardName = styled.h6`
   }
 `
 
+export const AdminProductImg = styled.img`
+  height: 60px;
+  @media (max-width: 425px) {
+    height: 40px;
+  }
+`
+
 export const AdminProductCardBtn = styled.button`
   background: none;
   border: none;
@@ -56,12 +63,5 @@ export const AdminProductCardBtn = styled.button`
     font-size: 16px;
     bottom: 5px;
     right: 5px;
-  }
-`
-
-export const AdminProductImg = styled.img`
-  height: 60px;
-  @media (max-width: 425px) {
-    height: 40px;
   }
 `

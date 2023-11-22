@@ -15,17 +15,22 @@ import {
   StyledAdminProductPage,
 } from '../AdminProducts.styles'
 import { PrimaryButton } from '../../../../GlobalStyles'
+import { IPrice } from '../../../../compiler/productInterface'
+import { getProductPrices } from '../../../../firebase/firebase-firestore'
 
 export default function AdminProductPage() {
   const { productId } = useParams()
   const [product, setProduct] = useState<Stripe.Product | null>(null)
+  const [prices, setPrices] = useState<IPrice[]>([])
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const setupData = async () => {
       try {
         const currentProduct = await retrieveStripeProduct(productId!)
-        if (currentProduct) {
+        const fetchedPrices = await getProductPrices(productId!)
+        if (currentProduct && fetchedPrices) {
           setProduct(currentProduct)
+          setPrices(fetchedPrices)
         }
       } catch (error) {
         if (error instanceof Error) {
@@ -33,12 +38,12 @@ export default function AdminProductPage() {
         }
       }
     }
-    fetchProduct()
+    setupData()
   }, [productId])
 
   return (
     <>
-      {product && (
+      {product && prices && (
         <>
           <AdminSubtitle>{product.name}</AdminSubtitle>
           <StyledAdminProductPage>
@@ -102,6 +107,35 @@ export default function AdminProductPage() {
                   </StyledSelect>
                 </AdminLabel>
               </AdminProductsDiv>
+              <AdminLabel>
+                Price (EUR):
+                <AdminInput
+                  required
+                  type="number"
+                  value={prices[0].unit_amount / 100}
+                />
+              </AdminLabel>
+              {product.metadata.discount === '1' && (
+                <>
+                  <AdminLabel>
+                    Discounted price (EUR):
+                    <AdminInput
+                      required
+                      type="number"
+                      value={prices[1].unit_amount / 100}
+                    />
+                  </AdminLabel>
+                  <AdminLabel>
+                    Discount label:
+                    <AdminInput
+                      required
+                      type="text"
+                      value={prices[1].description!}
+                      maxLength={4}
+                    />
+                  </AdminLabel>
+                </>
+              )}
               <AdminLabel>
                 Material:
                 <AdminInput

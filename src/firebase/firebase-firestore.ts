@@ -87,6 +87,31 @@ export const getSingleProduct = async (docId: string) => {
   }
 }
 
+//Get product prices
+export const getProductPrices = async (docId: string) => {
+  try {
+    const docRef = doc(db, 'products', docId)
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+      const prices: IPrice[] = []
+      const priceQuery = collection(db, 'products', docId, 'prices')
+      const priceSnapshot = await getDocs(priceQuery)
+
+      priceSnapshot.forEach((item) => {
+        const priceObject: IPrice = item.data() as IPrice
+        priceObject.priceId = item.id
+        prices.push(priceObject)
+      })
+
+      return prices
+    }
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
+  }
+}
+
 // Get past orders
 export const getOrdersForUser = async (userId: string) => {
   const ordersArray: IOrder[] = []

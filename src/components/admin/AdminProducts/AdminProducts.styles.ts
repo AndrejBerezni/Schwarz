@@ -41,7 +41,7 @@ export const AdminProductCardName = styled.h6`
 
 export const AdminProductImg = styled.img`
   height: 50%;
-  max-height: 200px;
+  max-height: 280px;
   margin: 0 auto;
 `
 

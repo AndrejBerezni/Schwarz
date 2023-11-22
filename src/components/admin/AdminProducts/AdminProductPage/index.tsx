@@ -22,16 +22,19 @@ export default function AdminProductPage() {
   const { productId } = useParams()
   const [product, setProduct] = useState<Stripe.Product | null>(null)
   const [prices, setPrices] = useState<IPrice[]>([])
-  const nameRef = useRef(null)
-  const brandRef = useRef(null)
-  const discountRef = useRef(null)
-  const newRef = useRef(null)
-  const collectionRef = useRef(null)
-  const priceRef = useRef(null)
-  const discountPriceRef = useRef(null)
-  const discountLabelRef = useRef(null)
-  const materialRef = useRef(null)
-  const imageUrlRef = useRef(null)
+
+  const [refresh, setRefresh] = useState<boolean>(false)
+
+  const nameRef = useRef<HTMLInputElement>(null)
+  const brandRef = useRef<HTMLInputElement>(null)
+  const discountRef = useRef<HTMLSelectElement>(null)
+  const newRef = useRef<HTMLSelectElement>(null)
+  const collectionRef = useRef<HTMLSelectElement>(null)
+  const priceRef = useRef<HTMLInputElement>(null)
+  const discountPriceRef = useRef<HTMLInputElement>(null)
+  const discountLabelRef = useRef<HTMLInputElement>(null)
+  const materialRef = useRef<HTMLInputElement>(null)
+  const imageUrlRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const setupData = async () => {
@@ -49,7 +52,7 @@ export default function AdminProductPage() {
       }
     }
     setupData()
-  }, [productId])
+  }, [productId, refresh])
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -91,6 +94,7 @@ export default function AdminProductPage() {
                   <StyledSelect
                     defaultValue={product.metadata.discount}
                     ref={discountRef}
+                    onChange={() => setRefresh((prev) => !prev)}
                   >
                     <option value="1">Yes</option>
                     <option value="0">No</option>
@@ -127,14 +131,14 @@ export default function AdminProductPage() {
                   onChange={(e) => handleChange(e, priceRef)}
                 />
               </AdminLabel>
-              {product.metadata.discount === '1' && (
+              {discountRef.current && discountRef.current.value === '1' && (
                 <>
                   <AdminLabel>
                     Discounted price (EUR):
                     <AdminInput
                       required
                       type="number"
-                      defaultValue={prices[1].unit_amount / 100}
+                      defaultValue={prices[1]?.unit_amount / 100 ?? 0}
                       ref={discountPriceRef}
                       onChange={(e) => handleChange(e, discountPriceRef)}
                     />
@@ -144,7 +148,7 @@ export default function AdminProductPage() {
                     <AdminInput
                       required
                       type="text"
-                      defaultValue={prices[1].description!}
+                      defaultValue={prices[1]?.description ?? ''}
                       maxLength={4}
                       ref={discountLabelRef}
                       onChange={(e) => handleChange(e, discountLabelRef)}

@@ -16,7 +16,7 @@ export default function AdminProductsList() {
       const fetchedProducts: Stripe.Product[] | undefined =
         await getStripeProducts()
       if (fetchedProducts) {
-        console.log(fetchedProducts)
+        fetchedProducts
         setStripeProducts(fetchedProducts)
       }
     }

@@ -1,5 +1,5 @@
 import Stripe from 'stripe'
-const stripeClient = new Stripe(import.meta.env.VITE_STRIPE_SECRET)
+import { stripeClient } from './stripe-config'
 
 //options to format the date
 const options: Intl.DateTimeFormatOptions = {

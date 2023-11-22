@@ -4,6 +4,8 @@ import AddAdmins from '../components/admin/AddAdmins'
 import AdminDashboard from '../components/admin/AdminDashboard'
 import AdminOrders from '../components/admin/AdminOrders'
 import AdminProducts from '../components/admin/AdminProducts'
+import AdminProductPage from '../components/admin/AdminProducts/AdminProductPage'
+import AdminProductsList from '../components/admin/AdminProducts/AdminProductsList'
 import AdminSettings from '../components/admin/AdminSettings'
 import Hero from '../components/Hero'
 import Orders from '../components/Orders'
@@ -41,7 +43,13 @@ export default function Router() {
         } // customers can't access admin portal
       >
         <Route index element={<AdminDashboard />} />
-        <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/products" element={<AdminProducts />}>
+          <Route index element={<AdminProductsList />} />
+          <Route
+            path="/admin/products/:productId"
+            element={<AdminProductPage />}
+          />
+        </Route>
         <Route path="/admin/orders" element={<AdminOrders />} />
         <Route path="/admin/admins" element={<AddAdmins />} />
         <Route path="/admin/settings" element={<AdminSettings />} />

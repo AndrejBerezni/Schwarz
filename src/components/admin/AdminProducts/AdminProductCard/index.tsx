@@ -1,4 +1,5 @@
 import { BsFillArrowRightSquareFill } from 'react-icons/bs'
+import { useNavigate } from 'react-router'
 import Stripe from 'stripe'
 import {
   StyledAdminProductCard,
@@ -14,11 +15,15 @@ interface IAdminProductCardProps {
 export default function AdminProductCard({
   product,
 }: Readonly<IAdminProductCardProps>) {
+  const navigate = useNavigate()
+
   return (
     <StyledAdminProductCard>
       <AdminProductCardName>{product.name}</AdminProductCardName>
       <AdminProductImg src={product.images[0]} />
-      <AdminProductCardBtn>
+      <AdminProductCardBtn
+        onClick={() => navigate(`/admin/products/${product.id}`)}
+      >
         <BsFillArrowRightSquareFill />
       </AdminProductCardBtn>
     </StyledAdminProductCard>

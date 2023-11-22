@@ -69,3 +69,19 @@ export const AdminLoadButton = styled.button`
     color: ${(props) => props.theme.textColor};
   }
 `
+
+export const AdminForm = styled.form`
+  color: ${(props) => props.theme.textColor};
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+
+export const AdminLabel = styled.label`
+  color: ${(props) => props.theme.secondaryText};
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+`

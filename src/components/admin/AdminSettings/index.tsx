@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { EditUIForm, StyledSelect, EditUILabel } from './AdminSettings.styles'
+import { StyledSelect } from './AdminSettings.styles'
 import { IHeroItem } from '../../../compiler/heroItemInterface'
 import {
   setupPageItems,
@@ -12,6 +12,8 @@ import {
   AdminTitle,
   AdminSubtitle,
   AdminInput,
+  AdminForm,
+  AdminLabel,
 } from '../../../pages/Admin/Admin.styles'
 import { displayAlert } from '../../../store/alert'
 import { getShowAlert, getAlert } from '../../../store/alert/selectors'
@@ -115,8 +117,8 @@ export default function AdminSettings() {
         </StyledSelect>
       )}
       {currentElement && (
-        <EditUIForm onSubmit={(e) => handleSubmit(e)}>
-          <EditUILabel>
+        <AdminForm onSubmit={(e) => handleSubmit(e)}>
+          <AdminLabel>
             Title:
             <AdminInput
               required
@@ -131,8 +133,8 @@ export default function AdminSettings() {
                 }))
               }
             />
-          </EditUILabel>
-          <EditUILabel>
+          </AdminLabel>
+          <AdminLabel>
             Subtitle:
             <AdminInput
               required
@@ -147,8 +149,8 @@ export default function AdminSettings() {
                 }))
               }
             />
-          </EditUILabel>
-          <EditUILabel>
+          </AdminLabel>
+          <AdminLabel>
             Button Text:
             <AdminInput
               required
@@ -163,8 +165,8 @@ export default function AdminSettings() {
                 }))
               }
             />
-          </EditUILabel>
-          <EditUILabel>
+          </AdminLabel>
+          <AdminLabel>
             Link to:
             <AdminInput
               required
@@ -178,14 +180,14 @@ export default function AdminSettings() {
                 }))
               }
             />
-          </EditUILabel>
-          <EditUILabel>
+          </AdminLabel>
+          <AdminLabel>
             Image:
             <AdminInput type="file" ref={imageRef} />
-          </EditUILabel>
+          </AdminLabel>
           <PrimaryButton>Update</PrimaryButton>
           {showAlert && alert.type === 'editUI' && <AlertMessage />}
-        </EditUIForm>
+        </AdminForm>
       )}
     </>
   )

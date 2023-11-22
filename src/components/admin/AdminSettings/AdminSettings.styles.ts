@@ -13,21 +13,3 @@ export const StyledSelect = styled.select`
     cursor: pointer;
   }
 `
-
-export const EditUIForm = styled.form`
-  color: ${(props) => props.theme.textColor};
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`
-
-export const EditUILabel = styled.label`
-  color: ${(props) => props.theme.secondaryText};
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 10px;
-`
-
-export const EditUIInput = styled.input

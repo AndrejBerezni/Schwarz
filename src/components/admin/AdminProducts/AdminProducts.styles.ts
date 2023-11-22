@@ -40,10 +40,9 @@ export const AdminProductCardName = styled.h6`
 `
 
 export const AdminProductImg = styled.img`
-  height: 60px;
-  @media (max-width: 425px) {
-    height: 40px;
-  }
+  height: 50%;
+  max-height: 200px;
+  margin: 0 auto;
 `
 
 export const AdminProductCardBtn = styled.button`
@@ -63,5 +62,25 @@ export const AdminProductCardBtn = styled.button`
     font-size: 16px;
     bottom: 5px;
     right: 5px;
+  }
+`
+
+export const AdminProductsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px auto;
+`
+
+export const StyledAdminProductPage = styled.section`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px auto;
+  gap: 20px;
+  width: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `

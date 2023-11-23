@@ -17,6 +17,7 @@ import NotFound from '../pages/NotFound'
 import Product from '../pages/Product'
 import ProductList from '../pages/ProductList'
 import { getAuthStatus, getUser } from '../store/authentication/selectors'
+import AdminCreateProduct from '../components/admin/AdminProducts/AdminCreateProduct'
 
 export default function Router() {
   const isAuth = useSelector(getAuthStatus)
@@ -45,6 +46,10 @@ export default function Router() {
         <Route index element={<AdminDashboard />} />
         <Route path="/admin/products" element={<AdminProducts />}>
           <Route index element={<AdminProductsList />} />
+          <Route
+            path="/admin/products/newproduct"
+            element={<AdminCreateProduct />}
+          />
           <Route
             path="/admin/products/:productId"
             element={<AdminProductPage />}

@@ -6,8 +6,11 @@ import { AdminLoadButton } from '../../../../pages/Admin/Admin.styles'
 import { getStripeProducts } from '../../../../stripe/products'
 import AdminProductCard from '../AdminProductCard'
 import { AdminProductsContainer } from '../AdminProducts.styles'
+import { useNavigate } from 'react-router'
 
 export default function AdminProductsList() {
+  const navigate = useNavigate()
+
   const [stripeProducts, setStripeProducts] = useState<Stripe.Product[]>([])
   const [allProductsShown, setAllProductsShown] = useState<boolean>(false)
 
@@ -46,7 +49,12 @@ export default function AdminProductsList() {
 
   return (
     <>
-      <PrimaryButton variant="outline">Add new product</PrimaryButton>
+      <PrimaryButton
+        variant="outline"
+        onClick={() => navigate('/admin/products/newproduct')}
+      >
+        Add new product
+      </PrimaryButton>
       <AdminProductsContainer>
         {stripeProducts.map((product) => (
           <AdminProductCard product={product} key={`${product.id}-apc`} />

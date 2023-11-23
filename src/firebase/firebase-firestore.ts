@@ -48,6 +48,8 @@ export const getAllProducts = async (
     })
 
     const productData = doc.data()
+    // Stripe API does not allow deleting prices, just setting active to false, therefore I am filtering
+    // prices to active ones. Later in the component I am filtering prices to determine which ones are dicsount prices
     productData.prices = prices.filter((price) => price.active === true)
     productData.docId = doc.id
 

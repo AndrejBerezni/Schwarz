@@ -30,7 +30,8 @@ export const retrieveStripeProduct = async (productId: string) => {
 
 export const updateProduct = async (
   update: IProductUpdate,
-  initialPrice: IPrice
+  initialPrice: IPrice,
+  initialDiscountPrice?: IPrice
 ) => {
   try {
     await stripeClient.products.update(update.docId, {
@@ -57,6 +58,30 @@ export const updateProduct = async (
         default_price: newPrice.id,
       })
       await stripeClient.prices.update(initialPrice.priceId, { active: false })
+    }
+    //Handle discount price
+    if (
+      update.discount === '1' &&
+      initialDiscountPrice &&
+      update.discountPriceAmount &&
+      update.discountPriceLabel
+    ) {
+      //Case when discount price already existed and was changed
+      if (
+        update.discountPriceId !== null &&
+        initialDiscountPrice.unit_amount !==
+          Number(update.discountPriceAmount) * 100
+      ) {
+        await stripeClient.prices.create({
+          unit_amount: Number(update.discountPriceAmount) * 100,
+          currency: 'eur',
+          product: update.docId,
+          nickname: update.discountPriceLabel,
+        })
+        await stripeClient.prices.update(initialDiscountPrice.priceId, {
+          active: false,
+        })
+      }
     }
   } catch (error) {
     if (error instanceof Error) {

@@ -40,7 +40,7 @@ export default function ProductCard({ product }: Readonly<IProductCardProps>) {
           ? `${product.name.slice(0, 25)}...`
           : product.name}
       </ProductCardText>
-      {/* if product is on discount, it will have 2 elements in prices array (second is the new price) */}
+      {/* discount prices have description, and regular price does not */}
       {product.metadata.discount === '1' ? (
         <ProductPriceDiv>
           <PreviousProductPrice>

@@ -93,8 +93,22 @@ export default function AdminProductPage() {
         imageUrl: imageUrlRef.current!.value,
         priceId: prices[0].priceId,
         priceAmount: Number(priceRef.current!.value),
+        discountPriceId: prices.filter((price) => price.description !== null)[0]
+          ? prices.filter((price) => price.description !== null)[0].priceId
+          : null,
+        discountPriceAmount: prices.filter(
+          (price) => price.description !== null
+        )[0]
+          ? discountPriceRef.current!.value
+          : null,
+        discountPriceLabel: prices.filter(
+          (price) => price.description !== null
+        )[0]
+          ? discountLabelRef.current!.value
+          : null,
       },
-      prices[0]
+      prices.filter((price) => price.description === null)[0],
+      prices.filter((price) => price.description !== null)[0]
     )
     console.log('updated')
   }
@@ -179,7 +193,10 @@ export default function AdminProductPage() {
                   <AdminInput
                     required
                     type="number"
-                    defaultValue={prices[0].unit_amount / 100}
+                    defaultValue={
+                      prices.filter((price) => price.description === null)[0]
+                        .unit_amount / 100
+                    }
                     ref={priceRef}
                     onChange={(e) => handleChange(e, priceRef)}
                   />
@@ -191,7 +208,11 @@ export default function AdminProductPage() {
                       <AdminInput
                         required
                         type="number"
-                        defaultValue={prices[1]?.unit_amount / 100 ?? 0}
+                        defaultValue={
+                          prices.filter(
+                            (price) => price.description !== null
+                          )[0]?.unit_amount / 100 ?? 0
+                        }
                         ref={discountPriceRef}
                         onChange={(e) => handleChange(e, discountPriceRef)}
                       />
@@ -201,7 +222,11 @@ export default function AdminProductPage() {
                       <AdminInput
                         required
                         type="text"
-                        defaultValue={prices[1]?.description ?? ''}
+                        defaultValue={
+                          prices.filter(
+                            (price) => price.description !== null
+                          )[0]?.description ?? ''
+                        }
                         maxLength={4}
                         ref={discountLabelRef}
                         onChange={(e) => handleChange(e, discountLabelRef)}

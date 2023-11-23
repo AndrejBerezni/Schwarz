@@ -55,7 +55,7 @@ export interface IProductUpdate {
   imageUrl: string
   priceId: string
   priceAmount: number
-  discountPriceId?: string
-  discountPriceAmount?: number
-  discountPriceLabeL?: string
+  discountPriceId?: string | null
+  discountPriceAmount?: string | null
+  discountPriceLabel?: string | null
 }

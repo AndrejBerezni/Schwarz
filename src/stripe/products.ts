@@ -48,11 +48,15 @@ export const updateProduct = async (
     // Since Stripe API requires creating new price and does not allow updating old one,
     // we are first checking if changes were made, not to create new price for nothing
     if (initialPrice.unit_amount !== update.priceAmount * 100) {
-      await stripeClient.prices.create({
+      const newPrice = await stripeClient.prices.create({
         unit_amount: update.priceAmount * 100,
         currency: 'eur',
         product: update.docId,
       })
+      await stripeClient.products.update(update.docId, {
+        default_price: newPrice.id,
+      })
+      await stripeClient.prices.update(initialPrice.priceId, { active: false })
     }
   } catch (error) {
     if (error instanceof Error) {

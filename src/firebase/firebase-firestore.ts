@@ -48,7 +48,7 @@ export const getAllProducts = async (
     })
 
     const productData = doc.data()
-    productData.prices = prices
+    productData.prices = prices.filter((price) => price.active === true)
     productData.docId = doc.id
 
     productsArray.push(productData as IProduct)
@@ -75,7 +75,7 @@ export const getSingleProduct = async (docId: string) => {
       })
 
       const productData = docSnap.data()
-      productData.prices = prices
+      productData.prices = prices.filter((price) => price.active === true)
       productData.docId = docSnap.id
 
       return productData
@@ -103,7 +103,7 @@ export const getProductPrices = async (docId: string) => {
         prices.push(priceObject)
       })
 
-      return prices
+      return prices.filter((price) => price.active === true)
     }
   } catch (error) {
     if (error instanceof FirebaseError) {

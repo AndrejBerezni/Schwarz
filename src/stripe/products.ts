@@ -33,7 +33,6 @@ export const updateProduct = async (
   initialPrice: IPrice,
   initialDiscountPrice?: IPrice
 ) => {
-  console.log(`initial discount: ${initialDiscountPrice}`)
   try {
     await stripeClient.products.update(update.docId, {
       name: update.name,

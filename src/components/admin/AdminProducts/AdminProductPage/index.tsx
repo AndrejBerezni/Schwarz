@@ -32,9 +32,17 @@ import {
   StyledAdminProductPage,
 } from '../AdminProducts.styles'
 import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
+import AlertMessage from '../../../AlertMessage'
+import { getAlert, getShowAlert } from '../../../../store/alert/selectors'
+import { useDispatch, useSelector } from 'react-redux'
+import { displayAlert } from '../../../../store/alert'
 
 export default function AdminProductPage() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const showAlert = useSelector(getShowAlert)
+  const alert = useSelector(getAlert)
+
   const { productId } = useParams()
   const [product, setProduct] = useState<Stripe.Product | null>(null)
   const [prices, setPrices] = useState<IPrice[]>([])
@@ -80,33 +88,51 @@ export default function AdminProductPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    await updateProduct(
-      {
-        docId: product!.id,
-        name: nameRef.current!.value,
-        brand: brandRef.current!.value,
-        description: descriptionRef.current!.value,
-        discount: discountRef.current!.value,
-        new: newRef.current!.value,
-        collection: collectionRef.current!.value,
-        material: materialRef.current!.value,
-        imageUrl: imageUrlRef.current!.value,
-        priceId: prices[0].priceId,
-        priceAmount: Number(priceRef.current!.value),
-        discountPriceId: prices.filter((price) => price.description !== null)[0]
-          ? prices.filter((price) => price.description !== null)[0].priceId
-          : null,
-        discountPriceAmount: discountPriceRef.current
-          ? discountPriceRef.current!.value
-          : null,
-        discountPriceLabel: discountPriceRef.current
-          ? discountLabelRef.current!.value
-          : null,
-      },
-      prices.filter((price) => price.description === null)[0],
-      prices.filter((price) => price.description !== null)[0]
-    )
-    console.log('updated')
+    try {
+      await updateProduct(
+        {
+          docId: product!.id,
+          name: nameRef.current!.value,
+          brand: brandRef.current!.value,
+          description: descriptionRef.current!.value,
+          discount: discountRef.current!.value,
+          new: newRef.current!.value,
+          collection: collectionRef.current!.value,
+          material: materialRef.current!.value,
+          imageUrl: imageUrlRef.current!.value,
+          priceId: prices[0].priceId,
+          priceAmount: Number(priceRef.current!.value),
+          discountPriceId: prices.filter(
+            (price) => price.description !== null
+          )[0]
+            ? prices.filter((price) => price.description !== null)[0].priceId
+            : null,
+          discountPriceAmount: discountPriceRef.current
+            ? discountPriceRef.current!.value
+            : null,
+          discountPriceLabel: discountPriceRef.current
+            ? discountLabelRef.current!.value
+            : null,
+        },
+        prices.filter((price) => price.description === null)[0],
+        prices.filter((price) => price.description !== null)[0]
+      )
+      dispatch(
+        displayAlert({
+          type: 'editProduct',
+          message: 'Product successfully updated!',
+        })
+      )
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(
+          displayAlert({
+            type: 'editProduct',
+            message: error.message,
+          })
+        )
+      }
+    }
   }
 
   return (
@@ -260,6 +286,9 @@ export default function AdminProductPage() {
               <AdminFormRow>
                 <PrimaryButton variant="outline">Delete Product</PrimaryButton>
                 <PrimaryButton type="submit">Update Product</PrimaryButton>
+              </AdminFormRow>
+              <AdminFormRow>
+                {showAlert && alert.type === 'editProduct' && <AlertMessage />}
               </AdminFormRow>
             </AdminForm>
           </StyledAdminProductPage>

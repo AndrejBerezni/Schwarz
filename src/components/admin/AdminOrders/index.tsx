@@ -40,6 +40,14 @@ export default function AdminOrders() {
     setOrders((prev) => [...prev, ...newOrders])
   }
 
+  const showLessOrders = async () => {
+    const newOrders: IAdminViewOrder[] = await getPayments()
+    if (newOrders) {
+      setAllOrdersShown(false)
+      setOrders(newOrders)
+    }
+  }
+
   return (
     <>
       <AdminTitle>Orders</AdminTitle>
@@ -58,7 +66,9 @@ export default function AdminOrders() {
           <Spinner />
         )}
       </StyledTable>
-      {!allOrdersShown && (
+      {allOrdersShown ? (
+        <AdminLoadButton onClick={showLessOrders}>Show less</AdminLoadButton>
+      ) : (
         <AdminLoadButton onClick={loadMoreOrders}>
           Load more
           <IoReloadOutline />

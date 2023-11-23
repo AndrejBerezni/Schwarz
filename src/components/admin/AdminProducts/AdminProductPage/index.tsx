@@ -1,4 +1,11 @@
-import { useEffect, useState, useRef, ChangeEvent, RefObject } from 'react'
+import {
+  useEffect,
+  useState,
+  useRef,
+  ChangeEvent,
+  RefObject,
+  FormEvent,
+} from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import { useParams, useNavigate } from 'react-router'
 import Stripe from 'stripe'
@@ -10,6 +17,7 @@ import {
   AdminInput,
   AdminForm,
   AdminFormCol,
+  AdminFormRow,
   AdminLabel,
   AdminLoadButton,
 } from '../../../../pages/Admin/Admin.styles'
@@ -70,6 +78,24 @@ export default function AdminProductPage() {
     ref.current!.value = event.target.value
   }
 
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    await updateProduct({
+      docId: product!.id,
+      name: nameRef.current!.value,
+      brand: brandRef.current!.value,
+      description: descriptionRef.current!.value,
+      discount: discountRef.current!.value,
+      new: newRef.current!.value,
+      collection: collectionRef.current!.value,
+      material: materialRef.current!.value,
+      imageUrl: imageUrlRef.current!.value,
+      priceId: prices[0].priceId,
+      priceAmount: prices[0].unit_amount,
+    })
+    console.log('updated')
+  }
+
   return (
     <>
       {product && prices && (
@@ -80,7 +106,7 @@ export default function AdminProductPage() {
             Back to all products
           </AdminLoadButton>
           <StyledAdminProductPage>
-            <AdminForm>
+            <AdminForm onSubmit={async (e) => await handleSubmit(e)}>
               <AdminFormCol>
                 <AdminLabel>
                   Name:
@@ -204,12 +230,12 @@ export default function AdminProductPage() {
                   />
                 </AdminLabel>
               </AdminFormCol>
+              <AdminFormRow>
+                <PrimaryButton variant="outline">Delete Product</PrimaryButton>
+                <PrimaryButton type="submit">Update Product</PrimaryButton>
+              </AdminFormRow>
             </AdminForm>
           </StyledAdminProductPage>
-          <AdminProductsDiv>
-            <PrimaryButton variant="outline">Delete Product</PrimaryButton>
-            <PrimaryButton>Update Product</PrimaryButton>
-          </AdminProductsDiv>
         </>
       )}
     </>

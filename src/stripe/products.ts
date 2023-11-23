@@ -44,7 +44,7 @@ export const updateProduct = async (update: IProductUpdate) => {
     })
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(error.message)
+      console.log(error.message)
     }
   }
 }

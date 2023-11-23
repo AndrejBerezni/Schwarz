@@ -74,6 +74,7 @@ export const AdminForm = styled.form`
   color: ${(props) => props.theme.textColor};
   padding: 10px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
   gap: 20px;
@@ -88,10 +89,18 @@ export const AdminFormCol = styled.div`
   gap: 20px;
 `
 
+export const AdminFormRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+`
+
 export const AdminLabel = styled.label`
   color: ${(props) => props.theme.secondaryText};
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 10px;
+  flex-wrap: wrap;
 `

@@ -118,7 +118,7 @@ export default function AdminSettings() {
         </StyledSelect>
       )}
       {currentElement && (
-        <AdminForm onSubmit={(e) => handleSubmit(e)}>
+        <AdminForm onSubmit={async (e) => await handleSubmit(e)}>
           <AdminFormCol>
             <AdminLabel>
               Title:

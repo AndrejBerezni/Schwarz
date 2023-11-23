@@ -49,7 +49,7 @@ export default function AdminProductsList() {
       <PrimaryButton variant="outline">Add new product</PrimaryButton>
       <AdminProductsContainer>
         {stripeProducts.map((product) => (
-          <AdminProductCard product={product} />
+          <AdminProductCard product={product} key={`${product.id}-apc`} />
         ))}
       </AdminProductsContainer>
       {allProductsShown ? (

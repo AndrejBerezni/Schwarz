@@ -47,6 +47,7 @@ export interface IProductUpdate {
   docId: string
   name: string
   brand: string
+  description: string
   discount: string
   new: string
   collection: string
@@ -55,6 +56,6 @@ export interface IProductUpdate {
   priceId: string
   priceAmount: number
   discountPriceId?: string
-  discountPriceAmount: number
+  discountPriceAmount?: number
   discountPriceLabeL?: string
 }

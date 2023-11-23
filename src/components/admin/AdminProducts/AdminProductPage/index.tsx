@@ -22,11 +22,12 @@ import {
   AdminLabel,
   AdminLoadButton,
 } from '../../../../pages/Admin/Admin.styles'
-import { displayAlert } from '../../../../store/alert'
+import { displayAlert, hideAlert } from '../../../../store/alert'
 import { getAlert, getShowAlert } from '../../../../store/alert/selectors'
 import {
   retrieveStripeProduct,
   updateProduct,
+  archiveProduct,
 } from '../../../../stripe/products'
 import AlertMessage from '../../../AlertMessage'
 import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
@@ -123,6 +124,31 @@ export default function AdminProductPage() {
           message: 'Product successfully updated!',
         })
       )
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(
+          displayAlert({
+            type: 'editProduct',
+            message: error.message,
+          })
+        )
+      }
+    }
+  }
+
+  const handleArchive = async () => {
+    try {
+      await archiveProduct(product!.id)
+      dispatch(
+        displayAlert({
+          type: 'editProduct',
+          message: `Product archived! \n Redirecting to products list...`,
+        })
+      )
+      setTimeout(() => {
+        dispatch(hideAlert())
+        navigate('/admin/products')
+      }, 3000)
     } catch (error) {
       if (error instanceof Error) {
         dispatch(
@@ -284,7 +310,13 @@ export default function AdminProductPage() {
                 </AdminLabel>
               </AdminFormCol>
               <AdminFormRow>
-                <PrimaryButton variant="outline">Delete Product</PrimaryButton>
+                <PrimaryButton
+                  type="button"
+                  variant="outline"
+                  onClick={handleArchive}
+                >
+                  Archive Product
+                </PrimaryButton>
                 <PrimaryButton type="submit">Update Product</PrimaryButton>
               </AdminFormRow>
               <AdminFormRow>

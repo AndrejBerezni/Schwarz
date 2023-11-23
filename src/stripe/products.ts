@@ -8,7 +8,7 @@ export const getStripeProducts = async (startAfter?: string) => {
       limit: 10,
       starting_after: startAfter,
     })
-    return productsResponse.data
+    return productsResponse.data.filter((product) => product.active)
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message)
@@ -125,6 +125,18 @@ export const createNewProduct = async (product: IProductUpdate) => {
         nickname: product.discountPriceLabel,
       })
     }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message)
+    }
+  }
+}
+
+export const archiveProduct = async (productId: string) => {
+  try {
+    await stripeClient.products.update(productId, {
+      active: false,
+    })
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message)

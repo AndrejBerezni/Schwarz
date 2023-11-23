@@ -202,8 +202,12 @@ export default function AdminCreateProduct() {
           </AdminLabel>
           <AdminFormRow>
             <PrimaryButton
+              type="button"
               variant="outline"
-              onClick={() => navigate('/admin/products')}
+              onClick={() => {
+                dispatch(hideAlert())
+                navigate('/admin/products')
+              }}
             >
               Cancel
             </PrimaryButton>

@@ -56,7 +56,7 @@ export const getAllProducts = async (
     productsArray.push(productData as IProduct)
   }
 
-  return productsArray
+  return productsArray.filter((product) => product.active)
 }
 
 // Get single product
@@ -220,7 +220,7 @@ export const searchProducts = async (searchTerm: string) => {
     searchResults.push(productData as IProduct)
   }
 
-  return searchResults
+  return searchResults.filter((product) => product.active)
 }
 
 //Add review

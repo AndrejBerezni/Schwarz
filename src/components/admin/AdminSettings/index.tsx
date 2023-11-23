@@ -13,6 +13,7 @@ import {
   AdminSubtitle,
   AdminInput,
   AdminForm,
+  AdminFormCol,
   AdminLabel,
 } from '../../../pages/Admin/Admin.styles'
 import { displayAlert } from '../../../store/alert'
@@ -118,75 +119,77 @@ export default function AdminSettings() {
       )}
       {currentElement && (
         <AdminForm onSubmit={(e) => handleSubmit(e)}>
-          <AdminLabel>
-            Title:
-            <AdminInput
-              required
-              type="text"
-              value={currentElement.title}
-              maxLength={32}
-              ref={titleRef}
-              onChange={(e) =>
-                setCurrentElement((prev) => ({
-                  ...prev,
-                  title: e.target.value,
-                }))
-              }
-            />
-          </AdminLabel>
-          <AdminLabel>
-            Subtitle:
-            <AdminInput
-              required
-              type="text"
-              value={currentElement.subtitle}
-              maxLength={24}
-              ref={subtitleRef}
-              onChange={(e) =>
-                setCurrentElement((prev) => ({
-                  ...prev,
-                  subtitle: e.target.value,
-                }))
-              }
-            />
-          </AdminLabel>
-          <AdminLabel>
-            Button Text:
-            <AdminInput
-              required
-              type="text"
-              value={currentElement.buttonText}
-              maxLength={16}
-              ref={buttonTextRef}
-              onChange={(e) =>
-                setCurrentElement((prev) => ({
-                  ...prev,
-                  buttonText: e.target.value,
-                }))
-              }
-            />
-          </AdminLabel>
-          <AdminLabel>
-            Link to:
-            <AdminInput
-              required
-              type="text"
-              value={currentElement.link}
-              ref={linkRef}
-              onChange={(e) =>
-                setCurrentElement((prev) => ({
-                  ...prev,
-                  link: e.target.value,
-                }))
-              }
-            />
-          </AdminLabel>
-          <AdminLabel>
-            Image:
-            <AdminInput type="file" ref={imageRef} />
-          </AdminLabel>
-          <PrimaryButton>Update</PrimaryButton>
-          {showAlert && alert.type === 'editUI' && <AlertMessage />}
+          <AdminFormCol>
+            <AdminLabel>
+              Title:
+              <AdminInput
+                required
+                type="text"
+                value={currentElement.title}
+                maxLength={32}
+                ref={titleRef}
+                onChange={(e) =>
+                  setCurrentElement((prev) => ({
+                    ...prev,
+                    title: e.target.value,
+                  }))
+                }
+              />
+            </AdminLabel>
+            <AdminLabel>
+              Subtitle:
+              <AdminInput
+                required
+                type="text"
+                value={currentElement.subtitle}
+                maxLength={24}
+                ref={subtitleRef}
+                onChange={(e) =>
+                  setCurrentElement((prev) => ({
+                    ...prev,
+                    subtitle: e.target.value,
+                  }))
+                }
+              />
+            </AdminLabel>
+            <AdminLabel>
+              Button Text:
+              <AdminInput
+                required
+                type="text"
+                value={currentElement.buttonText}
+                maxLength={16}
+                ref={buttonTextRef}
+                onChange={(e) =>
+                  setCurrentElement((prev) => ({
+                    ...prev,
+                    buttonText: e.target.value,
+                  }))
+                }
+              />
+            </AdminLabel>
+            <AdminLabel>
+              Link to:
+              <AdminInput
+                required
+                type="text"
+                value={currentElement.link}
+                ref={linkRef}
+                onChange={(e) =>
+                  setCurrentElement((prev) => ({
+                    ...prev,
+                    link: e.target.value,
+                  }))
+                }
+              />
+            </AdminLabel>
+            <AdminLabel>
+              Image:
+              <AdminInput type="file" ref={imageRef} />
+            </AdminLabel>
+            <PrimaryButton>Update</PrimaryButton>
+            {showAlert && alert.type === 'editUI' && <AlertMessage />}
+          </AdminFormCol>
         </AdminForm>
       )}
     </>

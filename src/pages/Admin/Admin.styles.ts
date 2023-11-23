@@ -74,6 +74,16 @@ export const AdminForm = styled.form`
   color: ${(props) => props.theme.textColor};
   padding: 10px;
   display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+
+export const AdminFormCol = styled.div`
+  display: flex;
   flex-direction: column;
   gap: 20px;
 `

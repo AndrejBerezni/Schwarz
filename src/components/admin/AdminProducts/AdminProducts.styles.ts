@@ -71,6 +71,9 @@ export const AdminProductsDiv = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   margin: 20px auto;
+  @media (max-width: 340px) {
+    flex-direction: column;
+  }
 `
 
 export const StyledAdminProductPage = styled.section`

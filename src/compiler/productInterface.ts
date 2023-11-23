@@ -42,3 +42,19 @@ export interface IProduct {
   stripe_metadata_discount?: string
   tax_code: null
 }
+
+export interface IProductUpdate {
+  docId: string
+  name: string
+  brand: string
+  discount: string
+  new: string
+  collection: string
+  material: string
+  imageUrl: string
+  priceId: string
+  priceAmount: number
+  discountPriceId?: string
+  discountPriceAmount: number
+  discountPriceLabeL?: string
+}

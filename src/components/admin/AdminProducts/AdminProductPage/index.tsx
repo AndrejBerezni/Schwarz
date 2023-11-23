@@ -1,24 +1,32 @@
 import { useEffect, useState, useRef, ChangeEvent, RefObject } from 'react'
-import { useParams } from 'react-router'
+import { IoIosArrowRoundBack } from 'react-icons/io'
+import { useParams, useNavigate } from 'react-router'
 import Stripe from 'stripe'
+import { IPrice } from '../../../../compiler/productInterface'
+import { getProductPrices } from '../../../../firebase/firebase-firestore'
+import { PrimaryButton } from '../../../../GlobalStyles'
 import {
   AdminSubtitle,
   AdminInput,
   AdminForm,
+  AdminFormCol,
   AdminLabel,
+  AdminLoadButton,
 } from '../../../../pages/Admin/Admin.styles'
-import { retrieveStripeProduct } from '../../../../stripe/products'
+import {
+  retrieveStripeProduct,
+  updateProduct,
+} from '../../../../stripe/products'
 import { StyledSelect } from '../../AdminSettings/AdminSettings.styles'
 import {
   AdminProductImg,
   AdminProductsDiv,
   StyledAdminProductPage,
 } from '../AdminProducts.styles'
-import { PrimaryButton } from '../../../../GlobalStyles'
-import { IPrice } from '../../../../compiler/productInterface'
-import { getProductPrices } from '../../../../firebase/firebase-firestore'
+import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
 
 export default function AdminProductPage() {
+  const navigate = useNavigate()
   const { productId } = useParams()
   const [product, setProduct] = useState<Stripe.Product | null>(null)
   const [prices, setPrices] = useState<IPrice[]>([])
@@ -27,6 +35,7 @@ export default function AdminProductPage() {
 
   const nameRef = useRef<HTMLInputElement>(null)
   const brandRef = useRef<HTMLInputElement>(null)
+  const descriptionRef = useRef<HTMLTextAreaElement>(null)
   const discountRef = useRef<HTMLSelectElement>(null)
   const newRef = useRef<HTMLSelectElement>(null)
   const collectionRef = useRef<HTMLSelectElement>(null)
@@ -55,8 +64,8 @@ export default function AdminProductPage() {
   }, [productId, refresh])
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    ref: RefObject<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ref: RefObject<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     ref.current!.value = event.target.value
   }
@@ -66,119 +75,135 @@ export default function AdminProductPage() {
       {product && prices && (
         <>
           <AdminSubtitle>{product.name}</AdminSubtitle>
+          <AdminLoadButton onClick={() => navigate('/admin/products')}>
+            <IoIosArrowRoundBack />
+            Back to all products
+          </AdminLoadButton>
           <StyledAdminProductPage>
             <AdminForm>
-              <AdminLabel>
-                Name:
-                <AdminInput
-                  required
-                  type="text"
-                  defaultValue={product.name}
-                  ref={nameRef}
-                  onChange={(e) => handleChange(e, nameRef)}
-                />
-              </AdminLabel>
-              <AdminLabel>
-                Brand:
-                <AdminInput
-                  required
-                  type="text"
-                  defaultValue={product.metadata.brand}
-                  ref={brandRef}
-                  onChange={(e) => handleChange(e, brandRef)}
-                />
-              </AdminLabel>
-              <AdminProductsDiv>
+              <AdminFormCol>
                 <AdminLabel>
-                  On discount?
-                  <StyledSelect
-                    defaultValue={product.metadata.discount}
-                    ref={discountRef}
-                    onChange={() => setRefresh((prev) => !prev)}
-                  >
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </StyledSelect>
+                  Name:
+                  <AdminInput
+                    required
+                    type="text"
+                    defaultValue={product.name}
+                    ref={nameRef}
+                    onChange={(e) => handleChange(e, nameRef)}
+                  />
                 </AdminLabel>
                 <AdminLabel>
-                  New Item?
-                  <StyledSelect
-                    defaultValue={product.metadata.new}
-                    ref={newRef}
-                  >
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </StyledSelect>
+                  Brand:
+                  <AdminInput
+                    required
+                    type="text"
+                    defaultValue={product.metadata.brand}
+                    ref={brandRef}
+                    onChange={(e) => handleChange(e, brandRef)}
+                  />
                 </AdminLabel>
                 <AdminLabel>
-                  Collection:
-                  <StyledSelect
-                    defaultValue={product.metadata.collection}
-                    ref={collectionRef}
-                  >
-                    <option value="men">Men</option>
-                    <option value="women">Women</option>
-                  </StyledSelect>
+                  Description:
+                  <ReviewTextarea
+                    required
+                    defaultValue={product.description!}
+                    ref={descriptionRef}
+                    onChange={(e) => handleChange(e, descriptionRef)}
+                    maxLength={250}
+                  />
                 </AdminLabel>
-              </AdminProductsDiv>
-              <AdminLabel>
-                Price (EUR):
-                <AdminInput
-                  required
-                  type="number"
-                  defaultValue={prices[0].unit_amount / 100}
-                  ref={priceRef}
-                  onChange={(e) => handleChange(e, priceRef)}
-                />
-              </AdminLabel>
-              {discountRef.current && discountRef.current.value === '1' && (
-                <>
+                <AdminProductsDiv>
                   <AdminLabel>
-                    Discounted price (EUR):
-                    <AdminInput
-                      required
-                      type="number"
-                      defaultValue={prices[1]?.unit_amount / 100 ?? 0}
-                      ref={discountPriceRef}
-                      onChange={(e) => handleChange(e, discountPriceRef)}
-                    />
+                    On discount?
+                    <StyledSelect
+                      defaultValue={product.metadata.discount}
+                      ref={discountRef}
+                      onChange={() => setRefresh((prev) => !prev)}
+                    >
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </StyledSelect>
                   </AdminLabel>
                   <AdminLabel>
-                    Discount label:
-                    <AdminInput
-                      required
-                      type="text"
-                      defaultValue={prices[1]?.description ?? ''}
-                      maxLength={4}
-                      ref={discountLabelRef}
-                      onChange={(e) => handleChange(e, discountLabelRef)}
-                    />
+                    New Item?
+                    <StyledSelect
+                      defaultValue={product.metadata.new}
+                      ref={newRef}
+                    >
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </StyledSelect>
                   </AdminLabel>
-                </>
-              )}
-              <AdminLabel>
-                Material:
-                <AdminInput
-                  required
-                  type="text"
-                  defaultValue={product.metadata.material}
-                  ref={materialRef}
-                  onChange={(e) => handleChange(e, materialRef)}
-                />
-              </AdminLabel>
-            </AdminForm>
-            <AdminForm>
-              <AdminProductImg src={product.images[0]} />
-              <AdminLabel>
-                Image URL:
-                <AdminInput
-                  required
-                  type="text"
-                  defaultValue={product.images[0]}
-                  ref={imageUrlRef}
-                  onChange={(e) => handleChange(e, imageUrlRef)}
-                />
-              </AdminLabel>
+                  <AdminLabel>
+                    Collection:
+                    <StyledSelect
+                      defaultValue={product.metadata.collection}
+                      ref={collectionRef}
+                    >
+                      <option value="men">Men</option>
+                      <option value="women">Women</option>
+                    </StyledSelect>
+                  </AdminLabel>
+                </AdminProductsDiv>
+                <AdminLabel>
+                  Price (EUR):
+                  <AdminInput
+                    required
+                    type="number"
+                    defaultValue={prices[0].unit_amount / 100}
+                    ref={priceRef}
+                    onChange={(e) => handleChange(e, priceRef)}
+                  />
+                </AdminLabel>
+                {discountRef.current && discountRef.current.value === '1' && (
+                  <>
+                    <AdminLabel>
+                      Discounted price (EUR):
+                      <AdminInput
+                        required
+                        type="number"
+                        defaultValue={prices[1]?.unit_amount / 100 ?? 0}
+                        ref={discountPriceRef}
+                        onChange={(e) => handleChange(e, discountPriceRef)}
+                      />
+                    </AdminLabel>
+                    <AdminLabel>
+                      Discount label:
+                      <AdminInput
+                        required
+                        type="text"
+                        defaultValue={prices[1]?.description ?? ''}
+                        maxLength={4}
+                        ref={discountLabelRef}
+                        onChange={(e) => handleChange(e, discountLabelRef)}
+                      />
+                    </AdminLabel>
+                  </>
+                )}
+                <AdminLabel>
+                  Material:
+                  <AdminInput
+                    required
+                    type="text"
+                    defaultValue={product.metadata.material}
+                    ref={materialRef}
+                    onChange={(e) => handleChange(e, materialRef)}
+                  />
+                </AdminLabel>
+              </AdminFormCol>
+              <AdminFormCol>
+                <AdminProductImg src={product.images[0]} />
+                <AdminLabel>
+                  Image URL:
+                  <AdminInput
+                    required
+                    type="text"
+                    defaultValue={product.images[0]}
+                    ref={imageUrlRef}
+                    onChange={(e) => handleChange(e, imageUrlRef)}
+                  />
+                </AdminLabel>
+              </AdminFormCol>
             </AdminForm>
           </StyledAdminProductPage>
           <AdminProductsDiv>

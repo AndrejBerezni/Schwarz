@@ -7,6 +7,7 @@ import {
   FormEvent,
 } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router'
 import Stripe from 'stripe'
 import { IPrice } from '../../../../compiler/productInterface'
@@ -21,21 +22,20 @@ import {
   AdminLabel,
   AdminLoadButton,
 } from '../../../../pages/Admin/Admin.styles'
+import { displayAlert } from '../../../../store/alert'
+import { getAlert, getShowAlert } from '../../../../store/alert/selectors'
 import {
   retrieveStripeProduct,
   updateProduct,
 } from '../../../../stripe/products'
+import AlertMessage from '../../../AlertMessage'
+import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
 import { StyledSelect } from '../../AdminSettings/AdminSettings.styles'
 import {
   AdminProductImg,
   AdminProductsDiv,
   StyledAdminProductPage,
 } from '../AdminProducts.styles'
-import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
-import AlertMessage from '../../../AlertMessage'
-import { getAlert, getShowAlert } from '../../../../store/alert/selectors'
-import { useDispatch, useSelector } from 'react-redux'
-import { displayAlert } from '../../../../store/alert'
 
 export default function AdminProductPage() {
   const navigate = useNavigate()

@@ -4,6 +4,7 @@ import AddAdmins from '../components/admin/AddAdmins'
 import AdminDashboard from '../components/admin/AdminDashboard'
 import AdminOrders from '../components/admin/AdminOrders'
 import AdminProducts from '../components/admin/AdminProducts'
+import AdminCreateProduct from '../components/admin/AdminProducts/AdminCreateProduct'
 import AdminProductPage from '../components/admin/AdminProducts/AdminProductPage'
 import AdminProductsList from '../components/admin/AdminProducts/AdminProductsList'
 import AdminSettings from '../components/admin/AdminSettings'
@@ -17,7 +18,6 @@ import NotFound from '../pages/NotFound'
 import Product from '../pages/Product'
 import ProductList from '../pages/ProductList'
 import { getAuthStatus, getUser } from '../store/authentication/selectors'
-import AdminCreateProduct from '../components/admin/AdminProducts/AdminCreateProduct'
 
 export default function Router() {
   const isAuth = useSelector(getAuthStatus)

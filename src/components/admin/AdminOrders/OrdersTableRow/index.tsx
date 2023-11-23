@@ -1,6 +1,6 @@
 import { IAdminViewOrder } from '../../../../compiler/orderInterface'
-import { StyledTableRow, StyledTableCell } from '../AdminOrders.styles'
 import { formatPrice } from '../../../../utilities/formatPrice'
+import { StyledTableRow, StyledTableCell } from '../AdminOrders.styles'
 interface IOrdersTableRowProps {
   order: IAdminViewOrder
 }

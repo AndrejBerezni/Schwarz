@@ -1,3 +1,7 @@
+import { useRef, ChangeEvent, RefObject, useState, FormEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { PrimaryButton } from '../../../../GlobalStyles'
 import {
   AdminForm,
   AdminFormCol,
@@ -6,17 +10,13 @@ import {
   AdminLabel,
   AdminInput,
 } from '../../../../pages/Admin/Admin.styles'
-import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
-import { PrimaryButton } from '../../../../GlobalStyles'
-import { useNavigate } from 'react-router'
-import { useRef, ChangeEvent, RefObject, useState, FormEvent } from 'react'
-import { AdminProductsDiv } from '../AdminProducts.styles'
-import { StyledSelect } from '../../AdminSettings/AdminSettings.styles'
-import { createNewProduct } from '../../../../stripe/products'
-import { useDispatch, useSelector } from 'react-redux'
-import { displayAlert } from '../../../../store/alert'
+import { displayAlert, hideAlert } from '../../../../store/alert'
 import { getAlert, getShowAlert } from '../../../../store/alert/selectors'
+import { createNewProduct } from '../../../../stripe/products'
 import AlertMessage from '../../../AlertMessage'
+import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
+import { StyledSelect } from '../../AdminSettings/AdminSettings.styles'
+import { AdminProductsDiv } from '../AdminProducts.styles'
 
 export default function AdminCreateProduct() {
   const navigate = useNavigate()
@@ -65,6 +65,16 @@ export default function AdminCreateProduct() {
           ? discountLabelRef.current!.value
           : null,
       })
+      dispatch(
+        displayAlert({
+          type: 'newProduct',
+          message: `Product successfully added!\nRedirecting to products list...`,
+        })
+      )
+      setTimeout(() => {
+        dispatch(hideAlert())
+        navigate('/admin/products')
+      }, 3000)
     } catch (error) {
       if (error instanceof Error) {
         dispatch(

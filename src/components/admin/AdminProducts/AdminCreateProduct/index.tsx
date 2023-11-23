@@ -61,7 +61,7 @@ export default function AdminCreateProduct() {
         discountPriceAmount: discountPriceRef.current
           ? discountPriceRef.current!.value
           : null,
-        discountPriceLabel: discountPriceRef.current
+        discountPriceLabel: discountLabelRef.current
           ? discountLabelRef.current!.value
           : null,
       })

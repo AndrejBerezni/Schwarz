@@ -94,9 +94,40 @@ export const updateProduct = async (
     }
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message)
+      throw new Error(error.message)
     }
   }
 }
 
-export const createNewProduct = async (productData: IProductUpdate) => {}
+export const createNewProduct = async (product: IProductUpdate) => {
+  try {
+    const newProduct = await stripeClient.products.create({
+      name: product.name,
+      description: product.description,
+      metadata: {
+        brand: product.brand,
+        discount: product.discount,
+        new: product.new,
+        material: product.material,
+        collection: product.collection,
+      },
+      default_price_data: {
+        currency: 'eur',
+        unit_amount: Number(product.priceAmount) * 100,
+      },
+      images: [product.imageUrl],
+    })
+    if (product.discountPriceAmount && product.discountPriceLabel) {
+      await stripeClient.prices.create({
+        unit_amount: Number(product.discountPriceAmount) * 100,
+        currency: 'eur',
+        product: newProduct.id,
+        nickname: product.discountPriceLabel,
+      })
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message)
+    }
+  }
+}

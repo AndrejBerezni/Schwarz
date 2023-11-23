@@ -106,15 +106,30 @@ export default function MainProductCard({
               {product.metadata.discount === '1' ? (
                 <>
                   <MainProductPreviousPrice>
-                    {formatPrice(product.prices[0].unit_amount / 100)}€
+                    {formatPrice(
+                      product.prices.filter(
+                        (price) => price.description === null
+                      )[0].unit_amount / 100
+                    )}
+                    €
                   </MainProductPreviousPrice>
                   <MainProductPrice>
-                    {formatPrice(product.prices[1].unit_amount / 100)}€
+                    {formatPrice(
+                      product.prices.filter(
+                        (price) => price.description !== null
+                      )[0].unit_amount / 100
+                    )}
+                    €
                   </MainProductPrice>
                 </>
               ) : (
                 <MainProductPrice>
-                  {formatPrice(product.prices[0].unit_amount / 100)}€
+                  {formatPrice(
+                    product.prices.filter(
+                      (price) => price.description === null
+                    )[0].unit_amount / 100
+                  )}
+                  €
                 </MainProductPrice>
               )}
               {!user.isAdmin && (

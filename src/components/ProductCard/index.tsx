@@ -25,7 +25,12 @@ export default function ProductCard({ product }: Readonly<IProductCardProps>) {
           <ProductCardBadge>NEW</ProductCardBadge>
         )}
         {product.metadata.discount === '1' && (
-          <ProductCardBadge>{product.prices[1].description}</ProductCardBadge>
+          <ProductCardBadge>
+            {
+              product.prices.filter((price) => price.description !== null)[0]
+                .description
+            }
+          </ProductCardBadge>
         )}
       </ProductCardBadgeContainer>
       <ProductCardImg src={product.images[0]} />
@@ -39,15 +44,27 @@ export default function ProductCard({ product }: Readonly<IProductCardProps>) {
       {product.metadata.discount === '1' ? (
         <ProductPriceDiv>
           <PreviousProductPrice>
-            {formatPrice(product.prices[0].unit_amount / 100)}€
+            {formatPrice(
+              product.prices.filter((price) => price.description === null)[0]
+                .unit_amount / 100
+            )}
+            €
           </PreviousProductPrice>
           <ProductPrice>
-            {formatPrice(product.prices[1].unit_amount / 100)}€
+            {formatPrice(
+              product.prices.filter((price) => price.description !== null)[0]
+                .unit_amount / 100
+            )}
+            €
           </ProductPrice>
         </ProductPriceDiv>
       ) : (
         <ProductPrice>
-          {formatPrice(product.prices[0].unit_amount / 100)}€
+          {formatPrice(
+            product.prices.filter((price) => price.description === null)[0]
+              .unit_amount / 100
+          )}
+          €
         </ProductPrice>
       )}
     </StyledProductCard>

@@ -96,14 +96,10 @@ export default function AdminProductPage() {
         discountPriceId: prices.filter((price) => price.description !== null)[0]
           ? prices.filter((price) => price.description !== null)[0].priceId
           : null,
-        discountPriceAmount: prices.filter(
-          (price) => price.description !== null
-        )[0]
+        discountPriceAmount: discountPriceRef.current
           ? discountPriceRef.current!.value
           : null,
-        discountPriceLabel: prices.filter(
-          (price) => price.description !== null
-        )[0]
+        discountPriceLabel: discountPriceRef.current
           ? discountLabelRef.current!.value
           : null,
       },
@@ -159,6 +155,7 @@ export default function AdminProductPage() {
                   <AdminLabel>
                     On discount?
                     <StyledSelect
+                      required
                       defaultValue={product.metadata.discount}
                       ref={discountRef}
                       onChange={() => setRefresh((prev) => !prev)}
@@ -170,6 +167,7 @@ export default function AdminProductPage() {
                   <AdminLabel>
                     New Item?
                     <StyledSelect
+                      required
                       defaultValue={product.metadata.new}
                       ref={newRef}
                     >
@@ -180,6 +178,7 @@ export default function AdminProductPage() {
                   <AdminLabel>
                     Collection:
                     <StyledSelect
+                      required
                       defaultValue={product.metadata.collection}
                       ref={collectionRef}
                     >

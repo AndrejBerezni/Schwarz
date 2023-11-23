@@ -34,7 +34,7 @@ export const updateProduct = async (
   initialDiscountPrice?: IPrice
 ) => {
   try {
-    await stripeClient.products.update(update.docId, {
+    await stripeClient.products.update(update.docId!, {
       name: update.name,
       description: update.description,
       metadata: {
@@ -54,7 +54,7 @@ export const updateProduct = async (
         currency: 'eur',
         product: update.docId,
       })
-      await stripeClient.products.update(update.docId, {
+      await stripeClient.products.update(update.docId!, {
         default_price: newPrice.id,
       })
       await stripeClient.prices.update(initialPrice.priceId, { active: false })
@@ -98,3 +98,5 @@ export const updateProduct = async (
     }
   }
 }
+
+export const createNewProduct = async (productData: IProductUpdate) => {}

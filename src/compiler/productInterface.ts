@@ -44,7 +44,7 @@ export interface IProduct {
 }
 
 export interface IProductUpdate {
-  docId: string
+  docId?: string
   name: string
   brand: string
   description: string
@@ -53,7 +53,7 @@ export interface IProductUpdate {
   collection: string
   material: string
   imageUrl: string
-  priceId: string
+  priceId?: string
   priceAmount: number
   discountPriceId?: string | null
   discountPriceAmount?: string | null

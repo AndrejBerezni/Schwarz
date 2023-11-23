@@ -9,13 +9,22 @@ import {
 import { ReviewTextarea } from '../../../Reviews/Reviews.styles'
 import { PrimaryButton } from '../../../../GlobalStyles'
 import { useNavigate } from 'react-router'
-import { useRef, ChangeEvent, RefObject, useState } from 'react'
+import { useRef, ChangeEvent, RefObject, useState, FormEvent } from 'react'
 import { AdminProductsDiv } from '../AdminProducts.styles'
 import { StyledSelect } from '../../AdminSettings/AdminSettings.styles'
+import { createNewProduct } from '../../../../stripe/products'
+import { useDispatch, useSelector } from 'react-redux'
+import { displayAlert } from '../../../../store/alert'
+import { getAlert, getShowAlert } from '../../../../store/alert/selectors'
+import AlertMessage from '../../../AlertMessage'
 
 export default function AdminCreateProduct() {
   const navigate = useNavigate()
-  const [refresh, setRefresh] = useState<boolean>(false)
+  const dispatch = useDispatch()
+  const showAlert = useSelector(getShowAlert)
+  const alert = useSelector(getAlert)
+
+  const [showDiscount, setShowDiscount] = useState<boolean>(false)
 
   const nameRef = useRef<HTMLInputElement>(null)
   const brandRef = useRef<HTMLInputElement>(null)
@@ -36,10 +45,42 @@ export default function AdminCreateProduct() {
     ref.current!.value = event.target.value
   }
 
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    try {
+      await createNewProduct({
+        name: nameRef.current!.value,
+        brand: brandRef.current!.value,
+        description: descriptionRef.current!.value,
+        discount: discountRef.current!.value,
+        new: newRef.current!.value,
+        collection: collectionRef.current!.value,
+        material: materialRef.current!.value,
+        imageUrl: imageUrlRef.current!.value,
+        priceAmount: Number(priceRef.current!.value),
+        discountPriceAmount: discountPriceRef.current
+          ? discountPriceRef.current!.value
+          : null,
+        discountPriceLabel: discountPriceRef.current
+          ? discountLabelRef.current!.value
+          : null,
+      })
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(
+          displayAlert({
+            type: 'editProduct',
+            message: error.message,
+          })
+        )
+      }
+    }
+  }
+
   return (
     <>
       <AdminSubtitle>Add New Product</AdminSubtitle>
-      <AdminForm>
+      <AdminForm onSubmit={(e) => handleSubmit(e)}>
         <AdminFormCol>
           <AdminLabel>
             Name:
@@ -74,7 +115,11 @@ export default function AdminCreateProduct() {
               <StyledSelect
                 required
                 ref={discountRef}
-                onChange={() => setRefresh((prev) => !prev)}
+                onChange={() =>
+                  setShowDiscount(
+                    discountRef.current!.value === '1' ? true : false
+                  )
+                }
               >
                 <option value="0">No</option>
                 <option value="1">Yes</option>
@@ -104,7 +149,7 @@ export default function AdminCreateProduct() {
               onChange={(e) => handleChange(e, priceRef)}
             />
           </AdminLabel>
-          {discountRef.current && discountRef.current.value === '1' && (
+          {showDiscount && (
             <>
               <AdminLabel>
                 Discounted price (EUR):
@@ -154,6 +199,11 @@ export default function AdminCreateProduct() {
             </PrimaryButton>
             <PrimaryButton type="submit">Submit</PrimaryButton>
           </AdminFormRow>
+          {showAlert && alert.type === 'newProduct' && (
+            <AdminFormRow>
+              <AlertMessage />
+            </AdminFormRow>
+          )}
         </AdminFormCol>
       </AdminForm>
     </>

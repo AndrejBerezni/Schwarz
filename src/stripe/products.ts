@@ -1,6 +1,6 @@
 import Stripe from 'stripe'
 import { stripeClient } from './stripe-config'
-import { IProductUpdate } from '../compiler/productInterface'
+import { IPrice, IProductUpdate } from '../compiler/productInterface'
 
 export const getStripeProducts = async (startAfter?: string) => {
   try {
@@ -28,7 +28,10 @@ export const retrieveStripeProduct = async (productId: string) => {
   }
 }
 
-export const updateProduct = async (update: IProductUpdate) => {
+export const updateProduct = async (
+  update: IProductUpdate,
+  initialPrice: IPrice
+) => {
   try {
     await stripeClient.products.update(update.docId, {
       name: update.name,
@@ -42,6 +45,15 @@ export const updateProduct = async (update: IProductUpdate) => {
       },
       images: [update.imageUrl],
     })
+    // Since Stripe API requires creating new price and does not allow updating old one,
+    // we are first checking if changes were made, not to create new price for nothing
+    if (initialPrice.unit_amount !== update.priceAmount * 100) {
+      await stripeClient.prices.create({
+        unit_amount: update.priceAmount * 100,
+        currency: 'eur',
+        product: update.docId,
+      })
+    }
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message)

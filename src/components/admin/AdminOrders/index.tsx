@@ -61,7 +61,9 @@ export default function AdminOrders() {
           <StyledTableHeadCell>Date</StyledTableHeadCell>
         </StyledTableHeadRow>
         {orders.length > 0 ? (
-          orders.map((item) => <OrdersTableRow order={item} />)
+          orders.map((item) => (
+            <OrdersTableRow order={item} key={`${item.orderId}-or`} />
+          ))
         ) : (
           <Spinner />
         )}

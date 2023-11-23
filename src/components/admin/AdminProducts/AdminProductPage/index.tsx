@@ -80,19 +80,22 @@ export default function AdminProductPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    await updateProduct({
-      docId: product!.id,
-      name: nameRef.current!.value,
-      brand: brandRef.current!.value,
-      description: descriptionRef.current!.value,
-      discount: discountRef.current!.value,
-      new: newRef.current!.value,
-      collection: collectionRef.current!.value,
-      material: materialRef.current!.value,
-      imageUrl: imageUrlRef.current!.value,
-      priceId: prices[0].priceId,
-      priceAmount: prices[0].unit_amount,
-    })
+    await updateProduct(
+      {
+        docId: product!.id,
+        name: nameRef.current!.value,
+        brand: brandRef.current!.value,
+        description: descriptionRef.current!.value,
+        discount: discountRef.current!.value,
+        new: newRef.current!.value,
+        collection: collectionRef.current!.value,
+        material: materialRef.current!.value,
+        imageUrl: imageUrlRef.current!.value,
+        priceId: prices[0].priceId,
+        priceAmount: Number(priceRef.current!.value),
+      },
+      prices[0]
+    )
     console.log('updated')
   }
 

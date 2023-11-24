@@ -12,6 +12,7 @@ export const AdminDashboardRow = styled.div`
   width: 100%;
   justify-content: space-around;
   gap: 20px;
+  margin-bottom: 20px;
 `
 
 export const StyledAdminDashboardBox = styled(AdminDashboardCol)`
@@ -20,6 +21,7 @@ export const StyledAdminDashboardBox = styled(AdminDashboardCol)`
   background: linear-gradient(to bottom, #222222, #111111, #000000);
   display: flex;
   flex-direction: column;
+  gap: 5px;
   justify-content: center;
   width: 260px;
   padding: 40px 10px;

@@ -1,5 +1,6 @@
 import Stripe from 'stripe'
 import { stripeClient } from './stripe-config'
+import { formatPrice } from '../utilities/formatPrice'
 
 //options to format the date
 const options: Intl.DateTimeFormatOptions = {
@@ -68,9 +69,10 @@ export const getPayments = async (startAfter?: string) => {
   return paymentDetails
 }
 
-//Return sum of successfull payments for certain period
+//Return sum of successfull payments or number of sales for certain period
 export const getSuccessfulPaymentsSum = async (
-  period: 'month' | 'week' | 'day'
+  period: 'month' | 'week' | 'day',
+  returnInformation: 'balance' | 'sales'
 ) => {
   // Get the current date
   const currentDate = new Date()
@@ -113,7 +115,6 @@ export const getSuccessfulPaymentsSum = async (
   const startTimestamp = Math.floor(startDate.getTime() / 1000)
   const endTimestamp = Math.floor(endDate.getTime() / 1000)
 
-  // Retrieve successful payments for the current month
   const allPayments = await stripeClient.paymentIntents.list({
     created: {
       gte: startTimestamp,
@@ -125,8 +126,10 @@ export const getSuccessfulPaymentsSum = async (
     (payment: Stripe.PaymentIntent) => payment.status === 'succeeded'
   )
 
-  // Calculate the sum of amounts
-  const sum = successfulPayments.reduce((acc, item) => acc + item.amount, 0)
-
-  return sum
+  if (returnInformation === 'balance') {
+    const sum = successfulPayments.reduce((acc, item) => acc + item.amount, 0)
+    return formatPrice(sum / 100)
+  } else if (returnInformation === 'sales') {
+    return successfulPayments.length.toString()
+  }
 }

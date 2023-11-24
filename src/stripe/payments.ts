@@ -67,3 +67,66 @@ export const getPayments = async (startAfter?: string) => {
   )
   return paymentDetails
 }
+
+//Return sum of successfull payments for certain period
+export const getSuccessfulPaymentsSum = async (
+  period: 'month' | 'week' | 'day'
+) => {
+  // Get the current date
+  const currentDate = new Date()
+
+  // Set the start and end dates according to argument passed
+  let startDate
+  let endDate
+
+  if (period === 'month') {
+    startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+    endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
+  } else if (period === 'week') {
+    const currentDay = currentDate.getDay()
+    startDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() - currentDay
+    )
+    endDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + (6 - currentDay)
+    )
+  } else if (period === 'day') {
+    startDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate()
+    )
+    endDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + 1
+    )
+  } else {
+    throw new Error('Invalid period. Please use "month", "week", or "day".')
+  }
+
+  // Convert dates to Unix timestamps
+  const startTimestamp = Math.floor(startDate.getTime() / 1000)
+  const endTimestamp = Math.floor(endDate.getTime() / 1000)
+
+  // Retrieve successful payments for the current month
+  const allPayments = await stripeClient.paymentIntents.list({
+    created: {
+      gte: startTimestamp,
+      lte: endTimestamp,
+    },
+  })
+
+  const successfulPayments = allPayments.data.filter(
+    (payment: Stripe.PaymentIntent) => payment.status === 'succeeded'
+  )
+
+  // Calculate the sum of amounts
+  const sum = successfulPayments.reduce((acc, item) => acc + item.amount, 0)
+
+  return sum
+}

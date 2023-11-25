@@ -15,7 +15,6 @@ export default function AdminDashboard() {
           />
         ))}
       </AdminDashboardRow>
-      <AdminDashboardRow></AdminDashboardRow>
       <AdminSubtitle>Total Income</AdminSubtitle>
       <AdminDashboardRow>
         {timePeriods.map((period) => (

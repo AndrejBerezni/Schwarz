@@ -4,48 +4,39 @@ import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { PiChartLineUpLight } from 'react-icons/pi'
 import { RiPagesLine } from 'react-icons/ri'
 import { useNavigate } from 'react-router'
-import {
-  StyledAdminNavbar,
-  AdminNavLink,
-  AdminNavLinkText,
-  AdminNavLinkIcon,
-} from './AdminNavbar.styles'
+import { StyledAdminNavbar } from './AdminNavbar.styles'
+import AdminNavLink from './AdminNavLink'
 
 export default function AdminNavbar() {
   const navigate = useNavigate()
 
   return (
     <StyledAdminNavbar>
-      <AdminNavLink onClick={() => navigate('/admin')}>
-        <AdminNavLinkText>Dashboard</AdminNavLinkText>
-        <AdminNavLinkIcon>
-          <PiChartLineUpLight />
-        </AdminNavLinkIcon>
-      </AdminNavLink>
-      <AdminNavLink onClick={() => navigate('/admin/products')}>
-        <AdminNavLinkText>Products</AdminNavLinkText>
-        <AdminNavLinkIcon>
-          <BsWatch />
-        </AdminNavLinkIcon>
-      </AdminNavLink>
-      <AdminNavLink onClick={() => navigate('/admin/orders')}>
-        <AdminNavLinkText>Orders</AdminNavLinkText>
-        <AdminNavLinkIcon>
-          <FaReceipt />
-        </AdminNavLinkIcon>
-      </AdminNavLink>
-      <AdminNavLink onClick={() => navigate('/admin/admins')}>
-        <AdminNavLinkText>Admins</AdminNavLinkText>
-        <AdminNavLinkIcon>
-          <MdOutlineAdminPanelSettings />
-        </AdminNavLinkIcon>
-      </AdminNavLink>
-      <AdminNavLink onClick={() => navigate('/admin/settings')}>
-        <AdminNavLinkText>Page Settings</AdminNavLinkText>
-        <AdminNavLinkIcon>
-          <RiPagesLine />
-        </AdminNavLinkIcon>
-      </AdminNavLink>
+      <AdminNavLink
+        handleClick={() => navigate('/admin')}
+        icon={<PiChartLineUpLight />}
+        linkText="Dashboard"
+      />
+      <AdminNavLink
+        handleClick={() => navigate('/admin/products')}
+        icon={<BsWatch />}
+        linkText="Products"
+      />
+      <AdminNavLink
+        handleClick={() => navigate('/admin/orders')}
+        icon={<FaReceipt />}
+        linkText="Orders"
+      />
+      <AdminNavLink
+        handleClick={() => navigate('/admin/admins')}
+        icon={<MdOutlineAdminPanelSettings />}
+        linkText="Admins"
+      />
+      <AdminNavLink
+        handleClick={() => navigate('/admin/settings')}
+        icon={<RiPagesLine />}
+        linkText="Page Settings"
+      />
     </StyledAdminNavbar>
   )
 }

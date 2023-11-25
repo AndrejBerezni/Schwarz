@@ -16,7 +16,7 @@ export const ProductsContainer = styled.div`
   position: relative;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-around;
+  justify-content: center;
   &::-webkit-scrollbar {
     width: 8px;
   }

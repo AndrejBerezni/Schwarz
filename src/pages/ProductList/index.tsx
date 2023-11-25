@@ -1,3 +1,4 @@
+import { IoReloadOutline } from 'react-icons/io5'
 import { useParams } from 'react-router'
 import { Navigate } from 'react-router-dom'
 import {
@@ -10,9 +11,9 @@ import Filters from '../../components/Filters'
 import ProductCard from '../../components/ProductCard'
 import Spinner from '../../components/Spinner'
 import { categories } from '../../data/categories'
-import { PrimaryButton } from '../../GlobalStyles'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
+import { AdminLoadButton } from '../Admin/Admin.styles'
 
 export default function ProductList() {
   const { category } = useParams()
@@ -44,10 +45,15 @@ export default function ProductList() {
               ))
             )}
           </ProductsContainer>
-          {!allProductsLoaded && (
-            <PrimaryButton variant="outline" onClick={loadMore}>
-              Load more
-            </PrimaryButton>
+          {allProductsLoaded ? (
+            <h4>No more products to show</h4>
+          ) : (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <AdminLoadButton onClick={loadMore}>
+                Load more
+                <IoReloadOutline />
+              </AdminLoadButton>
+            </div>
           )}
         </StyledProductList>
       ) : (

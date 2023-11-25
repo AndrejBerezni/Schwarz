@@ -39,7 +39,7 @@ export default function useProducts({
           if (prevProducts.length > 0) {
             setLastProduct(prevProducts[prevProducts.length - 1].docId)
           }
-          if (prevProducts.length < 6) {
+          if (prevProducts.length === 0) {
             setAllProductsLoaded(true)
           }
         }
@@ -57,12 +57,12 @@ export default function useProducts({
     )
     if (applyListFilters) {
       const filteredProducts = filterProducts(newProducts, filters)
-      if (filteredProducts.length < 6) {
+      if (filteredProducts.length === 0) {
         setAllProductsLoaded(true)
       }
       setProducts((prev) => [...(prev ?? []), ...filteredProducts])
     } else {
-      if (newProducts.length < 6) {
+      if (newProducts.length === 0) {
         setAllProductsLoaded(true)
       }
       setProducts((prev) => [...(prev ?? []), ...newProducts])

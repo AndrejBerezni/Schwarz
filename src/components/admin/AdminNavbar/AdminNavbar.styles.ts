@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-export const StyledAdminNavbar = styled.ul`
+export const StyledAdminNavbar = styled.menu`
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@ export const AdminNavLinkIcon = styled.p`
   }
 `
 
-export const AdminNavLink = styled.li`
+export const StyledAdminNavLink = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;

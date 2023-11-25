@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
 import { IoReloadOutline } from 'react-icons/io5'
-import {
-  StyledTable,
-  StyledTableHeadRow,
-  StyledTableHeadCell,
-} from './AdminOrders.styles'
+import { StyledTable } from './AdminOrders.styles'
+import OrdersTableHeader from './OrdersTableHeader'
 import OrdersTableRow from './OrdersTableRow'
 import { IAdminViewOrder } from '../../../compiler/orderInterface'
 import { AdminTitle, AdminLoadButton } from '../../../pages/Admin/Admin.styles'
@@ -52,14 +49,7 @@ export default function AdminOrders() {
     <>
       <AdminTitle>Orders</AdminTitle>
       <StyledTable>
-        <StyledTableHeadRow>
-          <StyledTableHeadCell>Order ID</StyledTableHeadCell>
-          <StyledTableHeadCell>Amount</StyledTableHeadCell>
-          <StyledTableHeadCell>Currency</StyledTableHeadCell>
-          <StyledTableHeadCell>Status</StyledTableHeadCell>
-          <StyledTableHeadCell>Customer</StyledTableHeadCell>
-          <StyledTableHeadCell>Date</StyledTableHeadCell>
-        </StyledTableHeadRow>
+        <OrdersTableHeader />
         {orders.length > 0 ? (
           orders.map((item) => (
             <OrdersTableRow order={item} key={`${item.orderId}-or`} />

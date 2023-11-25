@@ -71,7 +71,7 @@ export default function FeaturedCarousel({
          because I did not arrange
           not having empty space on the right inside carousel
            when the last item from array was set as first: */}
-            {products.slice(0, 5).map((item) => (
+            {products.slice(0, 6).map((item) => (
               <ProductCard key={`${item.docId}2`} product={item} />
             ))}
           </FeaturedCarouselInner>

@@ -1,8 +1,16 @@
+import {
+  StyledNotFoundContainer,
+  NotFoundTitle,
+  NotFoundText,
+} from './NotFound.styles'
+
 export default function NotFound() {
   return (
-    <>
-      <h2>404 - Not Found</h2>
-      <p>Sorry, the page you are looking for does not exist.</p>
-    </>
+    <StyledNotFoundContainer>
+      <NotFoundTitle>404 - Not Found</NotFoundTitle>
+      <NotFoundText>
+        Sorry, the page you are looking for does not exist.
+      </NotFoundText>
+    </StyledNotFoundContainer>
   )
 }

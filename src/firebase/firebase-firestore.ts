@@ -26,6 +26,7 @@ export const db = getFirestore(app)
 export const getAllProducts = async (
   metadataProp: string,
   metadataCriteria: string,
+  limitValue: number,
   lastItemId?: string
 ): Promise<IProduct[]> => {
   const productsArray = []
@@ -34,21 +35,25 @@ export const getAllProducts = async (
     const lastItemSnap = await getDoc(doc(db, 'products', lastItemId))
     q =
       metadataCriteria === 'all'
-        ? query(collection(db, 'products'), startAfter(lastItemSnap), limit(6))
+        ? query(
+            collection(db, 'products'),
+            startAfter(lastItemSnap),
+            limit(limitValue)
+          )
         : query(
             collection(db, 'products'),
             where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`),
             startAfter(lastItemSnap),
-            limit(6)
+            limit(limitValue)
           )
   } else {
     q =
       metadataCriteria === 'all'
-        ? query(collection(db, 'products'), limit(6))
+        ? query(collection(db, 'products'), limit(limitValue))
         : query(
             collection(db, 'products'),
             where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`),
-            limit(6)
+            limit(limitValue)
           )
   }
 

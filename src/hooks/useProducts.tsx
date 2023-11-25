@@ -26,7 +26,11 @@ export default function useProducts({
     const fetchProducts = async () => {
       setProducts(null) //adding this to start Spinner when filters are changed, while waiting for new results - otherwise screen would display old results until new ones are fetched and user would not know what is going on
       setAllProductsLoaded(false)
-      const newProducts = await getAllProducts(metadataProp, metadataCriteria)
+      const newProducts = await getAllProducts(
+        metadataProp,
+        metadataCriteria,
+        6
+      )
       if (applyListFilters) {
         const filteredProducts = filterProducts(newProducts, filters)
         setProducts(filteredProducts)
@@ -53,6 +57,7 @@ export default function useProducts({
     const newProducts = await getAllProducts(
       metadataProp,
       metadataCriteria,
+      6,
       lastProduct
     )
     if (applyListFilters) {

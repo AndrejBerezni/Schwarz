@@ -15,7 +15,11 @@ export default function useCarouselProducts({
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const newProducts = await getAllProducts(metadataProp, metadataCriteria)
+      const newProducts = await getAllProducts(
+        metadataProp,
+        metadataCriteria,
+        15
+      )
       setProducts(newProducts)
     }
 

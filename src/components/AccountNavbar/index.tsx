@@ -1,17 +1,16 @@
-import { useLocation } from 'react-router'
-import { Link } from 'react-router-dom'
-import { StyledAccountNavbar, AccountNavLink } from './AccountNavbar.styles'
-import { signOutUser } from '../../firebase/firebase-authentication'
-import { signOut } from '../../store/authentication'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router'
 import { VscSignOut } from 'react-icons/vsc'
-
+import { useDispatch } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import {
+  StyledAccountNavbar,
+  AccountNavLink,
   SignOutButton,
   SignOutTooltip,
   AccountNavDiv,
 } from './AccountNavbar.styles'
+import { signOutUser } from '../../firebase/firebase-authentication'
+import { signOut } from '../../store/authentication'
 
 export default function AccountNavbar() {
   const navigate = useNavigate()

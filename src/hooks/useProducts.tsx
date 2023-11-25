@@ -20,10 +20,12 @@ export default function useProducts({
   const [products, setProducts] = useState<IProduct[] | null>([])
   const filters: IFilterState = useSelector(getFilters)
   const [lastProduct, setLastProduct] = useState<string>('')
+  const [allProductsLoaded, setAllProductsLoaded] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchProducts = async () => {
       setProducts(null) //adding this to start Spinner when filters are changed, while waiting for new results - otherwise screen would display old results until new ones are fetched and user would not know what is going on
+      setAllProductsLoaded(false)
       const newProducts = await getAllProducts(metadataProp, metadataCriteria)
       if (applyListFilters) {
         const filteredProducts = filterProducts(newProducts, filters)
@@ -33,8 +35,13 @@ export default function useProducts({
       }
       // accessing last updated state (using only setLastProduct would not access updated state)
       setProducts((prevProducts) => {
-        if (prevProducts && prevProducts.length > 0) {
-          setLastProduct(prevProducts[prevProducts.length - 1].docId)
+        if (prevProducts) {
+          if (prevProducts.length > 0) {
+            setLastProduct(prevProducts[prevProducts.length - 1].docId)
+          }
+          if (prevProducts.length < 6) {
+            setAllProductsLoaded(true)
+          }
         }
         return prevProducts
       })
@@ -50,8 +57,14 @@ export default function useProducts({
     )
     if (applyListFilters) {
       const filteredProducts = filterProducts(newProducts, filters)
+      if (filteredProducts.length < 6) {
+        setAllProductsLoaded(true)
+      }
       setProducts((prev) => [...(prev ?? []), ...filteredProducts])
     } else {
+      if (newProducts.length < 6) {
+        setAllProductsLoaded(true)
+      }
       setProducts((prev) => [...(prev ?? []), ...newProducts])
     }
     setProducts((prevProducts) => {
@@ -62,5 +75,5 @@ export default function useProducts({
     })
   }
 
-  return { products, loadMore }
+  return { products, loadMore, allProductsLoaded }
 }

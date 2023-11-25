@@ -1,6 +1,6 @@
 import { AdminDashboardCol, AdminDashboardRow } from './AdminDashboard.styles'
-import { AdminSubtitle } from '../../../pages/Admin/Admin.styles'
 import AdminDashboardBox from './AdminDashboardBox'
+import { AdminSubtitle } from '../../../pages/Admin/Admin.styles'
 
 export default function AdminDashboard() {
   const timePeriods = ['month', 'week', 'day']

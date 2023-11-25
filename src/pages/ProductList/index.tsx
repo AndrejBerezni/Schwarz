@@ -10,14 +10,14 @@ import Filters from '../../components/Filters'
 import ProductCard from '../../components/ProductCard'
 import Spinner from '../../components/Spinner'
 import { categories } from '../../data/categories'
+import { PrimaryButton } from '../../GlobalStyles'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
-import { PrimaryButton } from '../../GlobalStyles'
 
 export default function ProductList() {
   const { category } = useParams()
   const brand = convertBrandString(category!)
-  const { products, loadMore } = useProducts({
+  const { products, loadMore, allProductsLoaded } = useProducts({
     metadataProp: 'brand',
     metadataCriteria: brand,
     applyListFilters: true,
@@ -44,9 +44,11 @@ export default function ProductList() {
               ))
             )}
           </ProductsContainer>
-          <PrimaryButton variant="outline" onClick={loadMore}>
-            Load more
-          </PrimaryButton>
+          {!allProductsLoaded && (
+            <PrimaryButton variant="outline" onClick={loadMore}>
+              Load more
+            </PrimaryButton>
+          )}
         </StyledProductList>
       ) : (
         <Navigate to="/404" />

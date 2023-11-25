@@ -1,10 +1,10 @@
+import { useState, useEffect } from 'react'
+import { getSuccessfulPaymentsSum } from '../../../../stripe/payments'
 import {
   StyledAdminDashboardBox,
   AdminDashBoxTitle,
   AdminDashBoxNumber,
 } from '../AdminDashboard.styles'
-import { useState, useEffect } from 'react'
-import { getSuccessfulPaymentsSum } from '../../../../stripe/payments'
 
 interface IAdminDashboardBoxProps {
   period: 'month' | 'week' | 'day'
@@ -27,7 +27,7 @@ export default function AdminDashboardBox({
       }
     }
     fetchBalance()
-  }, [])
+  }, [period, type])
 
   return (
     <StyledAdminDashboardBox>

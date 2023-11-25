@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components'
 import BrowseCategoriesSide from './components/BrowseCategories/BrowseCategoriesSide'
 import Cart from './components/Cart'
 import Footer from './components/Footer'
+import ResetPassword from './components/forms/ResetPassword'
 import SignIn from './components/forms/SignIn'
 import SignUp from './components/forms/SignUp'
 import NewsletterSection from './components/NewsletterSection'
@@ -23,6 +24,7 @@ function App() {
       <Footer />
       <SignIn />
       <SignUp />
+      <ResetPassword />
     </ThemeProvider>
   )
 }

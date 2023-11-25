@@ -104,3 +104,12 @@ export const CloseForm = styled.button`
     transform: translateY(-2px);
   }
 `
+
+export const FormBtnsDiv = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+`

@@ -45,6 +45,11 @@ export default function SignIn() {
     dispatch(showForm('signUp'))
   }
 
+  const redirectToResetPassword = () => {
+    dispatch(hideForm())
+    dispatch(showForm('resetPassword'))
+  }
+
   const handleEmailSignIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
@@ -123,7 +128,9 @@ export default function SignIn() {
               required
               placeholder="Enter your password here..."
             ></FormInput>
-            <FormLink>Forgot password?</FormLink>
+            <FormLink onClick={redirectToResetPassword}>
+              Forgot password?
+            </FormLink>
           </InputDiv>
           <PrimaryButton type="submit">Sign In</PrimaryButton>
         </StyledForm>

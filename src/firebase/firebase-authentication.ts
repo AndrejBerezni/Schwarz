@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  sendPasswordResetEmail,
 } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import { app } from './firebase-config'
@@ -66,4 +67,16 @@ export const checkIsAdmin = async () => {
     return docSnapshot.exists()
   }
   return false
+}
+
+//Send password reset email
+export const passwordReset = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email)
+    return 'Password reset email sent!'
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(error.message)
+    }
+  }
 }

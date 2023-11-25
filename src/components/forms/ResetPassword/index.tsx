@@ -1,6 +1,8 @@
-import { useId, useRef } from 'react'
+import { FormEvent, useId, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { passwordReset } from '../../../firebase/firebase-authentication'
 import { PrimaryButton } from '../../../GlobalStyles'
+import { displayAlert } from '../../../store/alert'
 import { getAlert, getShowAlert } from '../../../store/alert/selectors'
 import { hideForm, showForm } from '../../../store/authentication'
 import { getAuthForm } from '../../../store/authentication/selectors'
@@ -36,12 +38,29 @@ export default function ResetPassword() {
     dispatch(showForm('signIn'))
   }
 
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    try {
+      if (emailRef.current) {
+        await passwordReset(emailRef.current.value).then((success) =>
+          dispatch(displayAlert({ type: 'resetPassword', message: success }))
+        )
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(
+          displayAlert({ type: 'resetPassword', message: error.message })
+        )
+      }
+    }
+  }
+
   return (
     <Modal show={show}>
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Reset Password</h2>
-        <StyledForm>
+        <StyledForm onSubmit={(e) => handleSubmit(e)}>
           <InputDiv>
             <FormLabel htmlFor={id}>Email</FormLabel>
 
@@ -65,7 +84,7 @@ export default function ResetPassword() {
           </FormBtnsDiv>
         </StyledForm>
         <CloseForm onClick={handleClose}>X</CloseForm>
-        {showAlert && alert.type === 'signIn' && <AlertMessage />}
+        {showAlert && alert.type === 'resetPassword' && <AlertMessage />}
       </ModalContent>
     </Modal>
   )

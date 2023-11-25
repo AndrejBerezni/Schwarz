@@ -24,9 +24,6 @@ export const ProductsContainer = styled.div`
     border-radius: 5px;
     background-color: ${(props) => props.theme.primary};
   }
-  background-color: ${(props) => props.theme.navBgColor};
-  border: 1px solid ${(props) => props.theme.borderColor};
-  border-radius: 10px;
 `
 
 export const ProductsHeader = styled.div`

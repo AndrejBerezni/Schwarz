@@ -13,6 +13,7 @@ import {
   orderBy,
   arrayUnion,
   arrayRemove,
+  startAfter,
 } from 'firebase/firestore'
 import { app } from './firebase-config'
 import { IOrder } from '../compiler/orderInterface'
@@ -24,16 +25,33 @@ export const db = getFirestore(app)
 // Get products
 export const getAllProducts = async (
   metadataProp: string,
-  metadataCriteria: string
+  metadataCriteria: string,
+  lastItemId?: string
 ): Promise<IProduct[]> => {
   const productsArray = []
-  const q =
-    metadataCriteria === 'all'
-      ? collection(db, 'products')
-      : query(
-          collection(db, 'products'),
-          where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`)
-        )
+  let q
+  if (lastItemId) {
+    const lastItemSnap = await getDoc(doc(db, 'products', lastItemId))
+    q =
+      metadataCriteria === 'all'
+        ? query(collection(db, 'products'), startAfter(lastItemSnap), limit(6))
+        : query(
+            collection(db, 'products'),
+            where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`),
+            startAfter(lastItemSnap),
+            limit(6)
+          )
+  } else {
+    q =
+      metadataCriteria === 'all'
+        ? query(collection(db, 'products'), limit(6))
+        : query(
+            collection(db, 'products'),
+            where(`metadata.${metadataProp}`, '==', `${metadataCriteria}`),
+            limit(6)
+          )
+  }
+
   const querySnapshot = await getDocs(q)
 
   for (const doc of querySnapshot.docs) {

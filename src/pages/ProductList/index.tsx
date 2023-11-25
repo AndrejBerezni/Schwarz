@@ -12,11 +12,12 @@ import Spinner from '../../components/Spinner'
 import { categories } from '../../data/categories'
 import useProducts from '../../hooks/useProducts'
 import { convertBrandString } from '../../utilities/convertBrandString'
+import { PrimaryButton } from '../../GlobalStyles'
 
 export default function ProductList() {
   const { category } = useParams()
   const brand = convertBrandString(category!)
-  const products = useProducts({
+  const { products } = useProducts({
     metadataProp: 'brand',
     metadataCriteria: brand,
     applyListFilters: true,
@@ -43,6 +44,7 @@ export default function ProductList() {
               ))
             )}
           </ProductsContainer>
+          <PrimaryButton variant="outline">Load more</PrimaryButton>
         </StyledProductList>
       ) : (
         <Navigate to="/404" />

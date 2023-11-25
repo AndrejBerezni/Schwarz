@@ -17,7 +17,7 @@ import { PrimaryButton } from '../../GlobalStyles'
 export default function ProductList() {
   const { category } = useParams()
   const brand = convertBrandString(category!)
-  const { products } = useProducts({
+  const { products, loadMore } = useProducts({
     metadataProp: 'brand',
     metadataCriteria: brand,
     applyListFilters: true,
@@ -44,7 +44,9 @@ export default function ProductList() {
               ))
             )}
           </ProductsContainer>
-          <PrimaryButton variant="outline">Load more</PrimaryButton>
+          <PrimaryButton variant="outline" onClick={loadMore}>
+            Load more
+          </PrimaryButton>
         </StyledProductList>
       ) : (
         <Navigate to="/404" />

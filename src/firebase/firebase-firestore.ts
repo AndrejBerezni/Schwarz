@@ -31,6 +31,7 @@ export const getAllProducts = async (
   const productsArray = []
   let q
   if (lastItemId) {
+    console.log('last item:', lastItemId)
     const lastItemSnap = await getDoc(doc(db, 'products', lastItemId))
     q =
       metadataCriteria === 'all'

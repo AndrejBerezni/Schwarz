@@ -48,7 +48,7 @@ export default function TopNavbar() {
           Schwarz
         </NavTitle>
       </NavDiv>
-      <NavbarSearch />
+      <NavbarSearch smallScreen={false} />
       <NavDiv>
         {!user.isAdmin && (
           <NavButton
@@ -81,6 +81,7 @@ export default function TopNavbar() {
           )}
         </div>
       </NavDiv>
+      <NavbarSearch smallScreen={true} />
     </StyledTopNavbar>
   )
 }

@@ -14,9 +14,19 @@ import {
 } from './NavbarSearch.styles'
 import { IProduct } from '../../../compiler/productInterface'
 import { searchProducts } from '../../../firebase/firebase-firestore'
-import { NavDiv, NavInput, NavSearchIcon } from '../TopNavbar.styles'
+import {
+  StyledNavbarSearch,
+  NavInput,
+  NavSearchIcon,
+} from '../TopNavbar.styles'
 
-export default function NavbarSearch() {
+interface INavbarSearchProps {
+  smallScreen: boolean
+}
+
+export default function NavbarSearch({
+  smallScreen,
+}: Readonly<INavbarSearchProps>) {
   const navigate = useNavigate()
   const [results, setResults] = useState<IProduct[]>([])
   const [input, setInput] = useState<string>('')
@@ -46,7 +56,7 @@ export default function NavbarSearch() {
   }
 
   return (
-    <NavDiv>
+    <StyledNavbarSearch smallScreen={smallScreen}>
       <NavInput
         type="text"
         placeholder="Search for products..."
@@ -78,6 +88,6 @@ export default function NavbarSearch() {
           ))}
         </SearchResultsBox>
       )}
-    </NavDiv>
+    </StyledNavbarSearch>
   )
 }

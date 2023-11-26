@@ -40,10 +40,28 @@ export const NavDiv = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     margin-bottom: 10px;
+    &:nth-of-type(2) {
+      justify-content: space-between;
+      margin-bottom: 0px;
+    }
   }
   &:nth-of-type(3) {
     justify-content: space-between;
     margin-bottom: 0px;
+  }
+`
+
+interface IStyledNavbarSearchProps {
+  theme: {
+    navBgColor: string
+  }
+  smallScreen: boolean
+}
+
+export const StyledNavbarSearch = styled(NavDiv)<IStyledNavbarSearchProps>`
+  display: ${(props) => (props.smallScreen ? 'none' : 'flex')};
+  @media (max-width: 768px) {
+    display: ${(props) => (props.smallScreen ? 'flex' : 'none')};
   }
 `
 

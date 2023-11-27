@@ -104,7 +104,7 @@ export default function SignIn() {
   }
 
   return (
-    <Modal show={show}>
+    <Modal show={show} data-testid="sign-in-form">
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Sign In To Continue</h2>
@@ -136,7 +136,9 @@ export default function SignIn() {
         </StyledForm>
         <p>
           Don't have an account?{' '}
-          <FormLink onClick={redirectToSignUp}>Sign up</FormLink>
+          <FormLink onClick={redirectToSignUp} data-testid="sign-up-link">
+            Sign up
+          </FormLink>
         </p>
         <p>or</p>
         <PrimaryButton variant="outline" onClick={handleGoogleSignIn}>

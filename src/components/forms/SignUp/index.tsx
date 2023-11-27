@@ -77,7 +77,7 @@ export default function SignIn() {
   }
 
   return (
-    <Modal show={show}>
+    <Modal show={show} data-testid="sign-up-form">
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Sign Up</h2>

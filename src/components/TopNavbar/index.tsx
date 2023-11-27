@@ -24,7 +24,7 @@ import { calculateTotalItems } from '../../utilities/cartCalculations'
 export default function TopNavbar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const isAuth = useSelector(getAuthStatus)
+  const isAuth: boolean = useSelector(getAuthStatus)
   const user = useSelector(getUser)
   const cart = useSelector(getCartItems)
 
@@ -59,7 +59,10 @@ export default function TopNavbar() {
           </NavButton>
         )}
         <div>
-          <NavButton onClick={handleAccountPageAccess}>
+          <NavButton
+            data-testid="account-nav-btn"
+            onClick={handleAccountPageAccess}
+          >
             {user.isAdmin ? <RiAdminFill /> : <MdAccountCircle />}
           </NavButton>
           <NavTooltip>{user.isAdmin ? 'Admin' : 'Account'}</NavTooltip>

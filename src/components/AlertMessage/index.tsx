@@ -15,7 +15,7 @@ export default function AlertMessage() {
   return (
     <StyledAlertMessage>
       <p>{alert.message}</p>
-      <AlertCloseBtn onClick={handleClose}>
+      <AlertCloseBtn onClick={handleClose} data-testid="alert-close-btn">
         <IoMdCloseCircle />
       </AlertCloseBtn>
     </StyledAlertMessage>

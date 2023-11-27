@@ -83,9 +83,9 @@ export default function SignIn() {
         <h2>Sign Up</h2>
         <StyledForm onSubmit={handleEmailSignUp}>
           <InputDiv>
-            <FormLabel htmlFor="email">Email</FormLabel>
+            <FormLabel htmlFor="emailSU">Email</FormLabel>
             <FormInput
-              id="email"
+              id="emailSU"
               type="email"
               ref={emailRef}
               required
@@ -93,9 +93,9 @@ export default function SignIn() {
             ></FormInput>
           </InputDiv>
           <InputDiv>
-            <FormLabel htmlFor="password">Password</FormLabel>
+            <FormLabel htmlFor="passwordSU">Password</FormLabel>
             <FormInput
-              id="password"
+              id="passwordSU"
               type="password"
               ref={passwordRef}
               required
@@ -103,9 +103,9 @@ export default function SignIn() {
             ></FormInput>
           </InputDiv>
           <InputDiv>
-            <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+            <FormLabel htmlFor="confirmPasswordSU">Confirm Password</FormLabel>
             <FormInput
-              id="confirmPassword"
+              id="confirmPasswordSU"
               type="password"
               ref={confirmPasswordRef}
               required

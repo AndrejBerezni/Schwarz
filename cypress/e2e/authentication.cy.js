@@ -92,4 +92,16 @@ describe('customer authentication', () => {
       expect(loc.href).to.eq('http://localhost:5173/account')
     })
   })
+
+  it('admin can sign in and is properly redirected to admin portal', () => {
+    cy.navigateAndOpenForm()
+    cy.get('input[id="emailSI"]').type('admin1@schwarz.com')
+    cy.get('input[id="passwordSI"]').type('admin1')
+    cy.get('button')
+      .contains(/sign in/i)
+      .click()
+    cy.location().should((loc) => {
+      expect(loc.href).to.eq('http://localhost:5173/admin')
+    })
+  })
 })

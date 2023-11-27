@@ -56,7 +56,7 @@ export default function ResetPassword() {
   }
 
   return (
-    <Modal show={show}>
+    <Modal show={show} data-testid="reset-password-form">
       <ModalOuter onClick={handleClose}></ModalOuter>
       <ModalContent>
         <h2>Reset Password</h2>
@@ -66,6 +66,7 @@ export default function ResetPassword() {
 
             <FormInput
               id={id}
+              data-testid="rp-email-input"
               type="email"
               ref={emailRef}
               required

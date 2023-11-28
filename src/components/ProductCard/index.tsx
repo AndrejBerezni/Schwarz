@@ -19,7 +19,12 @@ interface IProductCardProps {
 export default function ProductCard({ product }: Readonly<IProductCardProps>) {
   const navigate = useNavigate()
   return (
-    <StyledProductCard onClick={() => navigate(`/products/${product.docId}`)}>
+    <StyledProductCard
+      onClick={() => {
+        window.scrollTo(0, 0)
+        navigate(`/products/${product.docId}`)
+      }}
+    >
       <ProductCardBadgeContainer>
         {product.metadata.new === '1' && (
           <ProductCardBadge>NEW</ProductCardBadge>

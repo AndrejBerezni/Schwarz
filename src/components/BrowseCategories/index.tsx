@@ -7,19 +7,24 @@ import {
 
 export default function BrowseCategories() {
   const navigate = useNavigate()
+
+  const handleClick = (url: string) => {
+    window.scrollTo(0, 0)
+    navigate(url)
+  }
   return (
     <StyledBrowseCategories>
       <BrowseTitle>Browse Brands</BrowseTitle>
-      <BrowseItem onClick={() => navigate('/all')}>All Brands</BrowseItem>
-      <BrowseItem onClick={() => navigate('/cartier')}>Cartier</BrowseItem>
-      <BrowseItem onClick={() => navigate('/patek_philippe')}>
+      <BrowseItem onClick={() => handleClick('/all')}>All Brands</BrowseItem>
+      <BrowseItem onClick={() => handleClick('/cartier')}>Cartier</BrowseItem>
+      <BrowseItem onClick={() => handleClick('/patek_philippe')}>
         Patek Philippe
       </BrowseItem>
-      <BrowseItem onClick={() => navigate('/rolex')}>Rolex</BrowseItem>
-      <BrowseItem onClick={() => navigate('/ulysee_nardin')}>
+      <BrowseItem onClick={() => handleClick('/rolex')}>Rolex</BrowseItem>
+      <BrowseItem onClick={() => handleClick('/ulysee_nardin')}>
         Ulysse Nardin
       </BrowseItem>
-      <BrowseItem onClick={() => navigate('/vacheron_constantine')}>
+      <BrowseItem onClick={() => handleClick('/vacheron_constantine')}>
         Vacheron Constantin
       </BrowseItem>
     </StyledBrowseCategories>

@@ -15,6 +15,7 @@ export default function BrowseCategoriesSide() {
   const show = useSelector(getShowCategories)
 
   const handleClick = (url: string) => {
+    window.scrollTo(0, 0)
     navigate(url)
     dispatch(hideSidebars())
   }

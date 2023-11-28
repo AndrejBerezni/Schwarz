@@ -1,7 +1,7 @@
 # **Schwarz**
 
-Visit live page at [https://schwarzluxurywatches.web.app/](https://schwarzluxurywatches.web.app/)
-View Admin Page functionalities [here](https://scribehow.com/shared/Admin_Page_of_Schwarz__OXL3NGnbSIKCMOHeDgn0Pw).
+- Visit live page at [https://schwarzluxurywatches.web.app](https://schwarzluxurywatches.web.app/)
+- View Admin Page functionalities [here](https://scribehow.com/shared/Admin_Page_of_Schwarz__OXL3NGnbSIKCMOHeDgn0Pw).
 
 ### Table of Contents
 

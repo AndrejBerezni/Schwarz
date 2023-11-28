@@ -11,7 +11,7 @@ const preloaderAnimationKF = keyframes`
   }
 `
 
-const preloaderAnimation = (props) => css`
+const preloaderAnimation = () => css`
   ${preloaderAnimationKF} 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 `
 

@@ -4,6 +4,12 @@
 
 1. [Description](#description)
 2. [Stack](#stack)
+3. [State](#state)
+   1. [Alert](#alert)
+   2. [Authentication](#authentication)
+   3. [Cart](#cart)
+   4. [Filter](#filter)
+   5. [Sidebars](#sidebars)
 
 ## Description
 
@@ -21,6 +27,31 @@ Schwarz is an e-commerce app selling luxury watches, integrated with Stripe for 
 - Enabling admin users to manage products, and view payments data in admin portal created for this project (instead of Stripe dashboard) was achieved by using **Stripe API**
 - Project was styled with **styled-components** library
 - End to end tests were written in **Cypress**
+
+## State
+
+### Alert
+
+Alerts are shown throughout the app and the most convenient way of showing, hidding, and determining their content and type was through Redux.
+State object for alert reducer is consisted of two properties - showAlert and alert. First one gives us information about whether alert should be displayed and the second contains specific information about current alert (type and message).
+
+### Authentication
+
+Authentication is the only reducer in this project that is persisted using **redux-persist** library. I wanted user to have the convenience of staying signed in between sessions.
+This reducer saves authentication status, but also handles displaying of authentication forms (SignIn, SignUp, and ResetPassword).
+
+### Cart
+
+Cart reducer handles adding and removing items from cart, increasing and decreasing their amount in cart, clearing all cart content, and storing the information that will be sent to checkout session once user decides to checkout.
+After checkout, information in this reducer is reset to initial state (empty cart).
+
+### Filter
+
+This reducer is used for keeping filters when browsing through different product categories.
+
+### Sidebars
+
+This reducer is used to keep state of sidebars (open or closed) throughout the app.
 
 ## Credits
 

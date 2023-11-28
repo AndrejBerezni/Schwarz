@@ -1,5 +1,13 @@
-import { StyledPreloader } from './Preloader.styles'
+import { StyledPreloader, PreloaderAnimationDiv } from './Preloader.styles'
 
 export default function Preloader() {
-  return <StyledPreloader></StyledPreloader>
+  return (
+    <StyledPreloader>
+      <PreloaderAnimationDiv>
+        <div></div>
+        <div></div>
+        <div></div>
+      </PreloaderAnimationDiv>
+    </StyledPreloader>
+  )
 }

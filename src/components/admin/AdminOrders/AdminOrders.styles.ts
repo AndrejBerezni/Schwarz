@@ -3,9 +3,8 @@ import { styled } from 'styled-components'
 export const StyledTable = styled.table`
   background-color: ${(props) => props.theme.bgColor};
   position: relative;
-  @media (max-width: 768px) {
-    align-self: start;
-  }
+  min-width: 100%;
+  align-self: start;
 `
 
 export const StyledTableHeadRow = styled.tr`

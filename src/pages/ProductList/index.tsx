@@ -45,16 +45,16 @@ export default function ProductList() {
               ))
             )}
           </ProductsContainer>
-          {allProductsLoaded ? (
+          {allProductsLoaded && products && products.length > 0 ? (
             <h4>No more products to show</h4>
-          ) : (
+          ) : products && products.length > 0 ? (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <AdminLoadButton onClick={loadMore}>
                 Load more
                 <IoReloadOutline />
               </AdminLoadButton>
             </div>
-          )}
+          ) : null}
         </StyledProductList>
       ) : (
         <Navigate to="/404" />

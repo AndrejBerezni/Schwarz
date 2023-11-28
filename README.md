@@ -17,6 +17,8 @@
    4. [Product](#product-page)
    5. [Admin](#admin-page)
    6. [Not Found](#not-found-page)
+5. [Database](#database)
+6. [Authentication](#authentication)
 
 ## Description
 
@@ -26,6 +28,7 @@ Schwarz is an e-commerce app selling luxury watches, integrated with Stripe for 
 
 - Schwarz is a **React Typescript** project, built with **Vite**
 - State is managed with **Redux**, using **Redux Toolkit** as it is recommended approach for writing Redux logic.
+- Routing is handled with **React Router**.
 - Database used is **Firebase's** non-relational database **Firestore**.
 - Images for UI content (excluding product images) are stored in **Firebase Storage**.
 - Authentication is handled through **Firebase Authentication**.
@@ -108,6 +111,27 @@ Admin Page has several sections to which user can navigate using the Admin Navba
 ### Not Found Page
 
 Not Found Page is displayed when user navigates to non-existent url.
+
+## Database
+
+As mentioned earlier, this project uses Firebase's non-relational database **Firestore**.
+The following document collections are present:
+
+- Administrators - Contains information about admin users and is used for their verification when they sign in
+- Content - Contains information that is fetched to be displayed on Hero Section of Home Page. This collection is modified by admin users from Admin Page.
+- Customers - Automatically created by Run Payments with Stripe extension when it was installed. It contains document for each user, which is consisted of user information and subcollections for checkout sessions and payments.
+- Products - Automatically created by Run Payments with Stripe extension, this collection contains document for each product. It is synchronised with Stripe Dashboard and therefore modified when changes are made either from Stripe Dashboard or Admin Page.
+- Reviews - Each product has document in this collection that contains user reviews. One user can leave only one review for individual product, therefore any new review for the same product is overwritting the old review.
+- Wishlist - When user starts creating wishlist, document for that user is created in this collection and it stores products that are currently present on user's wishlist.
+
+## Authentication
+
+Using Firebase authentication, users can easily sign in / sign up with one of the two following methods:
+
+- Email and password
+- Google Sign In
+
+Firebase provides mechanism for resetting password by sending password reset email, which I added as an option to Sign In form.
 
 ## Credits
 

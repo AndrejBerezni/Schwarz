@@ -9,15 +9,17 @@ interface IAdminNavLinkProps {
   handleClick: () => void
   icon: ReactNode
   linkText: string
+  current: boolean
 }
 
 export default function AdminNavLink({
   handleClick,
   icon,
   linkText,
+  current,
 }: Readonly<IAdminNavLinkProps>) {
   return (
-    <StyledAdminNavLink onClick={handleClick}>
+    <StyledAdminNavLink onClick={handleClick} current={current}>
       <AdminNavLinkText>{linkText}</AdminNavLinkText>
       <AdminNavLinkIcon>{icon}</AdminNavLinkIcon>
     </StyledAdminNavLink>

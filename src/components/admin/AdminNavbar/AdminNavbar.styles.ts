@@ -32,13 +32,23 @@ export const AdminNavLinkIcon = styled.p`
   }
 `
 
-export const StyledAdminNavLink = styled.li`
+interface IStyledAdminNavLinkProps {
+  theme: {
+    primary: string
+    borderColor: string
+    textColor: string
+  }
+  current: boolean
+}
+
+export const StyledAdminNavLink = styled.li<IStyledAdminNavLinkProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
   font-size: 20px;
-  color: ${(props) => props.theme.primary};
+  color: ${(props) =>
+    props.current ? props.theme.textColor : props.theme.primary};
   width: 100%;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   &:hover {

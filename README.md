@@ -1,22 +1,25 @@
 # **Schwarz**
 
+Visit live page at [https://schwarzluxurywatches.web.app/](https://schwarzluxurywatches.web.app/)
+View Admin Page functionalities [here](https://scribehow.com/shared/Admin_Page_of_Schwarz__OXL3NGnbSIKCMOHeDgn0Pw).
+
 ### Table of Contents
 
 1. [Description](#description)
 2. [Stack](#stack)
-3. [State](#state)
-   1. [Alert](#alert)
-   2. [Authentication](#authentication)
-   3. [Cart](#cart)
-   4. [Filter](#filter)
-   5. [Sidebars](#sidebars)
-4. [Pages](#pages)
+3. [Pages](#pages)
    1. [Home](#home-page)
    2. [Account](#account-page)
    3. [Product List](#product-list-page)
    4. [Product](#product-page)
    5. [Admin](#admin-page)
    6. [Not Found](#not-found-page)
+4. [State](#state)
+   1. [Alert](#alert)
+   2. [Authentication](#authentication)
+   3. [Cart](#cart)
+   4. [Filter](#filter)
+   5. [Sidebars](#sidebars)
 5. [Database](#database)
 6. [Authentication](#authentication)
 
@@ -38,31 +41,6 @@ Schwarz is an e-commerce app selling luxury watches, integrated with Stripe for 
 - Project was styled with **styled-components** library
 - Icons used in the project are from **React Icons** package.
 - End to end tests were written in **Cypress**
-
-## State
-
-### Alert
-
-Alerts are shown throughout the app and the most convenient way of showing, hidding, and determining their content and type was through Redux.
-State object for alert reducer is consisted of two properties - showAlert and alert. First one gives us information about whether alert should be displayed and the second contains specific information about current alert (type and message).
-
-### Authentication
-
-Authentication is the only reducer in this project that is persisted using **redux-persist** library. I wanted user to have the convenience of staying signed in between sessions.
-This reducer saves authentication status, but also handles displaying of authentication forms (SignIn, SignUp, and ResetPassword). Information about the type of the user (isAdmin) is also saved and is used across application for displaying different content for different type of user.
-
-### Cart
-
-Cart reducer handles adding and removing items from cart, increasing and decreasing their amount in cart, clearing all cart content, and storing the information that will be sent to checkout session once user decides to checkout.
-After checkout, information in this reducer is reset to initial state (empty cart).
-
-### Filter
-
-This reducer is used for keeping filters when browsing through different product categories.
-
-### Sidebars
-
-This reducer is used to keep state of sidebars (open or closed) throughout the app.
 
 ## Pages
 
@@ -112,12 +90,37 @@ Admin Page has several sections to which user can navigate using the Admin Navba
 
 Not Found Page is displayed when user navigates to non-existent url.
 
+## State
+
+### Alert
+
+Alerts are shown throughout the app and the most convenient way of showing, hidding, and determining their content and type was through Redux.
+State object for alert reducer is consisted of two properties - showAlert and alert. First one gives us information about whether alert should be displayed and the second contains specific information about current alert (type and message).
+
+### Authentication
+
+Authentication is the only reducer in this project that is persisted using **redux-persist** library. I wanted user to have the convenience of staying signed in between sessions.
+This reducer saves authentication status, but also handles displaying of authentication forms (SignIn, SignUp, and ResetPassword). Information about the type of the user (isAdmin) is also saved and is used across application for displaying different content for different type of user.
+
+### Cart
+
+Cart reducer handles adding and removing items from cart, increasing and decreasing their amount in cart, clearing all cart content, and storing the information that will be sent to checkout session once user decides to checkout.
+After checkout, information in this reducer is reset to initial state (empty cart).
+
+### Filter
+
+This reducer is used for keeping filters when browsing through different product categories.
+
+### Sidebars
+
+This reducer is used to keep state of sidebars (open or closed) throughout the app.
+
 ## Database
 
 As mentioned earlier, this project uses Firebase's non-relational database **Firestore**.
 The following document collections are present:
 
-- Administrators - Contains information about admin users and is used for their verification when they sign in
+- Administrators - Contains information about admin users and is used for their verification when they sign in.
 - Content - Contains information that is fetched to be displayed on Hero Section of Home Page. This collection is modified by admin users from Admin Page.
 - Customers - Automatically created by Run Payments with Stripe extension when it was installed. It contains document for each user, which is consisted of user information and subcollections for checkout sessions and payments.
 - Products - Automatically created by Run Payments with Stripe extension, this collection contains document for each product. It is synchronised with Stripe Dashboard and therefore modified when changes are made either from Stripe Dashboard or Admin Page.

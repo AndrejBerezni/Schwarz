@@ -15,6 +15,7 @@ interface IFeaturedCarouselProps {
   useProductsData: {
     metadataProp: string
     metadataCriteria: string
+    exclude: string
   }
   title: string
 }

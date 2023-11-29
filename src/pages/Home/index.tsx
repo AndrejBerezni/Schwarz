@@ -18,6 +18,7 @@ export default function Home() {
         useProductsData={{
           metadataProp: 'new',
           metadataCriteria: '1',
+          exclude: 'none',
         }}
         title="Latest Products"
       />

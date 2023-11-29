@@ -5,11 +5,13 @@ import { getAllProducts } from '../firebase/firebase-firestore'
 interface IuseProductsProps {
   metadataProp: string
   metadataCriteria: string
+  exclude: string
 }
 
 export default function useCarouselProducts({
   metadataProp,
   metadataCriteria,
+  exclude,
 }: Readonly<IuseProductsProps>) {
   const [products, setProducts] = useState<IProduct[]>([])
 
@@ -20,11 +22,11 @@ export default function useCarouselProducts({
         metadataCriteria,
         15
       )
-      setProducts(newProducts)
+      setProducts(newProducts.filter((item) => item.docId !== exclude))
     }
 
     fetchProducts()
-  }, [metadataProp, metadataCriteria])
+  }, [metadataProp, metadataCriteria, exclude])
 
   return products
 }

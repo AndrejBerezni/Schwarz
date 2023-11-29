@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import BrowseCategoriesSide from './components/BrowseCategories/BrowseCategoriesSide'
 import Cart from './components/Cart'
@@ -11,7 +12,6 @@ import Preloader from './components/Preloader'
 import TopNavbar from './components/TopNavbar'
 import { theme, GlobalStyle, MainContent } from './GlobalStyles'
 import Router from './router/Routes'
-import { useSelector } from 'react-redux'
 import { getAuthStatus } from './store/authentication/selectors'
 
 function App() {

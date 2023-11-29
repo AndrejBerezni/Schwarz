@@ -22,7 +22,7 @@ function App() {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-    }, 2200)
+    }, 3000)
   }, [isAuth])
 
   return (

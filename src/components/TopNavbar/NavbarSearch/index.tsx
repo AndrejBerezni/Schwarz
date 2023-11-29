@@ -62,6 +62,7 @@ export default function NavbarSearch({
         placeholder="Search for products..."
         onChange={handleChange}
         value={input}
+        data-testid="nav-search-input"
       ></NavInput>
       <NavSearchIcon onClick={handleDeleteInput}>
         {input === '' ? <BiSearchAlt /> : <RiCloseCircleLine />}

@@ -61,7 +61,7 @@ export const StyledCartProductDiv = styled.div`
   width: 100%;
   height: 120px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   z-index: 1;
   background-color: #00000099;

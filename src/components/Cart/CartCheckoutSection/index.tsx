@@ -28,7 +28,7 @@ export default function CartCheckoutSection({
 
   const handleCheckout = async () => {
     if (cartItems.length === 0) {
-      throw new Error('Your cart is empty, please add products.')
+      return
     }
     if (!isAuth) {
       dispatch(showForm('signIn'))
@@ -42,10 +42,17 @@ export default function CartCheckoutSection({
     <StyledCartCheckoutSection>
       <CartCheckoutTotal>Total: {formatPrice(totalPrice)} €</CartCheckoutTotal>
       <CartCheckoutDiv>
-        <PrimaryButton variant="outline" onClick={() => dispatch(clearCart())}>
+        <PrimaryButton
+          variant="outline"
+          onClick={() => dispatch(clearCart())}
+          disabled={cartItems.length === 0}
+        >
           Clear Cart
         </PrimaryButton>
-        <PrimaryButton onClick={handleCheckout} disabled={buttonDisabled}>
+        <PrimaryButton
+          onClick={handleCheckout}
+          disabled={buttonDisabled || cartItems.length === 0}
+        >
           {buttonDisabled ? 'Redirecting...' : 'Checkout'}
         </PrimaryButton>
       </CartCheckoutDiv>

@@ -77,10 +77,14 @@ export const PrimaryButton = styled.button<IPrimaryButtonProps>`
       ? props.theme.navBgColor
       : props.theme.primary};
   color: ${(props) =>
-    props.variant === 'outline' ? props.theme.primary : props.theme.navBgColor};
+    props.disabled || props.variant !== 'outline'
+      ? props.theme.navBgColor
+      : props.theme.primary};
   border-radius: 6px;
   border: ${(props) =>
-    props.variant === 'outline' ? `1px solid ${props.theme.primary}` : 'none'};
+    props.disabled || props.variant !== 'outline'
+      ? 'none'
+      : `1px solid ${props.theme.primary}`};
   padding: 10px 15px;
   text-transform: uppercase;
   transition: 0.3s;
@@ -88,11 +92,14 @@ export const PrimaryButton = styled.button<IPrimaryButtonProps>`
   font-weight: bold;
   min-width: 120px;
   max-height: 50px;
-  &:hover {
+  ${(props) =>
+    !props.disabled &&
+    `&:hover {
     cursor: pointer;
     transform: translateY(-2px);
-    box-shadow: 0px 5px 5px -4px ${(props) => props.theme.primary};
-  }
+    box-shadow: 0px 5px 5px -4px ${(props: { theme: { primary: string } }) =>
+      props.theme.primary};
+  }`}
   &:active {
     box-shadow: 0 0 4px
       ${(props) =>

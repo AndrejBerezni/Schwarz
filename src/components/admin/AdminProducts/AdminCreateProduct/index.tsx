@@ -171,13 +171,14 @@ export default function AdminCreateProduct() {
                 />
               </AdminLabel>
               <AdminLabel>
-                Discount label:
+                Discount label (e.g. -25%):
                 <AdminInput
                   required
                   type="text"
                   maxLength={4}
                   ref={discountLabelRef}
                   onChange={(e) => handleChange(e, discountLabelRef)}
+                  pattern="^-\d{1,2}%$"
                 />
               </AdminLabel>
             </>

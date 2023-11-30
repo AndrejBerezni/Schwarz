@@ -47,6 +47,18 @@ export default function AdminCreateProduct() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    if (
+      discountPriceRef.current &&
+      priceRef.current!.value < discountPriceRef.current.value
+    ) {
+      dispatch(
+        displayAlert({
+          type: 'newProduct',
+          message: 'Original price can not be smaller than discount price.',
+        })
+      )
+      return
+    }
     try {
       await createNewProduct({
         name: nameRef.current!.value,

@@ -266,6 +266,11 @@ export default function AdminProductPage() {
                         }
                         ref={discountPriceRef}
                         onChange={(e) => handleChange(e, discountPriceRef)}
+                        max={
+                          prices.filter(
+                            (price) => price.description === null
+                          )[0].unit_amount / 100
+                        }
                       />
                     </AdminLabel>
                     <AdminLabel>

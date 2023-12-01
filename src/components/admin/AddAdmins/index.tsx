@@ -23,8 +23,8 @@ export default function AddAdmins() {
   useEffect(() => {
     const fetchAdmins = async () => {
       const admins = await getAdmins()
-      if (admins) {
-        setCurrentAdmin(admins.currentAdmin!)
+      if (admins?.currentAdmin && admins?.otherAdmins) {
+        setCurrentAdmin(admins.currentAdmin)
         setOtherAdmins(admins.otherAdmins)
       }
     }

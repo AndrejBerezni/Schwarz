@@ -138,9 +138,7 @@ export default function AdminCreateProduct() {
                 required
                 ref={discountRef}
                 onChange={() =>
-                  setShowDiscount(
-                    discountRef.current!.value === '1' ? true : false
-                  )
+                  setShowDiscount(discountRef.current!.value === '1')
                 }
               >
                 <option value="0">No</option>

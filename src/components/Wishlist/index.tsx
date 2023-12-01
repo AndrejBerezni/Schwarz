@@ -10,7 +10,7 @@ import { OrderDivProp, OrderDivItem } from '../Orders/OrderDiv/OrderDiv.styles'
 export default function Wishlist() {
   const user = useSelector(getUser)
   const [wishlist, setWishlist] = useState<IProduct[]>([])
-  const [refreshList, setRefresh] = useState<boolean>(false)
+  const [refreshList, setRefreshList] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -22,7 +22,7 @@ export default function Wishlist() {
   }, [user.uid, refreshList])
 
   const handleRefresh = () => {
-    setRefresh((prev) => !prev)
+    setRefreshList((prev) => !prev)
   }
   return (
     <StyledWishlist>

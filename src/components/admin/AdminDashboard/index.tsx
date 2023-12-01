@@ -12,6 +12,7 @@ export default function AdminDashboard() {
           <AdminDashboardBox
             period={period as 'month' | 'week' | 'day'}
             type="sales"
+            key={`${period}-adbs`}
           />
         ))}
       </AdminDashboardRow>
@@ -21,6 +22,7 @@ export default function AdminDashboard() {
           <AdminDashboardBox
             period={period as 'month' | 'week' | 'day'}
             type="balance"
+            key={`${period}-adbb`}
           />
         ))}
       </AdminDashboardRow>

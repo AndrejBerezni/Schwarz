@@ -47,10 +47,13 @@ export default function AdminCreateProduct() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
+
     if (
       discountPriceRef.current &&
-      priceRef.current!.value < discountPriceRef.current.value
+      priceRef.current &&
+      Number(priceRef.current!.value) < Number(discountPriceRef.current.value)
     ) {
+      console.log(priceRef.current!.value, discountPriceRef.current.value)
       dispatch(
         displayAlert({
           type: 'newProduct',

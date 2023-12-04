@@ -191,7 +191,7 @@ export default function AdminCreateProduct() {
                   maxLength={4}
                   ref={discountLabelRef}
                   onChange={(e) => handleChange(e, discountLabelRef)}
-                  pattern="^-\d{1,2}%$"
+                  pattern="^-(?:[1-9]|[1-9][0-9])%$"
                 />
               </AdminLabel>
             </>
